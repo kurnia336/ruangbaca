@@ -13,8 +13,11 @@
   <!-- Bootstrap core CSS -->
   <link href="{{ url('backend/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
+  <!-- link untuk mengakses fontawesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
+  <!--  -->
+
   <style type="text/css">
     .container-fluid{
 
@@ -28,7 +31,8 @@
 <body>
 
   <div class="d-flex" id="wrapper">
-
+    <!-- pemberian icon dari fontawesome -->
+    <!-- fontawesome <i class="fas-..."></i>  -->
     <!-- Sidebar -->
     <div class="bg-light border-right" id="sidebar-wrapper">
       <div class="sidebar-heading"><i class="fas fa-tachometer-alt"></i> Dashboard </div>
@@ -44,11 +48,13 @@
       </div>
     </div>
     <!-- /#sidebar-wrapper -->
+    
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
 
       <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+      <!-- fontawesome  -->
         <button class="btn btn-primary" id="menu-toggle"><i class="fas fa-bars"></i>
           <!-- <i class="fas fa-ellipsis-v"></i> -->
         </button>
@@ -128,6 +134,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
+                                                     <!-- fontawesome  -->
                                         <i class="fas fa-power-off"></i> {{ __('Logout') }}
                                     </a>
 
@@ -153,6 +160,7 @@
         <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>. The top navbar is optional, and just for demonstration. Just create an element with the <code>#menu-toggle</code> ID which will toggle the menu when clicked.</p> -->
         @section('container')
         <div class="card" style="margin:20px">
+                <!-- fontawesome  -->
                 <div class="card-header bg-success text-white"><i class="fas fa-tachometer-alt"></i> Dashboard</div>
 
                 <div class="card-body">
