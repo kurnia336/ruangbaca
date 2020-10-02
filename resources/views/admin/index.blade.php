@@ -13,7 +13,7 @@
   <!-- Bootstrap core CSS -->
   <link href="{{ url('backend/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
-  <!-- link untuk mengakses fontawesome -->
+  <!-- link untuk mengakses fontawesome, ini penting-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
   <!--  -->
@@ -148,6 +148,7 @@
         </div>
       </nav>
 
+      <!-- notifikasi berhasil -->
       <div class="container-fluid">
         @if ($message = Session::get('success'))
           <div class="alert alert-success alert-block" style="margin-top: 20px">

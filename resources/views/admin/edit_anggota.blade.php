@@ -18,6 +18,7 @@
 			<label for="nama">Nama Anggota</label>
 			<input class="form-control" type="text" name="nama_anggota" id="nama_anggota" placeholder="Masukkan Nama Anggota" value="{{ $p->nama_anggota }}">
 		</div>
+		<!-- jenis kelamin menggunakan radio button -->
 		<div class="form-group">
 			<label for="jabatan">JK Anggota</label>
 			<br>

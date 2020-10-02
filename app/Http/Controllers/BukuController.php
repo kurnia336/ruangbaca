@@ -8,7 +8,7 @@ class BukuController extends Controller
 {
     public function tampil(){
     	// mengambil data dari table petugas
-    	$buku = DB::table('buku')->paginate(5);
+    	$buku = DB::table('buku')->paginate(5);// untuk membagi record menjadi beberapa halaman
  
     	// mengirim data petugas ke view index
     	return view('admin.buku',['buku' => $buku]);
@@ -30,7 +30,7 @@ class BukuController extends Controller
 			'stok' => $request->stok
 		]);
 		// alihkan halaman ke halaman petugas
-		return redirect('/buku_tampil')->with(['success' => 'Tambah Berhasil']);
+		return redirect('/buku_tampil')->with(['success' => 'Tambah Berhasil']);//notifikasi 
 	 
 	}
 
@@ -59,7 +59,7 @@ class BukuController extends Controller
 			'stok' => $request->stok
 		]);
 		// alihkan halaman ke halaman petugas
-		return redirect('/buku_tampil')->with(['success' => 'Update Berhasil']);
+		return redirect('/buku_tampil')->with(['success' => 'Update Berhasil']);//notifikasi 
 	 
 	}
 
@@ -68,10 +68,10 @@ class BukuController extends Controller
 		// mengambil data petugas berdasarkan id yang dipilih
 		DB::table('buku')->where('id_buku',$id)->delete();
 		// passing data petugas yang didapat ke view 
-		return redirect('/buku_tampil')->with(['success' => 'Hapus Berhasil']);
+		return redirect('/buku_tampil')->with(['success' => 'Hapus Berhasil']);//notifikasi 
 	 
 	}
-
+	//funtion cari/search untuk saat ini masih menggunakan where nama
 	public function cari(Request $request)
 	{
 		// menangkap data pencarian
