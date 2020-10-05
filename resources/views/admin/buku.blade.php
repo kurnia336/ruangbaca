@@ -4,6 +4,7 @@
 <div class="container">
 	<div class="row">
 		<div class="my-4 col-12">
+		<!-- form cari -->
 			<h1 class="float-left"><i class="fas fa-book"></i> Daftar Buku</h1>
 				<a class="btn btn-primary float-right mt-2" href="{{url('/buku_tambah')}}" role="button"><i class="fas fa-book"></i> Tambah Buku</a>
 				<form class="float-right mt-2" style="margin: 5px;" action="{{url('/buku_cari')}}" method="GET">
@@ -13,7 +14,7 @@
 				</form>
 		</div>
 	<div class="col-12">
-
+<!-- style table -->
 <table class="table table-stripped table-hover">
 		<thead class="thead-primary bg-primary text-white">
 	<tr>
@@ -36,10 +37,12 @@
 		<td>{{$b->tahun_terbit}}</td>
 		<td>{{$b->stok}}</td>
 		<td>
+		<!-- fontawesome  -->
 			<a href="{{url('/buku_edit/'.$b->id_buku)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit Buku</a>
 			<a href="#" onclick="konfirmasi();" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a>
 		</td>
 	</tr>
+	<!-- script untuk menambahkan notifikasi -->
 	<script>
       function konfirmasi(){
          var tanya = confirm("Apakah Anda Akan Menghapus Data Ini ?");
@@ -56,6 +59,8 @@
 	
 </tbody>
 </table>
+<!-- untuk menambahkan bagian halaman -->
+<div class="text-center">{{ $buku->links() }}</div>
 		</div>
 	</div>
 </div>

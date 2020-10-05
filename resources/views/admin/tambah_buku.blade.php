@@ -6,6 +6,7 @@
 	<div class="row">
 <!-- Content -->
 		<div class="col-md-12 mt-3">
+		<!-- fontawesome  -->
 			<h3><i class="fas fa-book"></i> Form Tambah Buku</h3>
 	<form action="{{url('/buku_simpan')}}" method="post">
 		{{ csrf_field() }}
@@ -34,6 +35,7 @@
 			<input class="form-control" type="text" name="stok" id="stok" placeholder="Masukkan Stok Buku">
 		</div>
 		<div class="form-group float-right">
+		<!-- fontawesome  -->
 			<button class="btn btn-lg btn-danger" type="reset"><i class="fas fa-times"></i> Hapus</button>
 			<button class="btn btn-lg btn-primary" type="submit"><i class="fas fa-check"></i> Simpan</button>
 		</div>

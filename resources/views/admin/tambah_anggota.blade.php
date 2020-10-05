@@ -6,6 +6,7 @@
 	<div class="row">
 <!-- Content -->
 		<div class="col-md-12 mt-3">
+		<!-- fontawesome  -->
 			<h3><i class="fas fa-user-plus"></i> Form Menambah Anggota</h3>
 	<form action="{{url('/anggota/simpan')}}" method="post">
 		{{ csrf_field() }}
@@ -17,6 +18,7 @@
 			<label for="nama">Nama Anggota</label>
 			<input class="form-control" type="text" name="nama_anggota" id="nama_anggota" placeholder="Masukkan Nama Anggota" required="true">
 		</div>
+		<!-- jenis kelamin menggunakan radio button -->
 		<div class="form-group">
 			<label for="jabatan">JK Anggota</label>
 			<br>
@@ -36,6 +38,7 @@
 			<input class="form-control" type="text" name="alamat_anggota" id="alamat_anggota" placeholder="Masukkan Alamat Anggota">
 		</div>
 		<div class="form-group float-right">
+		<!-- fontawesome  -->
 			<button class="btn btn-lg btn-danger" type="reset"><i class="fas fa-times"></i> Hapus</button>
 			<button class="btn btn-lg btn-primary" type="submit"><i class="fas fa-check"></i> Simpan</button>
 		</div>

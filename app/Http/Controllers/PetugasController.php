@@ -11,7 +11,7 @@ class PetugasController extends Controller
     public function index()
     {
     	// mengambil data dari table petugas
-    	$petugas = DB::table('petugas')->paginate(5);
+    	$petugas = DB::table('petugas')->paginate(5);// untuk membagi record menjadi beberapa halaman
  
     	// mengirim data petugas ke view index
     	return view('admin.petugas',['petugas' => $petugas]);
@@ -39,7 +39,7 @@ class PetugasController extends Controller
 			'alamat_petugas' => $request->alamat_petugas
 		]);
 		// alihkan halaman ke halaman petugas
-		return redirect('/petugas')->with(['success' => 'Tambah Berhasil']);
+		return redirect('/petugas')->with(['success' => 'Tambah Berhasil']);//notifikasi 
 	 
 	}
 
@@ -65,7 +65,7 @@ class PetugasController extends Controller
 			'alamat_petugas' => $request->alamat_petugas
 		]);
 		// alihkan halaman ke halaman petugas
-		return redirect('/petugas')->with(['success' => 'Update Berhasil']);
+		return redirect('/petugas')->with(['success' => 'Update Berhasil']);//notifikasi 
 	}
 
 	// method untuk hapus data petugas
@@ -75,9 +75,10 @@ class PetugasController extends Controller
 		DB::table('petugas')->where('id_petugas',$id)->delete();
 			
 		// alihkan halaman ke halaman petugas
-		return redirect('/petugas')->with(['success' => 'Hapus Berhasil']);
+		return redirect('/petugas')->with(['success' => 'Hapus Berhasil']);//notifikasi 
 	}
 
+	//funtion cari/search untuk saat ini masih menggunakan where nama
 	public function cari(Request $request)
 	{
 		// menangkap data pencarian

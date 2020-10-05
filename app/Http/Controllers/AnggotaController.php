@@ -11,7 +11,7 @@ class AnggotaController extends Controller
     public function index()
     {
     	// mengambil data dari table anggota
-    	$anggota = DB::table('anggota')->paginate(5);
+    	$anggota = DB::table('anggota')->paginate(5);// untuk membagi record menjadi beberapa halaman
  
     	// mengirim data anggota ke view index
     	return view('admin.anggota',['anggota' => $anggota]);
@@ -39,7 +39,7 @@ class AnggotaController extends Controller
 			'alamat_anggota' => $request->alamat_anggota
 		]);
 		// alihkan halaman ke halaman anggota
-		return redirect('/anggota')->with(['success' => 'Tambah Berhasil']);
+		return redirect('/anggota')->with(['success' => 'Tambah Berhasil']);//notifikasi
 	 
 	}
 
@@ -65,7 +65,7 @@ class AnggotaController extends Controller
 			'alamat_anggota' => $request->alamat_anggota
 		]);
 		// alihkan halaman ke halaman anggota
-		return redirect('/anggota')->with(['success' => 'Update Berhasil']);
+		return redirect('/anggota')->with(['success' => 'Update Berhasil']);//notifikasi
 	}
 
 	// method untuk hapus data anggota
@@ -75,9 +75,10 @@ class AnggotaController extends Controller
 		DB::table('anggota')->where('id_anggota',$id)->delete();
 			
 		// alihkan halaman ke halaman anggota
-		return redirect('/anggota')->with(['success' => 'Hapus Berhasil']);
+		return redirect('/anggota')->with(['success' => 'Hapus Berhasil']);//notifikasi
 	}
 
+	//funtion cari/search untuk saat ini masih menggunakan where nama
 	public function cari(Request $request)
 	{
 		// menangkap data pencarian

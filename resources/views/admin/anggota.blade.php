@@ -3,7 +3,8 @@
 @section('container')
 <div class="container">
 	<div class="row">
-		<div class="my-4 col-12">
+		<div class="my-4 col-12"> 
+		<!-- form cari -->
 			<h1 class="float-left"><i class="fas fa-user-plus"></i> Daftar Anggota</h1>
 				<a class="btn btn-primary float-right mt-2" href="{{url('/anggota/tambah')}}" role="button"><i class="fas fa-user-plus"></i> Tambah Anggota</a>
 				<form class="float-right mt-2" style="margin: 5px;" action="{{url('/anggota/cari')}}" method="GET">
@@ -13,7 +14,7 @@
 				</form>
 		</div>
 	<div class="col-12">
-
+<!-- style table -->
 <table class="table table-stripped table-hover">
 		<thead class="thead-primary bg-primary text-white">
 	<tr>
@@ -36,10 +37,12 @@
 		<td>{{ $p->email_anggota }}</td>
 		<td>{{ $p->alamat_anggota }}</td>
 		<td>
+		<!-- fontawesome -->
 			<a href="{{url('/anggota/edit/'.$p->id_anggota)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit</a>
 			<a href="#" onclick="konfirmasi();" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a>
 		</td>
 	</tr>
+	<!-- script untuk menambahkan notifikasi -->
 	<script>
       function konfirmasi(){
          var tanya = confirm("Apakah Anda Akan Menghapus Data Ini ?");
@@ -55,6 +58,7 @@
 	@endforeach
 </tbody> 
 </table>
+<!-- untuk menambahkan bagian halaman -->
 	<div class="text-center">{{ $anggota->links() }}</div>
 		</div>
 	</div>

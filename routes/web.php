@@ -32,7 +32,7 @@ Route::post('/buku_simpan', 'BukuController@simpan');
 Route::get('/buku_edit/{id_buku}', 'BukuController@edit')->name('buku_edit');
 Route::post('/buku_update', 'BukuController@update')->name('buku_update');
 Route::get('/buku_hapus/{id_buku}', 'BukuController@hapus')->name('buku_hapus');
-Route::get('/buku_cari','BukuController@cari');
+Route::get('/buku_cari','BukuController@cari');//nambah route cari
 
 //petugas
 Route::get('/petugas','PetugasController@index'); //MENAMPILKAN HALAMAN PETUGAS/BUKU
@@ -41,7 +41,7 @@ Route::post('/petugas/simpan','PetugasController@simpan'); //MENYIMPAN FORM DARI
 Route::get('/petugas/edit/{id_petugas}','PetugasController@edit');
 Route::post('/petugas/update','PetugasController@update');
 Route::get('/petugas/hapus/{id_petugas}','PetugasController@hapus');
-Route::get('/petugas/cari','PetugasController@cari');
+Route::get('/petugas/cari','PetugasController@cari');//nambah route cari
 
 //anggota
 Route::get('/anggota','AnggotaController@index');
@@ -50,7 +50,7 @@ Route::post('/anggota/simpan','AnggotaController@simpan');
 Route::get('/anggota/edit/{id_petugas}','AnggotaController@edit');
 Route::post('/anggota/update','AnggotaController@update');
 Route::get('/anggota/hapus/{id_petugas}','AnggotaController@hapus');
-Route::get('/anggota/cari','AnggotaController@cari');
+Route::get('/anggota/cari','AnggotaController@cari');//nambah route cari
 
 Auth::routes();
 
