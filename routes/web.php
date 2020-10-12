@@ -52,6 +52,16 @@ Route::post('/anggota/update','AnggotaController@update');
 Route::get('/anggota/hapus/{id_petugas}','AnggotaController@hapus');
 Route::get('/anggota/cari','AnggotaController@cari');
 
+//rak
+Route::get('/rak_index', 'RakController@index')->name('rak_index');
+Route::get('/rak_tampil', 'RakController@tampil')->name('rak_tampil');
+Route::get('/rak_tambah', 'RakController@tambah')->name('rak_tambah');
+Route::post('/rak_simpan', 'RakController@simpan');
+Route::get('/rak_edit/{id_rak}', 'RakController@edit')->name('rak_edit');
+Route::post('/rak_update', 'RakController@update')->name('rak_update');
+Route::get('/rak_hapus/{id_rak}', 'RakController@hapus')->name('rak_hapus');
+Route::get('/rak_cari','RakController@cari');//nambah route cari
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

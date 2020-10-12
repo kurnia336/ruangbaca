@@ -10,6 +10,13 @@
 			<p class="text-muted">Sistem Informasi Ruang Baca Ver. 015.016</p>
 		</div>
 	</div>
+	 <!-- Bootstrap core CSS -->
+  <link href="{{ url('backend/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+
+  <!-- link untuk mengakses fontawesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
+  <!--  -->
 <div class="row">
 	<div class="col-12">
 		<div class="accordion" id="accordionExample">
