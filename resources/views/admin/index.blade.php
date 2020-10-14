@@ -40,7 +40,7 @@
         <a href="{{url('/home')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-home"></i> Home</a>
         <a href="{{url('/about')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-info-circle"></i> About</a>
         <a href="{{url('/buku_tampil')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-book"></i> Buku</a>
-        <a href="{{url('/home')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-book-reader"></i> Rak</a>
+        <a href="{{url('/rak_tampil')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-book-reader"></i> Rak</a>
         <a href="{{url('/petugas')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-user-tie"></i> Petugas</a>
         <a href="{{url('/anggota')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-user-plus"></i> Anggota</a>
         <a href="{{url('/home')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-handshake"></i></i> Peminjaman</a>
