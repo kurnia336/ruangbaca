@@ -8,7 +8,7 @@
 		<div class="col-md-12 mt-3">
 			<h3>Form Edit Rak</h3>
 			@foreach($rak as $r)
-	<form action="{{url('/rak_update')}}" method="post">
+	<form action="{{url('/rak/rak_update')}}" method="post">
 		{{ csrf_field() }}
 		<div class="form-group">
 			<!-- <label for="id_buku">ID Buku</label> -->

@@ -8,7 +8,7 @@
 		<div class="col-md-12 mt-3">
 			<h3>Form Edit Buku</h3>
 			@foreach($buku as $b)
-	<form action="{{url('/buku_update')}}" method="post">
+	<form action="{{url('/buku/buku_update')}}" method="post">
 		{{ csrf_field() }}
 		<div class="form-group">
 			<!-- <label for="id_buku">ID Buku</label> -->

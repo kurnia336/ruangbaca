@@ -8,18 +8,18 @@
 		<div class="col-md-12 mt-3">
 		<!-- fontawesome  -->
 			<h3><i class="fas fa-book"></i> Form Tambah Rak</h3>
-	<form action="{{url('/rak_simpan')}}" method="post">
+	<form action="{{url('/rak/rak_simpan')}}" method="post">
 		{{ csrf_field() }}
-		<!-- <div class="form-group">
+		<div class="form-group">
 			<label for="id_rak">ID Rak</label>
 			<input class="form-control" type="text" name="id_rak" id="id_rak" placeholder="Masukkan ID Rak" required="true">
-		</div> -->
+		</div>
 		<div class="form-group">
             <label for="buku">Pilih Judul Buku</label>
                 <select name="id_buku" id="id_buku" class="form-control" style="">
                     <option value="">--- Judul Buku ---</option>
                     @foreach ($buku as $key => $value)
-                    <option name="id_buku" id="id_buku" value="{{ $key }}">{{ $value }}</option>
+                    <option name="id_buku" id="id_buku" value="{{ $key }}">[{{'BK'.$key }}] {{ $value }}</option>
                     @endforeach
                 </select>
 		</div>

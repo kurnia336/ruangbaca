@@ -11,11 +11,11 @@ class BukuController extends Controller
     	$buku = DB::table('buku')->paginate(5);// untuk membagi record menjadi beberapa halaman
  
     	// mengirim data petugas ke view index
-    	return view('admin.buku',['buku' => $buku]);
+    	return view('admin.buku.buku',['buku' => $buku]);
     } 
 
     public function index(){
-    	return view('admin.buku');
+    	return view('admin.buku.buku');
     }
     // method untuk insert data ke table petugas
 	public function simpan(Request $request)
@@ -30,12 +30,12 @@ class BukuController extends Controller
 			'stok' => $request->stok
 		]);
 		// alihkan halaman ke halaman petugas
-		return redirect('/buku_tampil')->with(['success' => 'Tambah Berhasil']);//notifikasi 
+		return redirect('/buku/buku_tampil')->with(['success' => 'Tambah Berhasil']);//notifikasi 
 	 
 	}
 
 	public function tambah(){
-    	return view('admin.tambah_buku');
+    	return view('admin.buku.tambah_buku');
     }
 
     // method untuk edit data petugas
@@ -44,7 +44,7 @@ class BukuController extends Controller
 		// mengambil data petugas berdasarkan id yang dipilih
 		$buku = DB::table('buku')->where('id_buku',$id)->get();
 		// passing data petugas yang didapat ke view 
-		return view('admin.edit_buku',['buku' => $buku]);
+		return view('admin.buku.edit_buku',['buku' => $buku]);
 	 
 	}
 
@@ -59,7 +59,7 @@ class BukuController extends Controller
 			'stok' => $request->stok
 		]);
 		// alihkan halaman ke halaman petugas
-		return redirect('/buku_tampil')->with(['success' => 'Update Berhasil']);//notifikasi 
+		return redirect('/buku/buku_tampil')->with(['success' => 'Update Berhasil']);//notifikasi 
 	 
 	}
 
@@ -68,7 +68,7 @@ class BukuController extends Controller
 		// mengambil data petugas berdasarkan id yang dipilih
 		DB::table('buku')->where('id_buku',$id)->delete();
 		// passing data petugas yang didapat ke view 
-		return redirect('/buku_tampil')->with(['success' => 'Hapus Berhasil']);//notifikasi 
+		return redirect('/buku/buku_tampil')->with(['success' => 'Hapus Berhasil']);//notifikasi 
 	 
 	}
 	//funtion cari/search untuk saat ini masih menggunakan where nama
@@ -83,7 +83,7 @@ class BukuController extends Controller
 		->paginate();
  
     		// mengirim data pegawai ke view index
-		return view('admin.buku',['buku' => $buku]);
+		return view('admin.buku.buku',['buku' => $buku]);
  
 	}
 }

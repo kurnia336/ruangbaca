@@ -16,31 +16,33 @@ class RakController extends Controller
         ->join('buku as b','b.id_buku', '=', 'r.id_buku')
 		->paginate(5);
     	// mengirim data petugas ke view index
-    	return view('admin.rak',['rak' => $rak]);
+    	return view('admin.rak.rak',['rak' => $rak]);
     } 
 
     public function index(){
-    	return view('admin.rak');
+    	return view('admin.rak.rak');
     }
 
     public function simpan(Request $request)
 	{
-        $numeric_id = intval(substr($request['id_rak'], 1)); //retrieve numeric value of 'V001' (1)
-        $numeric_id++; //increment
-        if(mb_strlen($numeric_id) == 1)
-        {
-            $zero_string = '00';
-        }elseif(mb_strlen($numeric_id) == 2)
-        {
-            $zero_string = '0';
-        }else{
-            $zero_string = '';
-        }
-        $new_id = 'RK'.$zero_string.$numeric_id;
-        
+        // $numeric_id = intval(substr($request['id_rak'], 1)); //retrieve numeric value of 'V001' (1)
+        // $numeric_id++; //increment
+        // if(mb_strlen($numeric_id) == 1)
+        // {
+        //     $zero_string = '00';
+        // }elseif(mb_strlen($numeric_id) == 2)
+        // {
+        //     $zero_string = '0';
+        // }else{
+        //     $zero_string = '';
+        // }
+		// $new_id = 'RK'.$zero_string.$numeric_id;
+		// $new_id = 0;
+			
 		// insert data ke table pegawai
 		DB::table('rak')->insert([
-			'id_rak' => $new_id,
+			// 'id_rak' => $new_id==2 ? $new_id : $new_id++,
+			'id_rak' => $request->id_rak,
 			'id_buku' => $request->id_buku,
 			'nama_rak' => $request->nama_rak,
 			'lokasi_rak' => $request->lokasi_rak,
@@ -49,13 +51,13 @@ class RakController extends Controller
 			// get()
 		]);
 		// alihkan halaman ke halaman petugas
-		return redirect('/rak_tampil')->with(['success' => 'Tambah Berhasil']);//notifikasi 
+		return redirect('/rak/rak_tampil')->with(['success' => 'Tambah Berhasil']);//notifikasi 
 
     }
     
     public function tambah(){
         $buku = DB::table('buku')->pluck("judul_buku","id_buku");
-        return view('admin.tambah_rak',compact('buku'));
+        return view('admin.rak.tambah_rak',compact('buku'));
     	// return view('admin.tambah_rak');
     }
 
@@ -65,7 +67,7 @@ class RakController extends Controller
         $rak = DB::table('rak')->where('id_rak',$id)->get();
         $buku = DB::table('buku')->pluck("judul_buku","id_buku");
 		// passing data petugas yang didapat ke view 
-		return view('admin.edit_rak',['rak' => $rak],compact('buku'));
+		return view('admin.rak.edit_rak',['rak' => $rak],compact('buku'));
 
     }
     
@@ -81,7 +83,7 @@ class RakController extends Controller
 			// get()
 		]);
 		// alihkan halaman ke halaman petugas
-		return redirect('/rak_tampil')->with(['success' => 'Update Berhasil']);//notifikasi 
+		return redirect('/rak/rak_tampil')->with(['success' => 'Update Berhasil']);//notifikasi 
 
     }
     
@@ -90,7 +92,7 @@ class RakController extends Controller
 		// mengambil data petugas berdasarkan id yang dipilih
 		DB::table('rak')->where('id_rak',$id)->delete();
 		// passing data petugas yang didapat ke view 
-		return redirect('/rak_tampil')->with(['success' => 'Hapus Berhasil']);//notifikasi 
+		return redirect('/rak/rak_tampil')->with(['success' => 'Hapus Berhasil']);//notifikasi 
 
     }
     
@@ -111,7 +113,7 @@ class RakController extends Controller
 		->paginate();
 
     		// mengirim data pegawai ke view index
-		return view('admin.rak',['rak' => $rak]);
+		return view('admin.rak.rak',['rak' => $rak]);
 
     }
     

@@ -8,7 +8,7 @@
 		<div class="col-md-12 mt-3">
 		<!-- fontawesome  -->
 			<h3><i class="fas fa-book"></i> Form Tambah Buku</h3>
-	<form action="{{url('/buku_simpan')}}" method="post">
+	<form action="{{url('/buku/buku_simpan')}}" method="post">
 		{{ csrf_field() }}
 		<div class="form-group">
 			<label for="id_buku">ID Buku</label>

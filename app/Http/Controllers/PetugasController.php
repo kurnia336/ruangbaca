@@ -14,7 +14,7 @@ class PetugasController extends Controller
     	$petugas = DB::table('petugas')->paginate(5);// untuk membagi record menjadi beberapa halaman
  
     	// mengirim data petugas ke view index
-    	return view('admin.petugas',['petugas' => $petugas]);
+    	return view('admin.petugas.petugas',['petugas' => $petugas]);
  
     }
 
@@ -22,7 +22,7 @@ class PetugasController extends Controller
 	{
 	 
 		// memanggil view tambah
-		return view('admin.tambah_petugas');
+		return view('admin.petugas.tambah_petugas');
 	 
 	}
 
@@ -39,7 +39,7 @@ class PetugasController extends Controller
 			'alamat_petugas' => $request->alamat_petugas
 		]);
 		// alihkan halaman ke halaman petugas
-		return redirect('/petugas')->with(['success' => 'Tambah Berhasil']);//notifikasi 
+		return redirect('/petugas/petugas')->with(['success' => 'Tambah Berhasil']);//notifikasi 
 	 
 	}
 
@@ -49,7 +49,7 @@ class PetugasController extends Controller
 		// mengambil data petugas berdasarkan id yang dipilih
 		$petugas = DB::table('petugas')->where('id_petugas',$id)->get();
 		// passing data petugas yang didapat ke view 
-		return view('admin.edit_petugas',['petugas' => $petugas]);
+		return view('admin.petugas.edit_petugas',['petugas' => $petugas]);
 	 
 	}
 
@@ -65,7 +65,7 @@ class PetugasController extends Controller
 			'alamat_petugas' => $request->alamat_petugas
 		]);
 		// alihkan halaman ke halaman petugas
-		return redirect('/petugas')->with(['success' => 'Update Berhasil']);//notifikasi 
+		return redirect('/petugas/petugas')->with(['success' => 'Update Berhasil']);//notifikasi 
 	}
 
 	// method untuk hapus data petugas
@@ -75,7 +75,7 @@ class PetugasController extends Controller
 		DB::table('petugas')->where('id_petugas',$id)->delete();
 			
 		// alihkan halaman ke halaman petugas
-		return redirect('/petugas')->with(['success' => 'Hapus Berhasil']);//notifikasi 
+		return redirect('/petugas/petugas')->with(['success' => 'Hapus Berhasil']);//notifikasi 
 	}
 
 	//funtion cari/search untuk saat ini masih menggunakan where nama
@@ -90,7 +90,7 @@ class PetugasController extends Controller
 		->paginate();
  
     		// mengirim data pegawai ke view index
-		return view('admin.petugas',['petugas' => $petugas]);
+		return view('admin.petugas.petugas',['petugas' => $petugas]);
  
 	}
 }

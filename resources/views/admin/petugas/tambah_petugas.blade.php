@@ -8,7 +8,7 @@
 		<div class="col-md-12 mt-3">
 		<!-- fontawesome  -->
 			<h3><i class="fas fa-user-tie"></i> Form Menambah Petugas</h3>
-	<form action="{{url('/petugas/simpan')}}" method="post">
+	<form action="{{url('/petugas/petugas/simpan')}}" method="post">
 		{{ csrf_field() }}
 		<div class="form-group">
 			<label for="kd">ID Petugas</label>

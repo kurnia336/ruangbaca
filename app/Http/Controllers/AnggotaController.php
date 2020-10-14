@@ -14,7 +14,7 @@ class AnggotaController extends Controller
     	$anggota = DB::table('anggota')->paginate(5);// untuk membagi record menjadi beberapa halaman
  
     	// mengirim data anggota ke view index
-    	return view('admin.anggota',['anggota' => $anggota]);
+    	return view('admin.anggota.anggota',['anggota' => $anggota]);
  
     }
 
@@ -22,7 +22,7 @@ class AnggotaController extends Controller
 	{
 	 
 		// memanggil view tambah
-		return view('admin.tambah_anggota');
+		return view('admin.anggota.tambah_anggota');
 	 
 	}
 
@@ -39,7 +39,7 @@ class AnggotaController extends Controller
 			'alamat_anggota' => $request->alamat_anggota
 		]);
 		// alihkan halaman ke halaman anggota
-		return redirect('/anggota')->with(['success' => 'Tambah Berhasil']);//notifikasi
+		return redirect('/anggota/anggota')->with(['success' => 'Tambah Berhasil']);//notifikasi
 	 
 	}
 
@@ -49,7 +49,7 @@ class AnggotaController extends Controller
 		// mengambil data anggota berdasarkan id yang dipilih
 		$anggota = DB::table('anggota')->where('id_anggota',$id)->get();
 		// passing data anggota yang didapat ke view 
-		return view('admin.edit_anggota',['anggota' => $anggota]);
+		return view('admin.anggota.edit_anggota',['anggota' => $anggota]);
 	 
 	}
 
@@ -65,7 +65,7 @@ class AnggotaController extends Controller
 			'alamat_anggota' => $request->alamat_anggota
 		]);
 		// alihkan halaman ke halaman anggota
-		return redirect('/anggota')->with(['success' => 'Update Berhasil']);//notifikasi
+		return redirect('/anggota/anggota')->with(['success' => 'Update Berhasil']);//notifikasi
 	}
 
 	// method untuk hapus data anggota
@@ -75,7 +75,7 @@ class AnggotaController extends Controller
 		DB::table('anggota')->where('id_anggota',$id)->delete();
 			
 		// alihkan halaman ke halaman anggota
-		return redirect('/anggota')->with(['success' => 'Hapus Berhasil']);//notifikasi
+		return redirect('/anggota/anggota')->with(['success' => 'Hapus Berhasil']);//notifikasi
 	}
 
 	//funtion cari/search untuk saat ini masih menggunakan where nama
@@ -90,7 +90,7 @@ class AnggotaController extends Controller
 		->paginate();
  
     		// mengirim data pegawai ke view index
-		return view('admin.anggota',['anggota' => $anggota]);
+		return view('admin.anggota.anggota',['anggota' => $anggota]);
  
 	}
 }

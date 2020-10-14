@@ -8,11 +8,11 @@
 		<div class="col-md-12 mt-3">
 			<h3>Form Edit Petugas</h3>
 	@foreach($petugas as $p)
-	<form action="{{url('/petugas/update')}}" method="post">
+	<form action="{{url('/petugas/petugas/update')}}" method="post">
 		{{ csrf_field() }}
 		<div class="form-group">
 			<!-- <label for="kd">ID Petugas</label> -->
-			<input class="form-control" type="hidden" name="id_petugas" id="id_petugas" value="{{ $p->id_petugas }}" ">
+			<input class="form-control" type="hidden" name="id_petugas" id="id_petugas" value="{{ $p->id_petugas }}" >
 		</div>
 		<div class="form-group">
 			<label for="nama">Nama Petugas</label>

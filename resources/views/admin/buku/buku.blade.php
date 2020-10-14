@@ -6,7 +6,7 @@
 		<div class="my-4 col-12">
 		<!-- form cari -->
 			<h1 class="float-left"><i class="fas fa-book"></i> Daftar Buku</h1>
-				<a class="btn btn-primary float-right mt-2" href="{{url('/buku_tambah')}}" role="button"><i class="fas fa-book"></i> Tambah Buku</a>
+				<a class="btn btn-primary float-right mt-2" href="{{url('/buku/buku_tambah')}}" role="button"><i class="fas fa-book"></i> Tambah Buku</a>
 				<form class="float-right mt-2" style="margin: 5px;" action="{{url('/buku_cari')}}" method="GET">
 					{{ csrf_field() }}
 					<input type="text" name="cari" placeholder="Cari..." value="{{ old('cari') }}">
@@ -38,23 +38,21 @@
 		<td>{{$b->stok}}</td>
 		<td>
 		<!-- fontawesome  -->
-			<a href="{{url('/buku_edit/'.$b->id_buku)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit Buku</a>
-			<a href="#" onclick="konfirmasi();" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a>
+			<a href="{{url('/buku/buku_edit/'.$b->id_buku)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit Buku</a>
+			<a href="{{url('/buku_hapus/'.$b->id_buku)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a>
 		</td>
 	</tr>
 	<!-- script untuk menambahkan notifikasi -->
-	<script>
+	<!-- <script>
       function konfirmasi(){
          var tanya = confirm("Apakah Anda Akan Menghapus Data Ini ?");
  
-         if(tanya === true) {
+         if(tanya == true) {
             location.href = "{{url('/buku_hapus/'.$b->id_buku)}}";
-         }else{
-            location.href
          }
  
       }
-    </script>
+    </script> -->
 	@endforeach
 	
 </tbody>

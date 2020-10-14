@@ -6,7 +6,7 @@
 		<div class="my-4 col-12">
 		<!-- form cari -->
 			<h1 class="float-left"><i class="fas fa-user-tie"></i> Daftar Petugas</h1>
-				<a class="btn btn-primary float-right mt-2" href="{{url('/petugas/tambah')}}" role="button"><i class="fas fa-user-tie"></i> Tambah Petugas</a>
+				<a class="btn btn-primary float-right mt-2" href="{{url('/petugas/petugas/tambah')}}" role="button"><i class="fas fa-user-tie"></i> Tambah Petugas</a>
 				<!-- <br>
 				<br> -->
 				<form class="float-right mt-2" style="margin: 5px;" action="{{url('/petugas/cari')}}" method="GET">
@@ -40,12 +40,12 @@
 		<td>{{ $p->alamat_petugas }}</td>
 		<td>
 		<!-- fontawesome  -->
-			<a href="{{url('/petugas/edit/'.$p->id_petugas)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit</a>
-			<a href="#" onclick="konfirmasi();" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a>
+			<a href="{{url('/petugas/petugas/edit/'.$p->id_petugas)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit</a>
+			<a href="{{url('/petugas/hapus/'.$p->id_petugas)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a>
 		</td>
 	</tr>
 	<!-- script untuk menambahkan notifikasi -->
-	<script>
+	<!-- <script>
       function konfirmasi(){
          var tanya = confirm("Apakah Anda Akan Menghapus Data Ini ?");
  
@@ -56,7 +56,7 @@
          }
  
       }
-    </script>
+    </script> -->
 	@endforeach
 </tbody>
 </table>

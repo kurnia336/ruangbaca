@@ -8,7 +8,7 @@
 		<div class="col-md-12 mt-3">
 		<!-- fontawesome  -->
 			<h3><i class="fas fa-user-plus"></i> Form Menambah Anggota</h3>
-	<form action="{{url('/anggota/simpan')}}" method="post">
+	<form action="{{url('/anggota/anggota/simpan')}}" method="post">
 		{{ csrf_field() }}
 		<div class="form-group">
 			<label for="kd">ID Anggota</label>
