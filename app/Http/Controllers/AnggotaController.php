@@ -31,12 +31,12 @@ class AnggotaController extends Controller
 	{
 		// insert data ke table pegawai
 		DB::table('anggota')->insert([
-			'id_anggota' => $request->id_anggota,
-			'nama_anggota' => $request->nama_anggota,
-			'jk_anggota' => $request->jk_anggota,
-			'notelp_anggota' => $request->notelp_anggota,
-			'email_anggota' => $request->email_anggota,
-			'alamat_anggota' => $request->alamat_anggota
+			'ID_ANGGOTA' => $request->ID_ANGGOTA,
+			'NAMA_ANGGOTA' => $request->NAMA_ANGGOTA,
+			'JENIS_KELAMIN' => $request->JENIS_KELAMIN,
+			'NO_TELP_ANGGOTA' => $request->NO_TELP_ANGGOTA,
+			'EMAIL_ANGGOTA' => $request->EMAIL_ANGGOTA,
+			'ALAMAT_ANGGOTA' => $request->ALAMAT_ANGGOTA
 		]);
 		// alihkan halaman ke halaman anggota
 		return redirect('/anggota/anggota')->with(['success' => 'Tambah Berhasil']);//notifikasi
@@ -57,12 +57,12 @@ class AnggotaController extends Controller
 	public function update(Request $request)
 	{
 		// update data anggota
-		DB::table('anggota')->where('id_anggota',$request->id_anggota)->update([
-			'nama_anggota' => $request->nama_anggota,
-			'jk_anggota' => $request->jk_anggota,
-			'notelp_anggota' => $request->notelp_anggota,
-			'email_anggota' => $request->email_anggota,
-			'alamat_anggota' => $request->alamat_anggota
+		DB::table('anggota')->where('ID_ANGGOTA',$request->ID_ANGGOTA)->update([
+			'NAMA_ANGGOTA' => $request->NAMA_ANGGOTA,
+			'JENIS_KELAMIN' => $request->JENIS_KELAMIN,
+			'NO_TELP_ANGGOTA' => $request->NO_TELP_ANGGOTA,
+			'EMAIL_ANGGOTA' => $request->EMAIL_ANGGOTA,
+			'ALAMAT_ANGGOTA' => $request->ALAMAT_ANGGOTA
 		]);
 		// alihkan halaman ke halaman anggota
 		return redirect('/anggota/anggota')->with(['success' => 'Update Berhasil']);//notifikasi
@@ -72,7 +72,7 @@ class AnggotaController extends Controller
 	public function hapus($id)
 	{
 		// menghapus data anggota berdasarkan id yang dipilih
-		DB::table('anggota')->where('id_anggota',$id)->delete();
+		DB::table('anggota')->where('ID_ANGGOTA',$id)->delete();
 			
 		// alihkan halaman ke halaman anggota
 		return redirect('/anggota/anggota')->with(['success' => 'Hapus Berhasil']);//notifikasi
@@ -86,7 +86,11 @@ class AnggotaController extends Controller
  
     		// mengambil data dari table pegawai sesuai pencarian data
 		$anggota = DB::table('anggota')
-		->where('nama_anggota','like',"%".$cari."%")
+		->where('NAMA_ANGGOTA','like',"%".$cari."%")
+		->orWhere('JENIS_KELAMIN','like',"%".$cari."%")
+		->orWhere('NO_TELP_ANGGOTA','like',"%".$cari."%")
+		->orWhere('EMAIL_ANGGOTA','like',"%".$cari."%")
+		->orWhere('ALAMAT_ANGGOTA','like',"%".$cari."%")
 		->paginate();
  
     		// mengirim data pegawai ke view index

@@ -19,10 +19,11 @@
 		<thead class="thead-primary bg-primary text-white">
 	<tr>
 		<th>ID Buku</th>
+		<th>Nama Rak</th>
 		<th>Nama Buku</th>
 		<th>Penulis</th>
 		<th>Penerbit</th>
-		<th> Tahun Terbit</th>
+		<th>Tahun Terbit</th>
 		<th>Stok</th>
 		<th>Action</th>
 	</tr>
@@ -30,16 +31,17 @@
 <tbody>
 	@foreach($buku as $b)
 	<tr>
-		<td>{{$b->id_buku}}</td>
-		<td>{{$b->judul_buku}}</td>
-		<td>{{$b->penulis_buku}}</td>
-		<td>{{$b->penerbit}}</td>
-		<td>{{$b->tahun_terbit}}</td>
-		<td>{{$b->stok}}</td>
+		<td>{{$b->ID_BUKU}}</td>
+		<td>{{$b->NAMA_RAK}}</td>
+		<td>{{$b->JUDUL_BUKU}}</td>
+		<td>{{$b->PENULIS_BUKU}}</td>
+		<td>{{$b->PENERBIT}}</td>
+		<td>{{$b->TAHUN_TERBIT}}</td>
+		<td>{{$b->STOK}}</td>
 		<td>
 		<!-- fontawesome  -->
-			<a href="{{url('/buku/buku_edit/'.$b->id_buku)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit Buku</a>
-			<a href="{{url('/buku_hapus/'.$b->id_buku)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a>
+			<a href="{{url('/buku/buku_edit/'.$b->ID_BUKU)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit Buku</a>
+			<a href="{{url('/buku_hapus/'.$b->ID_BUKU)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a>
 		</td>
 	</tr>
 	<!-- script untuk menambahkan notifikasi -->
@@ -48,7 +50,7 @@
          var tanya = confirm("Apakah Anda Akan Menghapus Data Ini ?");
  
          if(tanya == true) {
-            location.href = "{{url('/buku_hapus/'.$b->id_buku)}}";
+            location.href = "{{url('/buku_hapus/'.$b->ID_BUKU)}}";
          }
  
       }

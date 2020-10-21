@@ -19,7 +19,6 @@
 		<thead class="thead-primary bg-primary text-white">
 	<tr>
 		<th>ID Rak</th>
-		<th>Judul Buku</th>
 		<th>Nama Rak</th>
 		<th>Lokasi Rak</th>
         <th>Action</th>
@@ -28,14 +27,13 @@
 <tbody>
 	@foreach($rak as $r)
 	<tr>
-		<td>{{$r->id_rak}}</td>
-		<td>{{$r->judul_buku}}</td>
-		<td>{{$r->nama_rak}}</td>
-		<td>{{$r->lokasi_rak}}</td>
+		<td>{{$r->ID_RAK}}</td>
+		<td>{{$r->NAMA_RAK}}</td>
+		<td>{{$r->LOKASI_RAK}}</td>
 		<td>
 		<!-- fontawesome  -->
-			<a href="{{url('/rak/rak_edit/'.$r->id_rak)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit Buku</a>
-			<a href="{{url('/rak_hapus/'.$r->id_rak)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a>
+			<a href="{{url('/rak/rak_edit/'.$r->ID_RAK)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit Buku</a>
+			<a href="{{url('/rak_hapus/'.$r->ID_RAK)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a>
 		</td>
 	</tr>
 	<!-- script untuk menambahkan notifikasi -->
@@ -44,7 +42,7 @@
          var tanya = confirm("Apakah Anda Akan Menghapus Data Ini ?");
  
          if(tanya === true) {
-            location.href = "{{url('/rak_hapus/'.$r->id_rak)}}";
+            location.href = "{{url('/rak_hapus/'.$r->ID_RAK)}}";
          }else{
             location.href
          }

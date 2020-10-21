@@ -8,8 +8,12 @@ class BukuController extends Controller
 {
     public function tampil(){
     	// mengambil data dari table petugas
-    	$buku = DB::table('buku')->paginate(5);// untuk membagi record menjadi beberapa halaman
- 
+    	// $buku = DB::table('buku')->paginate(5);// untuk membagi record menjadi beberapa halaman
+		$buku = DB::table('buku as b')
+        ->select('b.*','r.NAMA_RAK')
+        ->join('rak as r','b.ID_RAK', '=', 'r.ID_RAK')
+		->paginate(5);
+
     	// mengirim data petugas ke view index
     	return view('admin.buku.buku',['buku' => $buku]);
     } 
@@ -22,12 +26,16 @@ class BukuController extends Controller
 	{
 		// insert data ke table pegawai
 		DB::table('buku')->insert([
-			'id_buku' => $request->id_buku,
-			'judul_buku' => $request->judul_buku,
-			'penulis_buku' => $request->penulis_buku,
-			'penerbit' => $request->penerbit,
-			'tahun_terbit' => $request->tahun_terbit,
-			'stok' => $request->stok
+			'ID_BUKU' => $request->ID_BUKU,
+			'ID_RAK' => $request->ID_RAK,
+			'JUDUL_BUKU' => $request->JUDUL_BUKU,
+			'PENULIS_BUKU' => $request->PENULIS_BUKU,
+			'PENERBIT' => $request->PENERBIT,
+			'TAHUN_TERBIT' => $request->TAHUN_TERBIT,
+			'STOK' => $request->STOK
+			// join('buku','ID_RAK', '=', 'rak.ID_RAK'),
+			// select('buku.ID_RAK','rak.ID_RAK'),
+			// get()
 		]);
 		// alihkan halaman ke halaman petugas
 		return redirect('/buku/buku_tampil')->with(['success' => 'Tambah Berhasil']);//notifikasi 
@@ -35,7 +43,9 @@ class BukuController extends Controller
 	}
 
 	public function tambah(){
-    	return view('admin.buku.tambah_buku');
+		$rak = DB::table('rak')->pluck("NAMA_RAK","ID_RAK");
+        return view('admin.buku.tambah_buku',compact('rak'));
+    	// return view('admin.buku.tambah_buku');
     }
 
     // method untuk edit data petugas
@@ -43,20 +53,24 @@ class BukuController extends Controller
 	{
 		// mengambil data petugas berdasarkan id yang dipilih
 		$buku = DB::table('buku')->where('id_buku',$id)->get();
+		$rak = DB::table('rak')->pluck("NAMA_RAK","ID_RAK");
 		// passing data petugas yang didapat ke view 
-		return view('admin.buku.edit_buku',['buku' => $buku]);
+		return view('admin.buku.edit_buku',['buku' => $buku],compact('rak'));
+		// passing data petugas yang didapat ke view 
+		// return view('admin.buku.edit_buku',['buku' => $buku]);
 	 
 	}
 
 	public function update(Request $request)
 	{
 		// insert data ke table pegawai
-		DB::table('buku')->where('id_buku',$request->id_buku)->update([
-			'judul_buku' => $request->judul_buku,
-			'penulis_buku' => $request->penulis_buku,
-			'penerbit' => $request->penerbit,
-			'tahun_terbit' => $request->tahun_terbit,
-			'stok' => $request->stok
+		DB::table('buku')->where('ID_BUKU',$request->ID_BUKU)->update([
+			'ID_RAK' => $request->ID_RAK,
+			'JUDUL_BUKU' => $request->JUDUL_BUKU,
+			'PENULIS_BUKU' => $request->PENULIS_BUKU,
+			'PENERBIT' => $request->PENERBIT,
+			'TAHUN_TERBIT' => $request->TAHUN_TERBIT,
+			'STOK' => $request->STOK
 		]);
 		// alihkan halaman ke halaman petugas
 		return redirect('/buku/buku_tampil')->with(['success' => 'Update Berhasil']);//notifikasi 
@@ -66,7 +80,7 @@ class BukuController extends Controller
 	public function hapus($id)
 	{
 		// mengambil data petugas berdasarkan id yang dipilih
-		DB::table('buku')->where('id_buku',$id)->delete();
+		DB::table('buku')->where('ID_BUKU',$id)->delete();
 		// passing data petugas yang didapat ke view 
 		return redirect('/buku/buku_tampil')->with(['success' => 'Hapus Berhasil']);//notifikasi 
 	 
@@ -78,8 +92,15 @@ class BukuController extends Controller
 		$cari = $request->cari;
  
     		// mengambil data dari table pegawai sesuai pencarian data
-		$buku = DB::table('buku')
-		->where('judul_buku','like',"%".$cari."%")
+		$buku = DB::table('buku as b')
+		->select('b.*','r.NAMA_RAK')
+        ->join('rak as r','b.ID_RAK', '=', 'r.ID_RAK')
+		->where('NAMA_RAK','like',"%".$cari."%")
+		->orWhere('JUDUL_BUKU','like',"%".$cari."%")
+		->orWhere('PENULIS_BUKU','like',"%".$cari."%")
+		->orWhere('PENERBIT','like',"%".$cari."%")
+		->orWhere('TAHUN_TERBIT','like',"%".$cari."%")
+		->orWhere('STOK','like',"%".$cari."%")
 		->paginate();
  
     		// mengirim data pegawai ke view index

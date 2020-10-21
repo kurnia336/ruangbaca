@@ -30,16 +30,16 @@
 <tbody>
 	@foreach($anggota as $p)
 	<tr>
-		<td>{{ $p->id_anggota }}</td>
-		<td>{{ $p->nama_anggota }}</td>
-		<td>{{ $p->jk_anggota }}</td>
-		<td>{{ $p->notelp_anggota }}</td>
-		<td>{{ $p->email_anggota }}</td>
-		<td>{{ $p->alamat_anggota }}</td>
+		<td>{{ $p->ID_ANGGOTA }}</td>
+		<td>{{ $p->NAMA_ANGGOTA }}</td>
+		<td>{{ $p->JENIS_KELAMIN }}</td>
+		<td>{{ $p->NO_TELP_ANGGOTA }}</td>
+		<td>{{ $p->EMAIL_ANGGOTA }}</td>
+		<td>{{ $p->ALAMAT_ANGGOTA }}</td>
 		<td>
 		<!-- fontawesome -->
-			<a href="{{url('/anggota/anggota/edit/'.$p->id_anggota)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit</a>
-			<a href="{{url('anggota/hapus/'.$p->id_anggota)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a>
+			<a href="{{url('/anggota/anggota/edit/'.$p->ID_ANGGOTA)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit</a>
+			<a href="{{url('anggota/hapus/'.$p->ID_ANGGOTA)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a>
 		</td>
 	</tr>
 	<!-- script untuk menambahkan notifikasi -->
@@ -48,7 +48,7 @@
          var tanya = confirm("Apakah Anda Akan Menghapus Data Ini ?");
  
          if(tanya === true) {
-            location.href = "{{url('/anggota/anggota/hapus/'.$p->id_anggota)}}";
+            location.href = "{{url('/anggota/anggota/hapus/'.$p->ID_ANGGOTA)}}";
          }else{
             location.href
          }
