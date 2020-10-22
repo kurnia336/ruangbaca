@@ -38,11 +38,11 @@
 		</div>
 		<div class="form-group">
 			<label for="tahun_terbit">Tahun Terbit</label>
-			<input class="form-control" type="text" name="TAHUN_TERBIT" id="TAHUN_TERBIT" placeholder="Masukkan Tahun Terbit" value="{{$b->TAHUN_TERBIT}}">
+			<input class="form-control" type="text" name="TAHUN_TERBIT" id="TAHUN_TERBIT" placeholder="Masukkan Tahun Terbit" value="{{$b->TAHUN_TERBIT}}" maxlength="4" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
 		</div>
 		<div class="form-group">
 			<label for="stok">Stok</label>
-			<input class="form-control" type="number" name="STOK" id="STOK" placeholder="Masukkan Stok Buku" value="{{$b->STOK}}">
+			<input class="form-control" type="number" name="STOK" id="STOK" placeholder="Masukkan Stok Buku" value="{{$b->STOK}}" min="0" max="100">
 		</div>
 		<div class="form-group float-right">
 			<button class="btn btn-lg btn-danger" type="reset">Cancel</button>

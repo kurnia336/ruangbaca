@@ -95,12 +95,12 @@ class BukuController extends Controller
 		$buku = DB::table('buku as b')
 		->select('b.*','r.NAMA_RAK')
         ->join('rak as r','b.ID_RAK', '=', 'r.ID_RAK')
-		->where('NAMA_RAK','like',"%".$cari."%")
-		->orWhere('JUDUL_BUKU','like',"%".$cari."%")
-		->orWhere('PENULIS_BUKU','like',"%".$cari."%")
-		->orWhere('PENERBIT','like',"%".$cari."%")
-		->orWhere('TAHUN_TERBIT','like',"%".$cari."%")
-		->orWhere('STOK','like',"%".$cari."%")
+		->where('r.NAMA_RAK','like',"%".$cari."%")
+		->orWhere('b.JUDUL_BUKU','like',"%".$cari."%")
+		->orWhere('b.PENULIS_BUKU','like',"%".$cari."%")
+		->orWhere('b.PENERBIT','like',"%".$cari."%")
+		->orWhere('b.TAHUN_TERBIT','like',"%".$cari."%")
+		->orWhere('b.STOK','like',"%".$cari."%")
 		->paginate();
  
     		// mengirim data pegawai ke view index

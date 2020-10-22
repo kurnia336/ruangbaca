@@ -62,6 +62,20 @@ Route::post('/rak/rak_update', 'RakController@update')->name('rak_update');
 Route::get('/rak_hapus/{id_rak}', 'RakController@hapus')->name('rak_hapus');
 Route::get('/rak_cari','RakController@cari');//nambah route cari
 
+//peminjaman
+Route::get('/peminjaman/peminjaman', 'PeminjamanController@index');
+Route::get('/peminjaman/peminjaman/tambah', 'PeminjamanController@tambah');
+Route::post('/peminjaman/peminjaman/simpan', 'PeminjamanController@simpan');
+Route::get('/peminjaman/peminjaman/edit/{id_peminjaman}', 'PeminjamanController@edit');
+Route::put('/peminjaman/peminjaman/update/{id_peminjaman}', 'PeminjamanController@update');
+Route::get('/peminjaman_cari','PeminjamanController@cari');
+Route::get('/peminjaman/hapusSementara/{id_peminjaman}', 'PeminjamanController@hapusSementara');
+Route::get('/peminjaman/kembalikan/{id_peminjaman}', 'PeminjamanController@kembalikan');
+Route::get('/peminjaman/kembalikan_semua', 'PeminjamanController@kembalikan_semua');
+Route::get('/peminjaman/peminjaman_tongSampah', 'PeminjamanController@tongSampah');
+Route::get('/peminjaman/hapusPermanen/{id_peminjaman}', 'PeminjamanController@hapusPermanen');
+Route::get('/peminjaman/hapusPermanen_semua', 'PeminjamanController@hapusPermanen_semua');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -37,11 +37,11 @@
 		</div>
 		<div class="form-group">
 			<label for="tahun_terbit">Tahun Terbit</label>
-			<input class="form-control" type="text" name="TAHUN_TERBIT" id="TAHUN_TERBIT" placeholder="Masukkan Tahun Terbit">
+			<input class="form-control" type="text" name="TAHUN_TERBIT" id="TAHUN_TERBIT" placeholder="Masukkan Tahun Terbit" maxlength="4" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
 		</div>
 		<div class="form-group">
 			<label for="stok">Stok</label>
-			<input class="form-control" type="text" name="STOK" id="STOK" placeholder="Masukkan Stok Buku">
+			<input class="form-control" type="number" name="STOK" id="STOK" placeholder="Masukkan Stok Buku" min="0" max="100">
 		</div>
 		<div class="form-group float-right">
 		<!-- fontawesome  -->

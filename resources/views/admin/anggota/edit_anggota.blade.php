@@ -27,7 +27,7 @@
 		</div>
 		<div class="form-group">
 			<label for="numb">No Telp Anggota</label>
-			<input class="form-control" type="text" name="NO_TELP_ANGGOTA" id="NO_TELP_ANGGOTA" placeholder="Masukkan No Telp Anggota" value="{{ $p->NO_TELP_ANGGOTA }}">
+			<input class="form-control" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="NO_TELP_ANGGOTA" id="NO_TELP_ANGGOTA" placeholder="Masukkan No Telp Anggota" value="{{ $p->NO_TELP_ANGGOTA }}" maxlength="13">
 		</div>
 		<div class="form-group">
 			<label for="email">Email Anggota</label>
@@ -35,7 +35,7 @@
 		</div>
 		<div class="form-group">
 			<label for="adress">Alamat Anggota</label>
-			<input class="form-control" type="text" name="ALAMAT_ANGGOTA" id="ALAMAT_ANGGOTA" placeholder="Masukkan Alamat Anggota" value="{{ $p->ALAMAT_ANGGOTA }}">
+			<textarea class="form-control" name="ALAMAT_ANGGOTA" id="ALAMAT_ANGGOTA" placeholder="Masukkan Alamat Anggota" row="5">{{ $p->ALAMAT_ANGGOTA }}</textarea>
 		</div>
 		<div class="form-group float-right">
 			<button class="btn btn-lg btn-danger" type="reset">Batal</button>
