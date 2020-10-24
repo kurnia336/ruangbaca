@@ -7,16 +7,16 @@
 <!-- Content -->
 		<div class="col-md-12 mt-3">
 		<!-- fontawesome  -->
-			<h3><i class="fas fa-handshake"></i> Form Edit Peminjaman</h3>
-	<form action="{{url('/peminjaman/peminjaman/update/'.$peminjaman->ID_PEMINJAMAN)}}" method="post">
+			<h3><i class="fas fa-handshake"></i> Form Edit Pengembalian</h3>
+	<form action="{{url('/pengembalian/pengembalian/update/'.$pengembalian->ID_PENGEMBALIAN)}}" method="post">
 		{{ csrf_field() }}
         {{ method_field('PUT') }}
 		<div class="form-group">
 			<!-- <label for="id_buku">ID Buku</label> -->
-			<input class="form-control" type="hidden" name="ID_PEMINJAMAN" id="ID_PEMINJAMAN" placeholder="Masukkan ID Buku" required="true" value="{{$peminjaman->ID_PEMINJAMAN}}">
+			<input class="form-control" type="hidden" name="ID_PENGEMBALIAN" id="ID_PENGEMBALIAN" placeholder="Masukkan ID Buku" required="true" value="{{$pengembalian->ID_PENGEMBALIAN}}">
 		</div>
 		<div class="form-group">
-        <?php $selectedvalue=$peminjaman->ID_ANGGOTA ?>
+        <?php $selectedvalue=$pengembalian->ID_ANGGOTA ?>
             <label for="ID_ANGGOTA">Pilih Anggota</label>
                 <select name="ID_ANGGOTA" id="ID_ANGGOTA" class="form-control" style="">
                     <option value="">--- Nama Anggota ---</option>
@@ -31,7 +31,7 @@
                             @endif
 		</div>
         <div class="form-group">
-        <?php $selectedvalue=$peminjaman->ID_BUKU ?>
+        <?php $selectedvalue=$pengembalian->ID_BUKU ?>
             <label for="ID_BUKU">Pilih Buku</label>
                 <select name="ID_BUKU" id="ID_BUKU" class="form-control" style="">
                     <option value="">--- Nama Buku ---</option>
@@ -46,7 +46,7 @@
                             @endif
 		</div>
         <div class="form-group">
-        <?php $selectedvalue=$peminjaman->ID_PETUGAS ?>
+        <?php $selectedvalue=$pengembalian->ID_PETUGAS ?>
             <label for="ID_PETUGAS">Pilih Petugas</label>
                 <select name="ID_PETUGAS" id="ID_PETUGAS" class="form-control" style="">
                     <option value="">--- Nama Petugas ---</option>
@@ -61,12 +61,8 @@
                             @endif
 		</div>
 		<div class="form-group">
-			<label for="tahun_terbit">Tanggal Pinjam</label>
-			<input class="form-control" type="date" name="TANGGAL_PINJAM" id="TANGGAL_PINJAM" value="{{$peminjaman->TANGGAL_PINJAM}}" placeholder="">
-		</div>
-		<div class="form-group">
-			<label for="stok">Tanggal Kembali</label>
-			<input class="form-control" type="date" name="TANGGAL_KEMBALI" id="TANGGAL_KEMBALI" value="{{$peminjaman->TANGGAL_KEMBALI}}" placeholder="">
+			<label for="stok">Tanggal Pengembalian</label>
+			<input class="form-control" type="date" name="TANGGAL_PENGEMBALIAN" id="TANGGAL_PENGEMBALIAN" value="{{$pengembalian->TANGGAL_PENGEMBALIAN}}" placeholder="">
 		</div>
 		<div class="form-group float-right">
 		<!-- fontawesome  -->

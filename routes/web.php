@@ -76,6 +76,20 @@ Route::get('/peminjaman/peminjaman_tongSampah', 'PeminjamanController@tongSampah
 Route::get('/peminjaman/hapusPermanen/{id_peminjaman}', 'PeminjamanController@hapusPermanen');
 Route::get('/peminjaman/hapusPermanen_semua', 'PeminjamanController@hapusPermanen_semua');
 
+//pengembalian
+Route::get('/pengembalian/pengembalian', 'PengembalianController@index');
+Route::get('/pengembalian/pengembalian/tambah', 'PengembalianController@tambah');
+Route::post('/pengembalian/pengembalian/simpan', 'PengembalianController@simpan');
+Route::get('/pengembalian/pengembalian/edit/{id_pengembalian}', 'PengembalianController@edit');
+Route::put('/pengembalian/pengembalian/update/{id_pengembalian}', 'PengembalianController@update');
+Route::get('/pengembalian_cari','PengembalianController@cari');
+Route::get('/pengembalian/hapusSementara/{id_pengembalian}', 'PengembalianController@hapusSementara');
+Route::get('/pengembalian/kembalikan/{id_pengembalian}', 'PengembalianController@kembalikan');
+Route::get('/pengembalian/kembalikan_semua', 'PengembalianController@kembalikan_semua');
+Route::get('/pengembalian/pengembalian_tongSampah', 'PengembalianController@tongSampah');
+Route::get('/pengembalian/hapusPermanen/{id_pengembalian}', 'PengembalianController@hapusPermanen');
+Route::get('/pengembalian/hapusPermanen_semua', 'PengembalianController@hapusPermanen_semua');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

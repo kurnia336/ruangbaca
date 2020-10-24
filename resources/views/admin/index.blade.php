@@ -44,7 +44,7 @@
         <a href="{{url('/petugas/petugas')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-user-tie"></i> Petugas</a>
         <a href="{{url('/anggota/anggota')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-user-plus"></i> Anggota</a>
         <a href="{{url('/peminjaman/peminjaman')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-handshake"></i></i> Peminjaman</a>
-        <a href="{{url('/home')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-undo-alt"></i> Pengembalian</a>
+        <a href="{{url('/pengembalian/pengembalian')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-handshake"></i></i> Pengembalian</a>
       </div>
     </div>
     <!-- /#sidebar-wrapper -->
