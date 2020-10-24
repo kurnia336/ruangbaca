@@ -6,7 +6,7 @@
 		<div class="my-4 col-12">
 		<!-- form cari -->
 			<h1 class="float-left"><i class="fas fa-book"></i> Daftar Rak</h1>
-				<a class="btn btn-primary float-right mt-2" href="{{url('/rak_tambah')}}" role="button"><i class="fas fa-book"></i> Tambah Rak</a>
+				<a class="btn btn-primary float-right mt-2" href="{{url('/rak/rak_tambah')}}" role="button"><i class="fas fa-book"></i> Tambah Rak</a>
 				<form class="float-right mt-2" style="margin: 5px;" action="{{url('/rak_cari')}}" method="GET">
 					{{ csrf_field() }}
 					<input type="text" name="cari" placeholder="Cari..." value="{{ old('cari') }}">
@@ -19,39 +19,38 @@
 		<thead class="thead-primary bg-primary text-white">
 	<tr>
 		<th>ID Rak</th>
-		<th>ID Buku</th>
 		<th>Nama Rak</th>
 		<th>Lokasi Rak</th>
+        <th>Action</th>
 	</tr>
 		</thead>
 <tbody>
 	@foreach($rak as $r)
 	<tr>
-		<td>{{$r->id_rak}}</td>
-		<td>{{$r->id_buku}}</td>
-		<td>{{$r->nama_rak}}</td>
-		<td>{{$r->lokasi_rak}}</td>
+		<td>{{$r->ID_RAK}}</td>
+		<td>{{$r->NAMA_RAK}}</td>
+		<td>{{$r->LOKASI_RAK}}</td>
 		<td>
 		<!-- fontawesome  -->
-			<a href="{{url('/rak_edit/'.$r->id_rak)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit Buku</a>
-			<a href="#" onclick="konfirmasi();" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a>
+			<a href="{{url('/rak/rak_edit/'.$r->ID_RAK)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit Buku</a>
+			<a href="{{url('/rak_hapus/'.$r->ID_RAK)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a>
 		</td>
 	</tr>
 	<!-- script untuk menambahkan notifikasi -->
-	<script>
+	<!-- <script>
       function konfirmasi(){
          var tanya = confirm("Apakah Anda Akan Menghapus Data Ini ?");
  
          if(tanya === true) {
-            location.href = "{{url('/rak_hapus/'.$r->id_rak)}}";
+            location.href = "{{url('/rak_hapus/'.$r->ID_RAK)}}";
          }else{
             location.href
          }
  
       }
-    </script>
+    </script> -->
 	@endforeach
-	
+
 </tbody>
 </table>
 <!-- untuk menambahkan bagian halaman -->
@@ -60,4 +59,4 @@
 	</div>
 </div>
 
-@endsection
+@endsection 

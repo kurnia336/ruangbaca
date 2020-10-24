@@ -8,33 +8,34 @@
 	<div class="col-md-12 mt-3">
 		<h3>Form Edit Anggota</h3>
 	@foreach($anggota as $p)
-	<form action="{{url('/anggota/update')}}" method="post">
+	<form action="{{url('/anggota/anggota/update')}}" method="post">
 		{{ csrf_field() }}
 		<div class="form-group">
-			<label for="kd">ID Anggota</label>
-			<input class="form-control" type="text" name="id_anggota" id="id_anggota" placeholder="Masukkan ID Anggota" value="{{ $p->id_anggota }}">
+			<!-- <label for="kd">ID Anggota</label> -->
+			<input class="form-control" type="hidden" name="ID_ANGGOTA" id="ID_ANGGOTA" placeholder="Masukkan ID Anggota" value="{{ $p->ID_ANGGOTA }}" >
 		</div>
 		<div class="form-group">
 			<label for="nama">Nama Anggota</label>
-			<input class="form-control" type="text" name="nama_anggota" id="nama_anggota" placeholder="Masukkan Nama Anggota" value="{{ $p->nama_anggota }}">
+			<input class="form-control" type="text" name="NAMA_ANGGOTA" id="NAMA_ANGGOTA" placeholder="Masukkan Nama Anggota" value="{{ $p->NAMA_ANGGOTA }}">
 		</div>
+		<!-- jenis kelamin menggunakan radio button -->
 		<div class="form-group">
 			<label for="jabatan">JK Anggota</label>
 			<br>
-			<input class="" type="radio" name="jk_anggota" id="jk_anggota" placeholder="Masukkan Jenis Kelamin Anggota" value="L"  {{ $p->jk_anggota == "L" ? 'checked' : '' }}> Laki-Laki
-			<input class="" type="radio" name="jk_anggota" id="jk_anggota" placeholder="Masukkan Jenis Kelamin Anggota" value="P"  {{ $p->jk_anggota == "P" ? 'checked' : '' }}> Perempuan
+			<input class="" type="radio" name="JENIS_KELAMIN" id="JENIS_KELAMIN" placeholder="Masukkan Jenis Kelamin Anggota" value="L"  {{ $p->JENIS_KELAMIN == "L" ? 'checked' : '' }}> Laki-Laki
+			<input class="" type="radio" name="JENIS_KELAMIN" id="JENIS_KELAMIN" placeholder="Masukkan Jenis Kelamin Anggota" value="P"  {{ $p->JENIS_KELAMIN == "P" ? 'checked' : '' }}> Perempuan
 		</div>
 		<div class="form-group">
 			<label for="numb">No Telp Anggota</label>
-			<input class="form-control" type="text" name="notelp_anggota" id="notelp_anggota" placeholder="Masukkan No Telp Anggota" value="{{ $p->notelp_anggota }}">
+			<input class="form-control" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="NO_TELP_ANGGOTA" id="NO_TELP_ANGGOTA" placeholder="Masukkan No Telp Anggota" value="{{ $p->NO_TELP_ANGGOTA }}" maxlength="13">
 		</div>
 		<div class="form-group">
 			<label for="email">Email Anggota</label>
-			<input class="form-control" type="email" name="email_anggota" id="email_anggota" placeholder="Masukkan Email Anggota" value="{{ $p->email_anggota }}">
+			<input class="form-control" type="email" name="EMAIL_ANGGOTA" id="EMAIL_ANGGOTA" placeholder="Masukkan Email Anggota" value="{{ $p->EMAIL_ANGGOTA }}">
 		</div>
 		<div class="form-group">
 			<label for="adress">Alamat Anggota</label>
-			<input class="form-control" type="text" name="alamat_anggota" id="alamat_anggota" placeholder="Masukkan Alamat Anggota" value="{{ $p->alamat_anggota }}">
+			<textarea class="form-control" name="ALAMAT_ANGGOTA" id="ALAMAT_ANGGOTA" placeholder="Masukkan Alamat Anggota" row="5">{{ $p->ALAMAT_ANGGOTA }}</textarea>
 		</div>
 		<div class="form-group float-right">
 			<button class="btn btn-lg btn-danger" type="reset">Batal</button>

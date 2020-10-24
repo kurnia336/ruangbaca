@@ -7,24 +7,21 @@
 <!-- Content -->
 		<div class="col-md-12 mt-3">
 			<h3>Form Edit Rak</h3>
-			@foreach($buku as $b)
-	<form action="{{url('/rak_update')}}" method="post">
+			@foreach($rak as $r)
+	<form action="{{url('/rak/rak_update')}}" method="post">
 		{{ csrf_field() }}
 		<div class="form-group">
 			<!-- <label for="id_buku">ID Buku</label> -->
-			<input class="form-control" type="hidden" name="id_rak" id="id_rak" placeholder="Masukkan ID Rak" value="{{$r->id_rak}}">
+			<input class="form-control" type="hidden" name="ID_RAK" id="ID_RAK" placeholder="Masukkan ID Rak" value="{{$r->ID_RAK}}">
 		</div>
-		<div class="form-group">
-			<label for="id_buku">ID Buku</label>
-			<input class="form-control" type="text" name="id_buku" id="id_buku" placeholder="Masukkan ID Buku" value="{{$r->id_buku}}">
-		</div>
+        
 		<div class="form-group">
 			<label for="nama_rak">Nama Rak</label>
-			<input class="form-control" type="text" name="nama_rak" id="nama_rak" placeholder="Masukkan Nama Rak" value="{{$r->nama_rak}}">
+			<input class="form-control" type="text" name="NAMA_RAK" id="NAMA_RAK" placeholder="Masukkan Nama Rak" value="{{$r->NAMA_RAK}}">
 		</div>
 		<div class="form-group">
 			<label for="lokasi_rak">Lokasi Rak</label>
-			<input class="form-control" type="text" name="lokasi_rak" id="lokasi_rak" placeholder="Masukkan Lokasi Rak" value="{{$r->lokasi_rak}}">
+			<input class="form-control" type="text" name="LOKASI_RAK" id="LOKASI_RAK" placeholder="Masukkan Lokasi Rak" value="{{$r->LOKASI_RAK}}">
 		</div>
 		<div class="form-group float-right">
 			<button class="btn btn-lg btn-danger" type="reset">Cancel</button>
@@ -37,4 +34,4 @@
 	</div>
 </div>
 <!-- /.Main Section -->
-@endsection
+@endsection 

@@ -8,23 +8,19 @@
 		<div class="col-md-12 mt-3">
 		<!-- fontawesome  -->
 			<h3><i class="fas fa-book"></i> Form Tambah Rak</h3>
-	<form action="{{url('/rak_simpan')}}" method="post">
+	<form action="{{url('/rak/rak_simpan')}}" method="post">
 		{{ csrf_field() }}
 		<div class="form-group">
-			<label for="id_rak">ID Rak</label>
-			<input class="form-control" type="text" name="id_rak" id="id_rak" placeholder="Masukkan ID Rak" required="true">
-		</div>
-		<div class="form-group">
-			<label for="id_buku">ID Buku</label>
-			<input class="form-control" type="text" name="id_buku" id="id_buku" placeholder="Masukkan ID Buku" required="true">
+			<!-- <label for="id_rak">ID Rak</label> -->
+			<input class="form-control" type="hidden" name="ID_RAK" id="ID_RAK" placeholder="Masukkan ID Rak" required="true">
 		</div>
 		<div class="form-group">
 			<label for="nama_rak">Nama Rak</label>
-			<input class="form-control" type="text" name="nama_rak" id="nama_rak" placeholder="Masukkan Nama Rak">
+			<input class="form-control" type="text" name="NAMA_RAK" id="NAMA_RAK" placeholder="Masukkan Nama Rak">
 		</div>
 		<div class="form-group">
 			<label for="lokasi_rak">Lokasi Rak</label>
-			<input class="form-control" type="text" name="lokasi_rak" id="lokasi_rak" placeholder="Masukkan Lokasi Rak">
+			<input class="form-control" type="text" name="LOKASI_RAK" id="LOKASI_RAK" placeholder="Masukkan Lokasi Rak">
 		</div>
 		<div class="form-group float-right">
 		<!-- fontawesome  -->

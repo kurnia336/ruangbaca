@@ -11,7 +11,7 @@ class PetugasController extends Controller
     public function index()
     {
     	// mengambil data dari table petugas
-    	$petugas = DB::table('petugas')->paginate(5);
+    	$petugas = DB::table('petugas')->paginate(5);// untuk membagi record menjadi beberapa halaman
  
     	// mengirim data petugas ke view index
     	return view('admin.petugas',['petugas' => $petugas]);
@@ -31,15 +31,15 @@ class PetugasController extends Controller
 	{
 		// insert data ke table pegawai
 		DB::table('petugas')->insert([
-			'id_petugas' => $request->id_petugas,
-			'nama_petugas' => $request->nama_petugas,
-			'jabatan' => $request->jabatan,
-			'notelp_petugas' => $request->notelp_petugas,
-			'email_petugas' => $request->email_petugas,
-			'alamat_petugas' => $request->alamat_petugas
+			'ID_PETUGAS' => $request->ID_PETUGAS,
+			'NAMA_PETUGAS' => $request->NAMA_PETUGAS,
+			'JABATAN' => $request->JABATAN,
+			'NO_TELP_PETUGAS' => $request->NO_TELP_PETUGAS,
+			'EMAIL_PETUGAS' => $request->EMAIL_PETUGAS,
+			'ALAMAT_PETUGAS' => $request->ALAMAT_PETUGAS
 		]);
 		// alihkan halaman ke halaman petugas
-		return redirect('/petugas')->with(['success' => 'Tambah Berhasil']);
+		return redirect('/petugas/petugas')->with(['success' => 'Tambah Berhasil']);//notifikasi 
 	 
 	}
 
@@ -47,7 +47,7 @@ class PetugasController extends Controller
 	public function edit($id)
 	{
 		// mengambil data petugas berdasarkan id yang dipilih
-		$petugas = DB::table('petugas')->where('id_petugas',$id)->get();
+		$petugas = DB::table('petugas')->where('ID_PETUGAS',$id)->get();
 		// passing data petugas yang didapat ke view 
 		return view('admin.edit_petugas',['petugas' => $petugas]);
 	 
@@ -57,27 +57,28 @@ class PetugasController extends Controller
 	public function update(Request $request)
 	{
 		// update data petugas
-		DB::table('petugas')->where('id_petugas',$request->id_petugas)->update([
-			'nama_petugas' => $request->nama_petugas,
-			'jabatan' => $request->jabatan,
-			'notelp_petugas' => $request->notelp_petugas,
-			'email_petugas' => $request->email_petugas,
-			'alamat_petugas' => $request->alamat_petugas
+		DB::table('petugas')->where('ID_PETUGAS',$request->ID_PETUGAS)->update([
+			'NAMA_PETUGAS' => $request->NAMA_PETUGAS,
+			'JABATAN' => $request->JABATAN,
+			'NO_TELP_PETUGAS' => $request->NO_TELP_PETUGAS,
+			'EMAIL_PETUGAS' => $request->EMAIL_PETUGAS,
+			'ALAMAT_PETUGAS' => $request->ALAMAT_PETUGAS
 		]);
 		// alihkan halaman ke halaman petugas
-		return redirect('/petugas')->with(['success' => 'Update Berhasil']);
+		return redirect('/petugas/petugas')->with(['success' => 'Update Berhasil']);//notifikasi 
 	}
 
 	// method untuk hapus data petugas
 	public function hapus($id)
 	{
 		// menghapus data petugas berdasarkan id yang dipilih
-		DB::table('petugas')->where('id_petugas',$id)->delete();
+		DB::table('petugas')->where('ID_PETUGAS',$id)->delete();
 			
 		// alihkan halaman ke halaman petugas
-		return redirect('/petugas')->with(['success' => 'Hapus Berhasil']);
+		return redirect('/petugas/petugas')->with(['success' => 'Hapus Berhasil']);//notifikasi 
 	}
 
+	//funtion cari/search untuk saat ini masih menggunakan where nama
 	public function cari(Request $request)
 	{
 		// menangkap data pencarian
@@ -85,7 +86,11 @@ class PetugasController extends Controller
  
     		// mengambil data dari table pegawai sesuai pencarian data
 		$petugas = DB::table('petugas')
-		->where('nama_petugas','like',"%".$cari."%")
+		->where('NAMA_PETUGAS','like',"%".$cari."%")
+		->orWhere('JABATAN','like',"%".$cari."%")
+		->orWhere('NO_TELP_PETUGAS','like',"%".$cari."%")
+		->orWhere('EMAIL_PETUGAS','like',"%".$cari."%")
+		->orWhere('ALAMAT_PETUGAS','like',"%".$cari."%")
 		->paginate();
  
     		// mengirim data pegawai ke view index

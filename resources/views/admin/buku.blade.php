@@ -4,8 +4,9 @@
 <div class="container">
 	<div class="row">
 		<div class="my-4 col-12">
+		<!-- form cari -->
 			<h1 class="float-left"><i class="fas fa-book"></i> Daftar Buku</h1>
-				<a class="btn btn-primary float-right mt-2" href="{{url('/buku_tambah')}}" role="button"><i class="fas fa-book"></i> Tambah Buku</a>
+				<a class="btn btn-primary float-right mt-2" href="{{url('/buku/buku_tambah')}}" role="button"><i class="fas fa-book"></i> Tambah Buku</a>
 				<form class="float-right mt-2" style="margin: 5px;" action="{{url('/buku_cari')}}" method="GET">
 					{{ csrf_field() }}
 					<input type="text" name="cari" placeholder="Cari..." value="{{ old('cari') }}">
@@ -13,15 +14,16 @@
 				</form>
 		</div>
 	<div class="col-12">
-
+<!-- style table -->
 <table class="table table-stripped table-hover">
 		<thead class="thead-primary bg-primary text-white">
 	<tr>
 		<th>ID Buku</th>
+		<th>Nama Rak</th>
 		<th>Nama Buku</th>
 		<th>Penulis</th>
 		<th>Penerbit</th>
-		<th> Tahun Terbit</th>
+		<th>Tahun Terbit</th>
 		<th>Stok</th>
 		<th>Action</th>
 	</tr>
@@ -29,33 +31,36 @@
 <tbody>
 	@foreach($buku as $b)
 	<tr>
-		<td>{{$b->id_buku}}</td>
-		<td>{{$b->judul_buku}}</td>
-		<td>{{$b->penulis_buku}}</td>
-		<td>{{$b->penerbit}}</td>
-		<td>{{$b->tahun_terbit}}</td>
-		<td>{{$b->stok}}</td>
+		<td>{{$b->ID_BUKU}}</td>
+		<td>{{$b->NAMA_RAK}}</td>
+		<td>{{$b->JUDUL_BUKU}}</td>
+		<td>{{$b->PENULIS_BUKU}}</td>
+		<td>{{$b->PENERBIT}}</td>
+		<td>{{$b->TAHUN_TERBIT}}</td>
+		<td>{{$b->STOK}}</td>
 		<td>
-			<a href="{{url('/buku_edit/'.$b->id_buku)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit Buku</a>
-			<a href="#" onclick="konfirmasi();" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a>
+		<!-- fontawesome  -->
+			<a href="{{url('/buku/buku_edit/'.$b->ID_BUKU)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit Buku</a>
+			<a href="{{url('/buku_hapus/'.$b->ID_BUKU)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a>
 		</td>
 	</tr>
-	<script>
+	<!-- script untuk menambahkan notifikasi -->
+	<!-- <script>
       function konfirmasi(){
          var tanya = confirm("Apakah Anda Akan Menghapus Data Ini ?");
  
-         if(tanya === true) {
-            location.href = "{{url('/buku_hapus/'.$b->id_buku)}}";
-         }else{
-            location.href
+         if(tanya == true) {
+            location.href = "{{url('/buku_hapus/'.$b->ID_BUKU)}}";
          }
  
       }
-    </script>
+    </script> -->
 	@endforeach
 	
 </tbody>
 </table>
+<!-- untuk menambahkan bagian halaman -->
+<div class="text-center">{{ $buku->links() }}</div>
 		</div>
 	</div>
 </div>
