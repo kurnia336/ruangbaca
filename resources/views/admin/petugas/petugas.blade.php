@@ -11,7 +11,7 @@
 				<br> -->
 				<form class="float-right mt-2" style="margin: 5px;" action="{{url('/petugas/cari')}}" method="GET">
 					{{ csrf_field() }}
-					<input type="text" name="cari" placeholder="Cari..." value="{{ old('cari') }}">
+					<input type="text" name="cari" placeholder="Cari..." value="{{ old('cari') }}" autocomplete="off">
 					<input type="submit" class="btn btn-success" value="CARI">
 				</form>
 		</div>

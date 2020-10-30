@@ -7,12 +7,12 @@
 <!-- Content -->
 		<div class="col-md-12 mt-3">
 		<!-- fontawesome  -->
-			<h3><i class="fas fa-handshake"></i> Form Tambah Peminjaman</h3>
-	<form action="{{url('/peminjaman/peminjaman/simpan')}}" method="post">
+			<h3><<i class="fas fa-undo-alt"></i Form Tambah Pengembalian</h3>
+	<form action="{{url('/pengembalian/pengembalian/simpan')}}" method="post">
 		{{ csrf_field() }}
 		<div class="form-group">
 			<!-- <label for="id_buku">ID Buku</label> -->
-			<input class="form-control" type="hidden" name="ID_PEMINJAMAN" id="ID_PEMINJAMAN" placeholder="Masukkan ID Buku" required="true">
+			<input class="form-control" type="hidden" name="ID_PENGEMBALIAN" id="ID_PENGEMBALIAN" placeholder="Masukkan ID Buku" required="true">
 		</div>
 		<div class="form-group">
             <label for="ID_ANGGOTA">Pilih Anggota</label>
@@ -29,20 +29,6 @@
                             @endif
 		</div>
         <div class="form-group">
-            <label for="ID_BUKU">Pilih Buku</label>
-                <select name="ID_BUKU" id="ID_BUKU" class="form-control" style="">
-                    <option value="">--- Nama Buku ---</option>
-                    @foreach ($buku as $key => $value)
-                    <option name="ID_BUKU" id="ID_BUKU" value="{{ $key }}" @if( ($value->STOK) == 0) disabled @endif>[{{ $key }}] {{ $value->JUDUL_BUKU }} DENGAN STOK {{ $value->STOK }} </option>
-                    @endforeach
-                </select>
-                @if($errors->has('ID_BUKU'))
-                                <div class="text-danger">
-                                   <input type="hidden" value="{{ $errors->first('ID_BUKU')}}">Nama Buku wajib diisi</input>
-                                </div>
-                            @endif
-		</div>
-        <div class="form-group">
             <label for="ID_PETUGAS">Pilih Petugas</label>
                 <select name="ID_PETUGAS" id="ID_PETUGAS" class="form-control" style="">
                     <option value="">--- Nama Petugas ---</option>
@@ -55,14 +41,24 @@
                                     <input type="hidden" value="{{ $errors->first('ID_PETUGAS')}}">Nama Petugas wajib diisi</input>
                                 </div>
                             @endif
+        </div>
+        <div class="form-group">
+            <label for="ID_BUKU">Pilih Buku</label>
+                <select name="ID_BUKU" id="ID_BUKU" class="form-control" style="">
+                    <option value="">--- Nama Buku ---</option>
+                    @foreach ($buku as $key => $value)
+                    <option name="ID_BUKU" id="ID_BUKU" value="{{ $key }}">[{{ $key }}] {{ $value }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('ID_BUKU'))
+                                <div class="text-danger">
+                                   <input type="hidden" value="{{ $errors->first('ID_BUKU')}}">Nama Buku wajib diisi</input>
+                                </div>
+                            @endif
 		</div>
 		<div class="form-group">
-			<label for="tahun_terbit">Tanggal Pinjam</label>
-			<input class="date form-control" type="text" name="TANGGAL_PINJAM" id="TANGGAL_PINJAM" placeholder="" autocomplete="off">
-		</div>
-		<div class="form-group">
-			<label for="stok">Tanggal Kembali</label>
-			<input class="date form-control" type="text" name="TANGGAL_KEMBALI" id="TANGGAL_KEMBALI" placeholder="" autocomplete="off">
+			<label for="stok">Tanggal Pengembalian</label>
+			<input class="date form-control" type="text" name="TANGGAL_PENGEMBALIAN" id="TANGGAL_PENGEMBALIAN" placeholder="" autocomplete="off">
 		</div>
 		<div class="form-group float-right">
 		<!-- fontawesome  -->

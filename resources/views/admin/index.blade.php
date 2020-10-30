@@ -18,6 +18,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
   <!--  -->
 
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+
   <style type="text/css">
     .container-fluid{
 
@@ -41,10 +45,12 @@
         <a href="{{url('/about')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-info-circle"></i> About</a>
         <a href="{{url('/buku/buku_tampil')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-book"></i> Buku</a>
         <a href="{{url('/rak/rak_tampil')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-book-reader"></i> Rak</a>
+        <a href="{{url('/jenisbuku/jenisbuku_tampil')}}" class="list-group-item list-group-item-action bg-light"><i class="fa fa-bookmark"></i></i> Jenis Buku</a>
+        <a href="{{url('/penerbit/penerbit_tampil')}}" class="list-group-item list-group-item-action bg-light"><i class="fa fa-building"></i></i> Penerbit</a>
         <a href="{{url('/petugas/petugas')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-user-tie"></i> Petugas</a>
         <a href="{{url('/anggota/anggota')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-user-plus"></i> Anggota</a>
         <a href="{{url('/peminjaman/peminjaman')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-handshake"></i></i> Peminjaman</a>
-        <a href="{{url('/home')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-undo-alt"></i> Pengembalian</a>
+        <a href="{{url('/pengembalian/pengembalian')}}" class="list-group-item list-group-item-action bg-light"><i class="fas fa-undo-alt"></i> Pengembalian</a>
       </div>
     </div>
     <!-- /#sidebar-wrapper -->

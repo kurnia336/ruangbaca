@@ -6,10 +6,11 @@
 		<div class="my-4 col-12"> 
 		<!-- form cari -->
 			<h1 class="float-left"><i class="fas fa-user-plus"></i> Daftar Anggota</h1>
-				<a class="btn btn-primary float-right mt-2" href="{{url('/anggota/anggota/tambah')}}" role="button"><i class="fas fa-user-plus"></i> Tambah Anggota</a>
+				<a class="btn btn-secondary float-right mt-2" style="margin: 5px;" href="{{url('/anggota/anggota_tidakAktif')}}" role="button"><i class="fas fa-user-slash"></i> Anggota Tidak Aktif</a>
+				<a class="btn btn-primary float-right mt-2" style="margin: 5px;" href="{{url('/anggota/anggota/tambah')}}" role="button"><i class="fas fa-user-plus"></i> Tambah Anggota</a>
 				<form class="float-right mt-2" style="margin: 5px;" action="{{url('/anggota/cari')}}" method="GET">
 					{{ csrf_field() }}
-					<input type="text" name="cari" placeholder="Cari..." value="{{ old('cari') }}">
+					<input type="text" name="cari" placeholder="Cari..." value="{{ old('cari') }}" autocomplete="off">
 					<input type="submit" class="btn btn-success" value="CARI">
 				</form>
 		</div>
@@ -39,7 +40,7 @@
 		<td>
 		<!-- fontawesome -->
 			<a href="{{url('/anggota/anggota/edit/'.$p->ID_ANGGOTA)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit</a>
-			<a href="{{url('anggota/hapus/'.$p->ID_ANGGOTA)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a>
+			<a href="{{url('/anggota/hapusSementara/'.$p->ID_ANGGOTA)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Tidak Aktif</a>
 		</td>
 	</tr>
 	<!-- script untuk menambahkan notifikasi -->

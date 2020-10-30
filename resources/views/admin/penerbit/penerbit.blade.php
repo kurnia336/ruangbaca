@@ -1,13 +1,13 @@
 @extends('admin/index')
-@section('title','Data Rak')
+@section('title','Data Penerbit')
 @section('container')
 <div class="container">
 	<div class="row">
 		<div class="my-4 col-12">
 		<!-- form cari -->
-			<h1 class="float-left"><i class="fas fa-book"></i> Daftar Rak</h1>
-				<a class="btn btn-primary float-right mt-2" href="{{url('/rak/rak_tambah')}}" role="button"><i class="fas fa-book"></i> Tambah Rak</a>
-				<form class="float-right mt-2" style="margin: 5px;" action="{{url('/rak_cari')}}" method="GET">
+			<h1 class="float-left"><i class="fa fa-building"></i> Daftar Penerbit</h1>
+				<a class="btn btn-primary float-right mt-2" href="{{url('/penerbit_tambah')}}" role="button"><i class="fa fa-building"></i> Tambah Penerbit</a>
+				<form class="float-right mt-2" style="margin: 5px;" action="{{url('/penerbit_cari')}}" method="GET">
 					{{ csrf_field() }}
 					<input type="text" name="cari" placeholder="Cari..." value="{{ old('cari') }}" autocomplete="off">
 					<input type="submit" class="btn btn-success" value="CARI">
@@ -18,22 +18,20 @@
 <table class="table table-stripped table-hover">
 		<thead class="thead-primary bg-primary text-white">
 	<tr>
-		<th>ID Rak</th>
-		<th>Nama Rak</th>
-		<th>Lokasi Rak</th>
+		<th>ID Penerbit</th>
+		<th>Nama Penerbit</th>
         <th>Action</th>
 	</tr>
 		</thead>
 <tbody>
-	@foreach($rak as $r)
+	@foreach($penerbit as $p)
 	<tr>
-		<td>{{$r->ID_RAK}}</td>
-		<td>{{$r->NAMA_RAK}}</td>
-		<td>{{$r->LOKASI_RAK}}</td>
+		<td>{{$p->ID_PENERBIT}}</td>
+		<td>{{$p->NAMA_PENERBIT}}</td>
 		<td>
 		<!-- fontawesome  -->
-			<a href="{{url('/rak/rak_edit/'.$r->ID_RAK)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit Buku</a>
-			<a href="{{url('/rak_hapus/'.$r->ID_RAK)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a>
+			<a href="{{url('/penerbit_edit/'.$p->ID_PENERBIT)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit Penerbit</a>
+			<a href="{{url('/penerbit_hapus/'.$p->ID_PENERBIT)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a>
 		</td>
 	</tr>
 	<!-- script untuk menambahkan notifikasi -->
@@ -42,7 +40,7 @@
          var tanya = confirm("Apakah Anda Akan Menghapus Data Ini ?");
  
          if(tanya === true) {
-            location.href = "{{url('/rak_hapus/'.$r->ID_RAK)}}";
+            location.href = "{{url('/penerbit_hapus/'.$p->ID_PENERBIT)}}";
          }else{
             location.href
          }
@@ -54,9 +52,8 @@
 </tbody>
 </table>
 <!-- untuk menambahkan bagian halaman -->
-<div class="text-center">{{ $rak->links() }}</div>
+<div class="text-center">{{ $penerbit->links() }}</div>
 		</div>
 	</div>
 </div>
-
-@endsection 
+@endsection

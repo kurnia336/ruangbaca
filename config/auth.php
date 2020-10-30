@@ -46,6 +46,16 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'petugas' => [
+            'driver' => 'session',
+            'provider' => 'petugas',
+        ],
+        
+        'anggota' => [
+            'driver' => 'session',
+            'provider' => 'anggota',
+        ],
     ],
 
     /*
@@ -70,7 +80,14 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
-
+        'petugas' => [
+            'driver' => 'eloquent',
+            'model' => App\Petugas::class,
+        ],
+        'anggota' => [
+            'driver' => 'eloquent',
+            'model' => App\Anggota::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

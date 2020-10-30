@@ -7,19 +7,21 @@
 <!-- Content -->
 		<div class="col-md-12 mt-3">
 		<!-- fontawesome  -->
-			<h3><i class="fas fa-handshake"></i> Form Tambah Peminjaman</h3>
-	<form action="{{url('/peminjaman/peminjaman/simpan')}}" method="post">
+			<h3><i class="fas fa-undo-alt"></i> Form Edit Pengembalian</h3>
+	<form action="{{url('/pengembalian/pengembalian/update/'.$pengembalian->ID_PENGEMBALIAN)}}" method="post">
 		{{ csrf_field() }}
+        {{ method_field('PUT') }}
 		<div class="form-group">
 			<!-- <label for="id_buku">ID Buku</label> -->
-			<input class="form-control" type="hidden" name="ID_PEMINJAMAN" id="ID_PEMINJAMAN" placeholder="Masukkan ID Buku" required="true">
+			<input class="form-control" type="hidden" name="ID_PENGEMBALIAN" id="ID_PENGEMBALIAN" placeholder="Masukkan ID Buku" required="true" value="{{$pengembalian->ID_PENGEMBALIAN}}">
 		</div>
 		<div class="form-group">
+        <?php $selectedvalue=$pengembalian->ID_ANGGOTA ?>
             <label for="ID_ANGGOTA">Pilih Anggota</label>
                 <select name="ID_ANGGOTA" id="ID_ANGGOTA" class="form-control" style="">
                     <option value="">--- Nama Anggota ---</option>
                     @foreach ($anggota as $key => $value)
-                    <option name="ID_ANGGOTA" id="ID_ANGGOTA" value="{{ $key }}">[{{ $key }}] {{ $value }}</option>
+                    <option name="ID_ANGGOTA" id="ID_ANGGOTA" value="{{ $key }}" {{ $key == $selectedvalue ? 'selected="selected"' : '' }}>[{{ $key }}] {{ $value }}</option>
                     @endforeach
                 </select>
                 @if($errors->has('ID_ANGGOTA'))
@@ -29,11 +31,12 @@
                             @endif
 		</div>
         <div class="form-group">
+        <?php $selectedvalue=$pengembalian->ID_BUKU ?>
             <label for="ID_BUKU">Pilih Buku</label>
                 <select name="ID_BUKU" id="ID_BUKU" class="form-control" style="">
                     <option value="">--- Nama Buku ---</option>
                     @foreach ($buku as $key => $value)
-                    <option name="ID_BUKU" id="ID_BUKU" value="{{ $key }}" @if( ($value->STOK) == 0) disabled @endif>[{{ $key }}] {{ $value->JUDUL_BUKU }} DENGAN STOK {{ $value->STOK }} </option>
+                    <option name="ID_BUKU" id="ID_BUKU" value="{{ $key }}" {{ $key == $selectedvalue ? 'selected="selected"' : '' }}>[{{ $key }}] {{ $value }}</option>
                     @endforeach
                 </select>
                 @if($errors->has('ID_BUKU'))
@@ -43,11 +46,12 @@
                             @endif
 		</div>
         <div class="form-group">
+        <?php $selectedvalue=$pengembalian->ID_PETUGAS ?>
             <label for="ID_PETUGAS">Pilih Petugas</label>
                 <select name="ID_PETUGAS" id="ID_PETUGAS" class="form-control" style="">
                     <option value="">--- Nama Petugas ---</option>
                     @foreach ($petugas as $key => $value)
-                    <option name="ID_PETUGAS" id="ID_PETUGAS" value="{{ $key }}">[{{ $key }}] {{ $value }}</option>
+                    <option name="ID_PETUGAS" id="ID_PETUGAS" value="{{ $key }}" {{ $key == $selectedvalue ? 'selected="selected"' : '' }}>[{{ $key }}] {{ $value }}</option>
                     @endforeach
                 </select>
                 @if($errors->has('ID_PETUGAS'))
@@ -57,16 +61,12 @@
                             @endif
 		</div>
 		<div class="form-group">
-			<label for="tahun_terbit">Tanggal Pinjam</label>
-			<input class="date form-control" type="text" name="TANGGAL_PINJAM" id="TANGGAL_PINJAM" placeholder="" autocomplete="off">
-		</div>
-		<div class="form-group">
-			<label for="stok">Tanggal Kembali</label>
-			<input class="date form-control" type="text" name="TANGGAL_KEMBALI" id="TANGGAL_KEMBALI" placeholder="" autocomplete="off">
+			<label for="stok">Tanggal Pengembalian</label>
+			<input class="form-control" type="text" name="TANGGAL_PENGEMBALIAN" id="TANGGAL_PENGEMBALIAN" value="{{$pengembalian->TANGGAL_PENGEMBALIAN}}" placeholder="" autocomplete="off">
 		</div>
 		<div class="form-group float-right">
 		<!-- fontawesome  -->
-			<button class="btn btn-lg btn-danger" type="reset"><i class="fas fa-times"></i> Hapus</button>
+			<button class="btn btn-lg btn-danger" type="reset"><i class="fas fa-times"></i> Batal</button>
 			<button class="btn btn-lg btn-primary" type="submit"><i class="fas fa-check"></i> Simpan</button>
 		</div>
 	</form>
@@ -76,15 +76,18 @@
 </div>
 <script type="text/javascript">
 
-    $('.date').datepicker({  
+(function() {
 
-        startDate: new Date(),
-        format: 'yyyy-mm-dd',
-        todayHighlight:'TRUE',
-        autoclose: true
+$("#TANGGAL_PENGEMBALIAN").datepicker({
+  format: 'yyyy-mm-dd',
+  startDate: new Date(),
+  endDate: ''
+}).on("show", function() {
+  $(this).val("{{$pengembalian->TANGGAL_PENGEMBALIAN}}").datepicker('update');
+});
 
-     });  
+})();
 
-</script>  
+</script> 
 <!-- /.Main Section -->
 @endsection

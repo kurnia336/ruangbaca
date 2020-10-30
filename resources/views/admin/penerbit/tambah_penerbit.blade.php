@@ -1,5 +1,5 @@
 @extends('admin/index') {{-- mengambil file index.blade.php --}}
-@section('title','Tambah Buku')
+@section('title','Tambah Penerbit')
 @section('container') {{-- Mengisi di bagian content --}}
 <!-- Main Section -->
 <div class="container">
@@ -7,20 +7,16 @@
 <!-- Content -->
 		<div class="col-md-12 mt-3">
 		<!-- fontawesome  -->
-			<h3><i class="fas fa-book"></i> Form Tambah Rak</h3>
-	<form action="{{url('/rak/rak_simpan')}}" method="post">
+			<h3><i class="fas fa-book"></i> Form Tambah Penerbit</h3>
+	<form action="{{url('/penerbit_simpan')}}" method="post">
 		{{ csrf_field() }}
 		<div class="form-group">
 			<!-- <label for="id_rak">ID Rak</label> -->
-			<input class="form-control" type="hidden" name="ID_RAK" id="ID_RAK" placeholder="Masukkan ID Rak" required="true" autocomplete="off">
+			<input class="form-control" type="hidden" name="ID_PENERBIT" id="ID_PENERBIT" placeholder="Masukkan ID Penerbit" required="true" autocomplete="off">
 		</div>
 		<div class="form-group">
-			<label for="nama_rak">Nama Rak</label>
-			<input class="form-control" type="text" name="NAMA_RAK" id="NAMA_RAK" placeholder="Masukkan Nama Rak" autocomplete="off">
-		</div>
-		<div class="form-group">
-			<label for="lokasi_rak">Lokasi Rak</label>
-			<input class="form-control" type="text" name="LOKASI_RAK" id="LOKASI_RAK" placeholder="Masukkan Lokasi Rak" autocomplete="off">
+			<label for="nama_rak">Nama Penerbit</label>
+			<input class="form-control" type="text" name="NAMA_PENERBIT" id="NAMA_PENERBIT" placeholder="Masukkan Nama Penerbit" autocomplete="off">
 		</div>
 		<div class="form-group float-right">
 		<!-- fontawesome  -->

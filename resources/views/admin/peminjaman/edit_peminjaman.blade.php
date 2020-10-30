@@ -7,7 +7,7 @@
 <!-- Content -->
 		<div class="col-md-12 mt-3">
 		<!-- fontawesome  -->
-			<h3><i class="fas fa-handshake"></i> Form Tambah Peminjaman</h3>
+			<h3><i class="fas fa-handshake"></i> Form Edit Peminjaman</h3>
 	<form action="{{url('/peminjaman/peminjaman/update/'.$peminjaman->ID_PEMINJAMAN)}}" method="post">
 		{{ csrf_field() }}
         {{ method_field('PUT') }}
@@ -36,7 +36,7 @@
                 <select name="ID_BUKU" id="ID_BUKU" class="form-control" style="">
                     <option value="">--- Nama Buku ---</option>
                     @foreach ($buku as $key => $value)
-                    <option name="ID_BUKU" id="ID_BUKU" value="{{ $key }}" {{ $key == $selectedvalue ? 'selected="selected"' : '' }}>[{{ $key }}] {{ $value }}</option>
+                    <option name="ID_BUKU" id="ID_BUKU" value="{{ $value->ID_BUKU }}" {{ $value->ID_BUKU == $selectedvalue ? 'selected="selected"' : '' }} @if( ($value->STOK) == 0) disabled @endif>[{{ $key }}] {{ $value->JUDUL_BUKU }}</option>
                     @endforeach
                 </select>
                 @if($errors->has('ID_BUKU'))
@@ -62,15 +62,15 @@
 		</div>
 		<div class="form-group">
 			<label for="tahun_terbit">Tanggal Pinjam</label>
-			<input class="form-control" type="date" name="TANGGAL_PINJAM" id="TANGGAL_PINJAM" value="{{$peminjaman->TANGGAL_PINJAM}}" placeholder="">
+			<input class="date form-control" type="text" name="TANGGAL_PINJAM" id="TANGGAL_PINJAM" value="{{$peminjaman->TANGGAL_PINJAM}}" placeholder="" autocomplete="off">
 		</div>
 		<div class="form-group">
 			<label for="stok">Tanggal Kembali</label>
-			<input class="form-control" type="date" name="TANGGAL_KEMBALI" id="TANGGAL_KEMBALI" value="{{$peminjaman->TANGGAL_KEMBALI}}" placeholder="">
+			<input class="date form-control" type="text" name="TANGGAL_KEMBALI" id="TANGGAL_KEMBALI" value="{{$peminjaman->TANGGAL_KEMBALI}}" placeholder="" autocomplete="off">
 		</div>
 		<div class="form-group float-right">
 		<!-- fontawesome  -->
-			<button class="btn btn-lg btn-danger" type="reset"><i class="fas fa-times"></i> Hapus</button>
+			<button class="btn btn-lg btn-danger" type="reset"><i class="fas fa-times"></i> Batal</button>
 			<button class="btn btn-lg btn-primary" type="submit"><i class="fas fa-check"></i> Simpan</button>
 		</div>
 	</form>
@@ -78,5 +78,28 @@
 <!-- /.content -->
 	</div>
 </div>
+<script type="text/javascript">
+
+(function() {
+
+$("#TANGGAL_PINJAM").datepicker({
+  format: 'yyyy-mm-dd',
+  startDate: new Date(),
+  endDate: ''
+}).on("show", function() {
+  $(this).val("{{$peminjaman->TANGGAL_PINJAM}}").datepicker('update');
+});
+
+$("#TANGGAL_KEMBALI").datepicker({
+  format: 'yyyy-mm-dd',
+  startDate: new Date(),
+  endDate: ''
+}).on("show", function() {
+  $(this).val("{{$peminjaman->TANGGAL_KEMBALI}}").datepicker('update');
+});
+
+})(); 
+
+</script> 
 <!-- /.Main Section -->
 @endsection

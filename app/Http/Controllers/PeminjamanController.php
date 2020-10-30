@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Peminjaman;
+use Illuminate\Support\Facades\DB;//query builder
+use App\Peminjaman;//eloquent
 use App\Buku;
 use App\Anggota;
 use App\Petugas;
@@ -19,12 +19,13 @@ class PeminjamanController extends Controller
         $petugas = petugas::all();
         $buku = buku::all();
         // return view('admin.peminjaman.peminjaman', ['peminjaman' => $peminjaman]);
-        return view('admin.peminjaman.peminjaman', compact('anggota','petugas','buku','peminjaman'));
+        return view('admin.peminjaman.peminjaman',compact('anggota','petugas','buku','peminjaman'));
     }
 
     public function tambah(){
         $anggota = DB::table('anggota')->pluck("NAMA_ANGGOTA","ID_ANGGOTA");
-        $buku = DB::table('buku')->pluck("JUDUL_BUKU","ID_BUKU");
+        // $buku = DB::table('buku')->pluck("JUDUL_BUKU","ID_BUKU","STOK");
+        $buku = Buku::all();
         $petugas = DB::table('petugas')->pluck("NAMA_PETUGAS","ID_PETUGAS");
         return view('admin.peminjaman.peminjaman_tambah',compact('anggota','buku','petugas'));
     	// return view('admin.peminjaman.peminjaman_tambah');
@@ -49,18 +50,21 @@ class PeminjamanController extends Controller
             'TANGGAL_KEMBALI' => $request->TANGGAL_KEMBALI
         ]);
         
+        DB::table('buku')->where('ID_BUKU',$request->ID_BUKU)->decrement('STOK');
+
         return redirect('/peminjaman/peminjaman')->with(['success' => 'Tambah Berhasil']);//notifikasi
     }
 
     public function edit($id){
         $peminjaman = peminjaman::find($id);
         $anggota = DB::table('anggota')->pluck("NAMA_ANGGOTA","ID_ANGGOTA");
-        $buku = DB::table('buku')->pluck("JUDUL_BUKU","ID_BUKU");
+        // $buku = DB::table('buku')->pluck("JUDUL_BUKU","ID_BUKU");
+        $buku = Buku::all();
         $petugas = DB::table('petugas')->pluck("NAMA_PETUGAS","ID_PETUGAS");
         return view('admin.peminjaman.edit_peminjaman',compact('anggota','buku','petugas','peminjaman'));
     }
 
-    public function update($id, Request $request){
+    public function update(Request $request,$id){
         $this->validate($request,[
             // 'ID_PEMINJAMAN' => 'required',
     		'ID_ANGGOTA' => 'required',
@@ -69,14 +73,24 @@ class PeminjamanController extends Controller
             'TANGGAL_PINJAM' => 'required',
             'TANGGAL_KEMBALI' => 'required'
         ]);
-    
         $peminjaman = peminjaman::find($id);
-        $peminjaman->ID_ANGGOTA = $request->ID_ANGGOTA;
-        $peminjaman->ID_BUKU = $request->ID_BUKU;
-        $peminjaman->ID_PETUGAS = $request->ID_PETUGAS;
-        $peminjaman->TANGGAL_PINJAM = $request->TANGGAL_PINJAM;
-        $peminjaman->TANGGAL_KEMBALI = $request->TANGGAL_KEMBALI;
-        $peminjaman->save();
+        // if($request->ID_BUKU == $id_buku){  
+        //     $peminjaman->ID_ANGGOTA = $request->ID_ANGGOTA;
+        //     $peminjaman->ID_BUKU = $request->ID_BUKU;
+        //     $peminjaman->ID_PETUGAS = $request->ID_PETUGAS;
+        //     $peminjaman->TANGGAL_PINJAM = $request->TANGGAL_PINJAM;
+        //     $peminjaman->TANGGAL_KEMBALI = $request->TANGGAL_KEMBALI;
+        //     $peminjaman->save();
+        // }else{
+            // $peminjaman = peminjaman::find($id);
+            $peminjaman->ID_ANGGOTA = $request->ID_ANGGOTA;
+            $peminjaman->ID_BUKU = $request->ID_BUKU;
+            $peminjaman->ID_PETUGAS = $request->ID_PETUGAS;
+            $peminjaman->TANGGAL_PINJAM = $request->TANGGAL_PINJAM;
+            $peminjaman->TANGGAL_KEMBALI = $request->TANGGAL_KEMBALI;
+            $peminjaman->save();
+            // DB::table('buku')->where('ID_BUKU',$id_buku)->increment('STOK');            
+        // }
         return redirect('/peminjaman/peminjaman')->with(['success' => 'Update Berhasil']);//notifikasi
     }
 

@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;//untuk komponen Database
+use App\Anggota;
 
 class AnggotaController extends Controller
 {
-    //
+	//
+	
     public function index()
     {
     	// mengambil data dari table anggota
-    	$anggota = DB::table('anggota')->paginate(5);// untuk membagi record menjadi beberapa halaman
- 
+    	// $anggota = DB::table('anggota')->paginate(5);// untuk membagi record menjadi beberapa halaman
+		$anggota = anggota::paginate(5);
     	// mengirim data anggota ke view index
     	return view('admin.anggota.anggota',['anggota' => $anggota]);
  
@@ -97,4 +99,46 @@ class AnggotaController extends Controller
 		return view('admin.anggota.anggota',['anggota' => $anggota]);
  
 	}
+
+	public function hapusSementara($id){
+    	$anggota = anggota::find($id);
+    	$anggota->delete();
+ 
+    	return redirect('/anggota/anggota')->with(['success' => 'Hapus Sementara Berhasil']);//notifikasi
+    }
+
+    // menampilkan data guru yang sudah dihapus
+    public function anggota_tidakAktif(){
+    	// mengampil data guru yang sudah dihapus
+    	$anggota = anggota::onlyTrashed()->paginate(5);
+    	return view('admin.anggota.anggota_tidakAktif', ['anggota' => $anggota]);
+    }
+
+    public function kembalikan($id){
+    	$anggota = anggota::onlyTrashed()->where('ID_ANGGOTA',$id);
+    	$anggota->restore();
+    	return redirect('/anggota/anggota')->with(['success' => 'Restore Berhasil']);//notifikasi
+    }
+
+    
+    public function kembalikan_semua(){	
+    	$anggota = anggota::onlyTrashed();
+    	$anggota->restore();
+    	return redirect('/anggota/anggota')->with(['success' => 'Restore Berhasil']);//notifikasi
+    }
+
+    // hapus permanen
+    public function hapusPermanen($id){
+    	// hapus permanen data guru
+    	$anggota = anggota::onlyTrashed()->where('ID_ANGGOTA',$id);
+    	$anggota->forceDelete();
+    	return redirect('/anggota/anggota_tidakAktif')->with(['success' => 'Hapus Permanen Berhasil']);//notifikasi
+    }
+
+    public function hapusPermanen_semua(){
+    	// hapus permanen data guru
+    	$peminjaman = peminjaman::onlyTrashed();
+    	$peminjaman->forceDelete();
+    	return redirect('/anggota/anggota_tidakAktif')->with(['success' => 'Hapus Permanen Berhasil']);//notifikasi
+    }
 }
