@@ -20,9 +20,10 @@
 	<tr>
 		<th>ID Buku</th>
 		<th>Nama Rak</th>
+		<th>Jenis Buku</th>
+		<th>Penerbit</th>
 		<th>Nama Buku</th>
 		<th>Penulis</th>
-		<th>Penerbit</th>
 		<th>Tahun Terbit</th>
 		<th>Stok</th>
 		<th>Action</th>
@@ -33,9 +34,10 @@
 	<tr>
 		<td>{{$b->ID_BUKU}}</td>
 		<td>{{$b->NAMA_RAK}}</td>
+		<td>{{$b->NAMA_JENISBUKU}}</td>
+		<td>{{$b->NAMA_PENERBIT}}</td>
 		<td>{{$b->JUDUL_BUKU}}</td>
 		<td>{{$b->PENULIS_BUKU}}</td>
-		<td>{{$b->PENERBIT}}</td>
 		<td>{{$b->TAHUN_TERBIT}}</td>
 		<td>{{$b->STOK}}</td>
 		<td>

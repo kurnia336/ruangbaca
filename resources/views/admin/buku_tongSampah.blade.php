@@ -6,8 +6,8 @@
 		<div class="my-4 col-12">
 		<!-- form cari -->
 			<h1 class="float-left"><i class="fas fa-handshake"></i> Tong Sampah</h1>
-                <a class="btn btn-danger float-right mt-2" style="margin: 5px;" href="{{url('/pengembalian/hapusPermanen_semua')}}" role="button"><i class="fas fa-dumpster-fire"></i> Delete All</a>
-                <a class="btn btn-primary float-right mt-2" style="margin: 5px;" href="{{url('/pengembalian/kembalikan_semua')}}" role="button"><i class="fas fa-trash-restore"></i> Restore All</a>
+                <a class="btn btn-danger float-right mt-2" style="margin: 5px;" href="{{url('/buku/hapusPermanen_semua')}}" role="button"><i class="fas fa-dumpster-fire"></i> Delete All</a>
+                <a class="btn btn-primary float-right mt-2" style="margin: 5px;" href="{{url('/buku/kembalikan_semua')}}" role="button"><i class="fas fa-trash-restore"></i> Restore All</a>
 				<!-- <form class="float-right mt-2" style="margin: 5px;" action="{{url('/buku_cari')}}" method="GET">
 					{{ csrf_field() }}
 					<input type="text" name="cari" placeholder="Cari..." value="{{ old('cari') }}">
@@ -19,26 +19,30 @@
 <table class="table table-stripped table-hover">
 		<thead class="thead-primary bg-primary text-white">
 	<tr>
-		<th>ID Peminjaman</th>
-		<th>Nama Anggota</th>
-		<th>Nama Petugas</th>
+		<th>ID Buku</th>
+		<th>Nama Rak</th>
 		<th>Nama Buku</th>
-		<th>Tanggal Pengembalian</th>
+		<th>Penulis</th>
+		<th>Penerbit</th>
+		<th>Tahun Terbit</th>
+		<th>Stok</th>
 		<th>Action</th>
 	</tr>
 		</thead>
 <tbody>
-	@foreach($pengembalian as $p)
+	@foreach($buku as $b)
 	<tr>
-		<td>{{$p->ID_PENGEMBALIAN}}</td>
-		<td>{{ $p->anggota->NAMA_ANGGOTA }}</td>
-		<td>{{ $p->petugas->NAMA_PETUGAS }}</td>
-		<td>{{ $p->buku->JUDUL_BUKU }}</td>
-		<td>{{\Carbon\Carbon::parse($p->TANGGAL_PENGEMBALIAN)->format('d/m/Y')}}</td>
+		<td>{{$b->ID_BUKU}}</td>
+		<td>{{$b->NAMA_RAK}}</td>
+		<td>{{$b->JUDUL_BUKU}}</td>
+		<td>{{$b->PENULIS_BUKU}}</td>
+		<td>{{$b->PENERBIT}}</td>
+		<td>{{$b->TAHUN_TERBIT}}</td>
+		<td>{{$b->STOK}}</td>
 		<td>
 		<!-- fontawesome  -->
-			<a href="{{url('/pengembalian/kembalikan/'.$p->ID_PENGEMBALIAN)}}" class="badge badge-success"><i class="fas fa-recycle"></i> Restore</a>
-			<a href="{{url('/pengembalian/hapusPermanen/'.$p->ID_PENGEMBALIAN)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus Permanen</a>
+			<a href="{{url('/buku/kembalikan/'.$p->ID_BUKU)}}" class="badge badge-success"><i class="fas fa-recycle"></i> Restore</a>
+			<a href="{{url('/buku/hapusPermanen/'.$p->ID_BUKU)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus Permanen</a>
 		</td>
 	</tr>
 	<!-- script untuk menambahkan notifikasi -->
@@ -57,7 +61,7 @@
 </tbody>
 </table>
 <!-- untuk menambahkan bagian halaman -->
-<div class="text-center">{{ $pengembalian->links() }}</div>
+<div class="text-center">{{ $buku->links() }}</div>
 		</div>
 	</div>
 </div>

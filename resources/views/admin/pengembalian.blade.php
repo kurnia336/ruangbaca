@@ -5,9 +5,9 @@
 	<div class="row">
 		<div class="my-4 col-12">
 		<!-- form cari -->
-			<h1 class="float-left"><i class="fas fa-handshake"></i> Daftar Pengembalian</h1>
+			<h1 class="float-left"><i class="fas fa-undo-alt"></i> Daftar Pengembalian</h1>
 				<a class="btn btn-secondary float-right mt-2" style="margin: 5px;" href="{{url('/pengembalian/pengembalian_tongSampah')}}" role="button"><i class="fas fa-trash"></i> Tong Sampah Pengembalian</a>
-				<a class="btn btn-primary float-right mt-2" style="margin: 5px;" href="{{url('/pengembalian/pengembalian/tambah')}}" role="button"><i class="fas fa-handshake"></i> Tambah Pengembalian</a>
+				<a class="btn btn-primary float-right mt-2" style="margin: 5px;" href="{{url('/pengembalian/pengembalian/tambah')}}" role="button"><i class="fas fa-undo-alt"></i> Tambah Pengembalian</a>
 				<form class="float-right mt-2" style="margin: 5px;" action="{{url('/pengembalian_cari')}}" method="GET">
 					{{ csrf_field() }}
 					<input type="text" name="cari" placeholder="Cari..." value="{{ old('cari') }}">
@@ -37,7 +37,7 @@
 		<td>{{\Carbon\Carbon::parse($p->TANGGAL_PENGEMBALIAN)->format('d/m/Y')}}</td>
 		<td>
 		<!-- fontawesome  -->
-			<a href="{{url('/pengembalian/pengembalian/edit/'.$p->ID_PENGEMBALIAN)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit Buku</a>
+			<a href="{{url('/pengembalian/pengembalian/edit/'.$p->ID_PENGEMBALIAN)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit Pengembalian</a>
 			<a href="{{url('/pengembalian/hapusSementara/'.$p->ID_PENGEMBALIAN)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus Sementara</a>
 		</td>
 	</tr>

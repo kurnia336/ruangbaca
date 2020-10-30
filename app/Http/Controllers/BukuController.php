@@ -10,8 +10,10 @@ class BukuController extends Controller
     	// mengambil data dari table petugas
     	// $buku = DB::table('buku')->paginate(5);// untuk membagi record menjadi beberapa halaman
 		$buku = DB::table('buku as b')
-        ->select('b.*','r.NAMA_RAK')
+        ->select('b.*','r.NAMA_RAK','j.NAMA_JENISBUKU', 'p.NAMA_PENERBIT')
         ->join('rak as r','b.ID_RAK', '=', 'r.ID_RAK')
+        ->join('jenis_buku as j','b.ID_JENISBUKU', '=', 'j.ID_JENISBUKU')
+        ->join('penerbit as p','b.ID_PENERBIT', '=', 'p.ID_PENERBIT')
 		->paginate(5);
 
     	// mengirim data petugas ke view index
@@ -28,9 +30,10 @@ class BukuController extends Controller
 		DB::table('buku')->insert([
 			'ID_BUKU' => $request->ID_BUKU,
 			'ID_RAK' => $request->ID_RAK,
+			'ID_JENISBUKU' => $request->ID_JENISBUKU,
+			'ID_PENERBIT' => $request->ID_PENERBIT,
 			'JUDUL_BUKU' => $request->JUDUL_BUKU,
 			'PENULIS_BUKU' => $request->PENULIS_BUKU,
-			'PENERBIT' => $request->PENERBIT,
 			'TAHUN_TERBIT' => $request->TAHUN_TERBIT,
 			'STOK' => $request->STOK
 			// join('buku','ID_RAK', '=', 'rak.ID_RAK'),
@@ -44,7 +47,9 @@ class BukuController extends Controller
 
 	public function tambah(){
 		$rak = DB::table('rak')->pluck("NAMA_RAK","ID_RAK");
-        return view('admin.tambah_buku',compact('rak'));
+		$jenis_buku = DB::table('jenis_buku')->pluck("NAMA_JENISBUKU","ID_JENISBUKU");
+		$penerbit = DB::table('penerbit')->pluck("NAMA_PENERBIT","ID_PENERBIT");
+        return view('admin.tambah_buku',compact('rak','jenis_buku','penerbit'));
     	// return view('admin.buku.tambah_buku');
     }
 
@@ -54,8 +59,10 @@ class BukuController extends Controller
 		// mengambil data petugas berdasarkan id yang dipilih
 		$buku = DB::table('buku')->where('id_buku',$id)->get();
 		$rak = DB::table('rak')->pluck("NAMA_RAK","ID_RAK");
+		$jenis_buku = DB::table('jenis_buku')->pluck("NAMA_JENISBUKU","ID_JENISBUKU");
+		$penerbit = DB::table('penerbit')->pluck("NAMA_PENERBIT","ID_PENERBIT");
 		// passing data petugas yang didapat ke view 
-		return view('admin.edit_buku',['buku' => $buku],compact('rak'));
+		return view('admin.edit_buku',['buku' => $buku],compact('rak','jenis_buku','penerbit'));
 		// passing data petugas yang didapat ke view 
 		// return view('admin.buku.edit_buku',['buku' => $buku]);
 	 
@@ -66,9 +73,10 @@ class BukuController extends Controller
 		// insert data ke table pegawai
 		DB::table('buku')->where('ID_BUKU',$request->ID_BUKU)->update([
 			'ID_RAK' => $request->ID_RAK,
+			'ID_JENIS_BUKU' => $request->ID_JENISBUKU,
+			'ID_PENERBIT' => $request->ID_PENERBIT,
 			'JUDUL_BUKU' => $request->JUDUL_BUKU,
 			'PENULIS_BUKU' => $request->PENULIS_BUKU,
-			'PENERBIT' => $request->PENERBIT,
 			'TAHUN_TERBIT' => $request->TAHUN_TERBIT,
 			'STOK' => $request->STOK
 		]);
@@ -93,12 +101,15 @@ class BukuController extends Controller
  
     		// mengambil data dari table pegawai sesuai pencarian data
 		$buku = DB::table('buku as b')
-		->select('b.*','r.NAMA_RAK')
+		->select('b.*','r.NAMA_RAK','j.NAMA_JENISBUKU', 'p.NAMA_PENERBIT')
         ->join('rak as r','b.ID_RAK', '=', 'r.ID_RAK')
+        ->join('jenis_buku as j','b.ID_JENISBUKU', '=', 'j.ID_JENISBUKU')
+        ->join('penerbit as p','b.ID_PENERBIT', '=', 'p.ID_PENERBIT')
 		->where('r.NAMA_RAK','like',"%".$cari."%")
+		->orWhere('j.NAMA_JENISBUKU','like',"%".$cari."%")
+		->orWhere('p.NAMA_PENERBIT','like',"%".$cari."%")
 		->orWhere('b.JUDUL_BUKU','like',"%".$cari."%")
 		->orWhere('b.PENULIS_BUKU','like',"%".$cari."%")
-		->orWhere('b.PENERBIT','like',"%".$cari."%")
 		->orWhere('b.TAHUN_TERBIT','like',"%".$cari."%")
 		->orWhere('b.STOK','like',"%".$cari."%")
 		->paginate();

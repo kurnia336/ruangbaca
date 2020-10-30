@@ -24,16 +24,30 @@
                 </select>
 		</div>
 		<div class="form-group">
+            <label for="buku">Pilih Jenis Buku</label>
+                <select name="ID_JENISBUKU" id="ID_JENISBUKU" class="form-control" style="">
+                    <option value="">--- Jenis Buku ---</option>
+                    @foreach ($jenis_buku as $key => $value)
+                    <option name="ID_JENISBUKU" id="ID_JENISBUKU" value="{{ $key }}">[{{ $key }}] {{ $value }}</option>
+                    @endforeach
+                </select>
+		</div>
+		<div class="form-group">
+            <label for="buku">Pilih Penerbit</label>
+                <select name="ID_PENERBIT" id="ID_PENERBIT" class="form-control" style="">
+                    <option value="">--- Penerbit ---</option>
+                    @foreach ($penerbit as $key => $value)
+                    <option name="ID_PENERBIT" id="ID_PENERBIT" value="{{ $key }}">[{{ $key }}] {{ $value }}</option>
+                    @endforeach
+                </select>
+		</div>
+		<div class="form-group">
 			<label for="judul_buku">Judul Buku</label>
 			<input class="form-control" type="text" name="JUDUL_BUKU" id="JUDUL_BUKU" placeholder="Masukkan Judul Buku" required="true">
 		</div>
 		<div class="form-group">
 			<label for="penulis_buku">Penulis</label>
 			<input class="form-control" type="text" name="PENULIS_BUKU" id="PENULIS_BUKU" placeholder="Masukkan Penulis Buku">
-		</div>
-		<div class="form-group">
-			<label for="penerbit">Penerbit</label>
-			<input class="form-control" type="text" name="PENERBIT" id="PENERBIT" placeholder="Masukkan Penerbit Buku">
 		</div>
 		<div class="form-group">
 			<label for="tahun_terbit">Tahun Terbit</label>

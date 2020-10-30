@@ -90,6 +90,26 @@ Route::get('/pengembalian/pengembalian_tongSampah', 'PengembalianController@tong
 Route::get('/pengembalian/hapusPermanen/{id_pengembalian}', 'PengembalianController@hapusPermanen');
 Route::get('/pengembalian/hapusPermanen_semua', 'PengembalianController@hapusPermanen_semua');
 
+//jenisbuku
+Route::get('/jenisbuku/jenisbuku_index', 'JenisbukuController@index')->name('jenisbuku_index');
+Route::get('/jenisbuku/jenisbuku_tampil', 'JenisbukuController@tampil')->name('jenisbuku_tampil');
+Route::get('/jenisbuku_tambah', 'JenisbukuController@tambah')->name('jenisbuku_tambah');
+Route::post('/jenisbuku_simpan', 'JenisbukuController@simpan');
+Route::get('/jenisbuku_edit/{id_rak}', 'JenisbukuController@edit')->name('jenisbuku_edit');
+Route::post('/jenisbuku_update', 'JenisbukuController@update')->name('jenisbuku_update');
+Route::get('/jenisbuku_hapus/{id_rak}', 'JenisbukuController@hapus')->name('jenisbuku_hapus');
+Route::get('/jenisbuku_cari','JenisbukuController@cari');//nambah route cari
+
+//rak
+Route::get('/penerbit/penerbit_index', 'PenerbitController@index')->name('penerbit_index');
+Route::get('/penerbit/penerbit_tampil', 'PenerbitController@tampil')->name('penerbit_tampil');
+Route::get('/penerbit_tambah', 'PenerbitController@tambah')->name('penerbit_tambah');
+Route::post('/penerbit_simpan', 'PenerbitController@simpan');
+Route::get('/penerbit_edit/{id_penerbit}', 'PenerbitController@edit')->name('penerbit_edit');
+Route::post('/penerbit_update', 'PenerbitController@update')->name('penerbit_update');
+Route::get('/penerbit_hapus/{id_penerbit}', 'PenerbitController@hapus')->name('penerbit_hapus');
+Route::get('/penerbit_cari','PenerbitController@cari');//nambah route cari
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

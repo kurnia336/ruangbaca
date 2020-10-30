@@ -7,7 +7,7 @@
 <!-- Content -->
 		<div class="col-md-12 mt-3">
 		<!-- fontawesome  -->
-			<h3><i class="fas fa-handshake"></i> Form Edit Pengembalian</h3>
+			<h3><i class="fas fa-undo-alt"></i> Form Edit Pengembalian</h3>
 	<form action="{{url('/pengembalian/pengembalian/update/'.$pengembalian->ID_PENGEMBALIAN)}}" method="post">
 		{{ csrf_field() }}
         {{ method_field('PUT') }}

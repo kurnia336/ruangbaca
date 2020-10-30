@@ -7,7 +7,7 @@
 <!-- Content -->
 		<div class="col-md-12 mt-3">
 		<!-- fontawesome  -->
-			<h3><i class="fas fa-handshake"></i> Form Tambah Pengembalian</h3>
+			<h3><i class="fas fa-undo-alt"></i> Form Tambah Pengembalian</h3>
 	<form action="{{url('/pengembalian/pengembalian/simpan')}}" method="post">
 		{{ csrf_field() }}
 		<div class="form-group">
