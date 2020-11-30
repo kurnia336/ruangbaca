@@ -33,6 +33,9 @@ Route::get('/buku/buku_edit/{id_buku}', 'BukuController@edit')->name('buku_edit'
 Route::post('/buku/buku_update', 'BukuController@update')->name('buku_update');
 Route::get('/buku_hapus/{id_buku}', 'BukuController@hapus')->name('buku_hapus');
 Route::get('/buku_cari','BukuController@cari');//nambah route cari
+Route::get('/cari_rak', 'BukuController@loadData_rak');
+Route::get('/cari_jenisbuku', 'BukuController@loadData_jenisBuku');
+Route::get('/cari_penerbit', 'BukuController@loadData_penerbit');
 
 //petugas
 Route::get('/petugas/petugas','PetugasController@index'); //MENAMPILKAN HALAMAN PETUGAS/BUKU
@@ -93,6 +96,7 @@ Route::get('/penerbit_cari','PenerbitController@cari');//nambah route cari
 Route::get('/peminjaman/peminjaman', 'PeminjamanController@index');
 Route::get('/peminjaman/peminjaman/tambah', 'PeminjamanController@tambah');
 Route::post('/peminjaman/peminjaman/simpan', 'PeminjamanController@simpan');
+Route::get('/peminjaman/peminjaman/simpan_pengembalian/{id_peminjaman}', 'PeminjamanController@simpan_pengembalian');
 Route::get('/peminjaman/peminjaman/edit/{id_peminjaman}', 'PeminjamanController@edit');
 // Route::put('/peminjaman/peminjaman/update/{id_peminjaman}/{id_buku}', 'PeminjamanController@update');
 Route::put('/peminjaman/peminjaman/update/{id_peminjaman}', 'PeminjamanController@update');
@@ -103,6 +107,8 @@ Route::get('/peminjaman/kembalikan_semua', 'PeminjamanController@kembalikan_semu
 Route::get('/peminjaman/peminjaman_tongSampah', 'PeminjamanController@tongSampah');
 Route::get('/peminjaman/hapusPermanen/{id_peminjaman}', 'PeminjamanController@hapusPermanen');
 Route::get('/peminjaman/hapusPermanen_semua', 'PeminjamanController@hapusPermanen_semua');
+Route::get('/cari_anggota', 'PeminjamanController@loadData_anggota');
+Route::get('/cari_buku', 'PeminjamanController@loadData_buku');
 
 //pengembalian
 Route::get('/pengembalian/pengembalian', 'PengembalianController@index');

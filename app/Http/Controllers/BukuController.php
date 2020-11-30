@@ -118,4 +118,29 @@ class BukuController extends Controller
 		return view('admin.buku.buku',['buku' => $buku]);
  
 	}
+
+	public function loadData_rak(Request $request)
+    {
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $data = DB::table('rak')->select('ID_RAK', 'NAMA_RAK')->where('NAMA_RAK', 'like',"%".$cari."%")->get();
+            return response()->json($data);
+        }
+	}
+	public function loadData_jenisBuku(Request $request)
+    {
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $data = DB::table('jenis_buku')->select('ID_JENISBUKU', 'NAMA_JENISBUKU')->where('NAMA_JENISBUKU', 'like',"%".$cari."%")->get();
+            return response()->json($data);
+        }
+	}
+	public function loadData_penerbit(Request $request)
+    {
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $data = DB::table('penerbit')->select('ID_PENERBIT', 'NAMA_PENERBIT')->where('NAMA_PENERBIT', 'like',"%".$cari."%")->get();
+            return response()->json($data);
+        }
+    }
 }

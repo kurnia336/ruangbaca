@@ -31,7 +31,7 @@
 		<td>
 		<!-- fontawesome  -->
 			<a href="{{url('/penerbit_edit/'.$p->ID_PENERBIT)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit Penerbit</a>
-			<a href="{{url('/penerbit_hapus/'.$p->ID_PENERBIT)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a>
+			<!-- <a href="{{url('/penerbit_hapus/'.$p->ID_PENERBIT)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a> -->
 		</td>
 	</tr>
 	<!-- script untuk menambahkan notifikasi -->

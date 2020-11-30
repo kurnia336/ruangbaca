@@ -17,10 +17,15 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
   <!--  -->
-
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
+  
+  
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 
   <style type="text/css">
     .container-fluid{
@@ -176,8 +181,10 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    Hai {{ Auth::user()->name }}, anda sudah melakukan login SI Ruang Baca
+                    <img src="img/buku1.jpg" class="img-fluid rounded mx-auto d-block" width="35%" alt="Ruang Baca">
+                    Hai <b>{{ Auth::user()->name }}</b>, anda sudah melakukan login SI Ruang Baca.
+                    <p style="text-indent:30pt;text-align:justify;">Sistem Informasi Ruang Baca merupakan sistem informasi yang dikembangkan untuk memudahkan dalam pelayanan serta memudahkan petugas perpustakaan dalam mengelola perpustakaan. Petugas perpustakaan dapat selalu memonitor tentang ketersediaan buku, daftar buku, daftar data anggota dan petugas, peminjaman buku dan pengembalian buku.</p>
+                    <p style="text-indent:30pt;text-align:justify;">Dengan sistem ini, peminjam buku maupun yang mengembalikan buku tidak perlu menunggu lama untuk proses peminjaman/pengembalian buku. Petugas perpustakaan pun tidak akan mengalami kesulitan dalam proses pelaporan. Sistem informasi raung baca yang berbasis webbase, memudahkan kita untuk mengakses perpustakaan online, bahkan mengetahui rekam jejak aktifitas pengunjung perpustakaan. Sistem informasi ini juga mempermudah bagi pengguna untuk mencari buku lebih bebas, cepat , leluasa dan nyaman.</p>
                 </div>
             </div>
         @endsection

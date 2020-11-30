@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Pengembalian;
+use App\Peminjaman;
 use App\Buku;
 use App\Anggota;
 use App\Petugas;
@@ -96,15 +97,16 @@ class PengembalianController extends Controller
 		// ->orWhere('p.TANGGAL_KEMBALI','like',"%".$cari."%")
 		// ->paginate();
         $pengembalian = pengembalian::select('pengembalian.*')
-        ->join('buku', 'pengembalian.ID_BUKU', '=', 'buku.ID_BUKU')
-        ->join('petugas', 'pengembalian.ID_PETUGAS', '=', 'petugas.ID_PETUGAS')
-        ->join('anggota', 'pengembalian.ID_ANGGOTA', '=', 'anggota.ID_ANGGOTA')
+        ->join('peminjaman','pengembalian.ID_PEMINJAMAN', '=', 'peminjaman.ID_PEMINJAMAN')
+        ->join('buku', 'peminjaman.ID_BUKU', '=', 'buku.ID_BUKU')
+        ->join('petugas', 'peminjaman.ID_PETUGAS', '=', 'petugas.ID_PETUGAS')
+        ->join('anggota', 'peminjaman.ID_ANGGOTA', '=', 'anggota.ID_ANGGOTA')
         ->where('ID_PENGEMBALIAN','like',"%".$cari."%")
         ->orWhere('TANGGAL_PENGEMBALIAN','like',"%".$cari."%")
         ->orWhere('buku.JUDUL_BUKU','like',"%".$cari."%")
 		->orWhere('anggota.NAMA_ANGGOTA','like',"%".$cari."%")
 		->orWhere('petugas.NAMA_PETUGAS','like',"%".$cari."%") 
-        ->paginate();
+        ->paginate(5);
     		// mengirim data pegawai ke view index
 		return view('admin.pengembalian.pengembalian',['pengembalian' => $pengembalian]);
 

@@ -4,17 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;//query builder
+use Illuminate\Support\Carbon;
 use App\Peminjaman;//eloquent
 use App\Buku;
 use App\Anggota;
 use App\Petugas;
+use App\Pengembalian;
 
 class PeminjamanController extends Controller
 {
     //
     public function index()
     {
-        $peminjaman = peminjaman::paginate(5);
+        $peminjaman = peminjaman::where('STATUS_PINJAM', '=', 0)->paginate(5);
         $anggota = anggota::all();
         $petugas = petugas::all();
         $buku = buku::all();
@@ -32,14 +34,14 @@ class PeminjamanController extends Controller
     }
 
     public function simpan(Request $request){
-        $this->validate($request,[
-            // 'ID_PEMINJAMAN' => 'required',
-    		'ID_ANGGOTA' => 'required',
-            'ID_BUKU' => 'required',
-            'ID_PETUGAS' => 'required',
-            'TANGGAL_PINJAM' => 'required',
-            'TANGGAL_KEMBALI' => 'required'
-    	]);
+        // $this->validate($request,[
+        //     // 'ID_PEMINJAMAN' => 'required',
+    	// 	'ID_ANGGOTA' => 'required',
+        //     'ID_BUKU' => 'required',
+        //     'ID_PETUGAS' => 'required',
+        //     'TANGGAL_PINJAM' => 'required',
+        //     'TANGGAL_KEMBALI' => 'required'
+    	// ]);
  
         Peminjaman::create([
     		// 'ID_PEMINJAMAN' => $request->ID_PEMINJAMAN,
@@ -53,6 +55,31 @@ class PeminjamanController extends Controller
         DB::table('buku')->where('ID_BUKU',$request->ID_BUKU)->decrement('STOK');
 
         return redirect('/peminjaman/peminjaman')->with(['success' => 'Tambah Berhasil']);//notifikasi
+    }
+
+    public function simpan_pengembalian(Request $request, $id_peminjaman){
+        // $this->validate($request,[
+        //     // 'ID_PEMINJAMAN' => 'required',
+    	// 	'ID_ANGGOTA' => 'required',
+        //     'ID_BUKU' => 'required',
+        //     'ID_PETUGAS' => 'required',
+        //     'TANGGAL_PINJAM' => 'required',
+        //     'TANGGAL_KEMBALI' => 'required'
+    	// ]);
+        $now = now();
+        $peminjaman = peminjaman::find($id_peminjaman);
+        $peminjaman->STATUS_PINJAM = 1;
+        $peminjaman->save();
+        DB::table('buku')->where('ID_BUKU',$peminjaman->ID_BUKU)->increment('STOK');
+
+        Pengembalian::create([
+            'ID_PEMINJAMAN' => $id_peminjaman,
+            'TANGGAL_PENGEMBALIAN' => $now
+        ]);
+        
+        
+
+        return redirect('/pengembalian/pengembalian')->with(['success' => 'Tambah Berhasil']);//notifikasi
     }
 
     public function edit($id){
@@ -125,6 +152,23 @@ class PeminjamanController extends Controller
     		// mengirim data pegawai ke view index
 		return view('admin.peminjaman.peminjaman',['peminjaman' => $peminjaman]);
  
+    }
+    
+    public function loadData_buku(Request $request)
+    {
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $data = DB::table('buku')->select('ID_BUKU', 'JUDUL_BUKU')->where('JUDUL_BUKU', 'like',"%".$cari."%")->get();
+            return response()->json($data);
+        }
+	}
+	public function loadData_anggota(Request $request)
+    {
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $data = DB::table('anggota')->select('ID_ANGGOTA', 'NAMA_ANGGOTA')->where('NAMA_ANGGOTA', 'like',"%".$cari."%")->get();
+            return response()->json($data);
+        }
 	}
 
     public function hapusSementara($id){

@@ -43,7 +43,7 @@
 		<td>
 		<!-- fontawesome  -->
 			<a href="{{url('/buku/buku_edit/'.$b->ID_BUKU)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit Buku</a>
-			<a href="{{url('/buku_hapus/'.$b->ID_BUKU)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a>
+			<!-- <a href="{{url('/buku_hapus/'.$b->ID_BUKU)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a> -->
 		</td>
 	</tr>
 	<!-- script untuk menambahkan notifikasi -->

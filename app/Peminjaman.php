@@ -27,4 +27,7 @@ class Peminjaman extends Model
     	return $this->belongsTo(Petugas::class,'ID_PETUGAS');
     }
     
+    public function pengembalian(){
+        return $this->hasOne(Pengembalian::class,'ID_PENGEMBALIAN');
+    }
 }

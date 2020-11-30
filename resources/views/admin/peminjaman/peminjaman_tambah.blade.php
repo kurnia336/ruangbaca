@@ -16,12 +16,13 @@
 		</div>
 		<div class="form-group">
             <label for="ID_ANGGOTA">Pilih Anggota</label>
-                <select name="ID_ANGGOTA" id="ID_ANGGOTA" class="form-control" style="">
+                <!-- <select name="ID_ANGGOTA" id="ID_ANGGOTA" class="form-control" style="">
                     <option value="">--- Nama Anggota ---</option>
                     @foreach ($anggota as $key => $value)
                     <option name="ID_ANGGOTA" id="ID_ANGGOTA" value="{{ $key }}">[{{ $key }}] {{ $value }}</option>
                     @endforeach
-                </select>
+                </select> -->
+                <select class="cari_anggota form-control" style="" id="ID_ANGGOTA" name="ID_ANGGOTA" autocomplete="off" required></select>
                 @if($errors->has('ID_ANGGOTA'))
                                 <div class="text-danger">
                                     <input type="hidden" value="{{ $errors->first('ID_ANGGOTA')}}">Nama Anggota wajib diisi</input>
@@ -30,12 +31,13 @@
 		</div>
         <div class="form-group">
             <label for="ID_BUKU">Pilih Buku</label>
-                <select name="ID_BUKU" id="ID_BUKU" class="form-control" style="">
+                <!-- <select name="ID_BUKU" id="ID_BUKU" class="form-control" style="">
                     <option value="">--- Nama Buku ---</option>
                     @foreach ($buku as $key => $value)
-                    <option name="ID_BUKU" id="ID_BUKU" value="{{ $key }}" @if( ($value->STOK) == 0) disabled @endif>[{{ $key }}] {{ $value->JUDUL_BUKU }} DENGAN STOK {{ $value->STOK }} </option>
+                    <option name="ID_BUKU" id="ID_BUKU" value="{{ $value->ID_BUKU }}" @if( ($value->STOK) == 0) disabled @endif>[{{ $value->ID_BUKU }}] {{ $value->JUDUL_BUKU }} DENGAN STOK {{ $value->STOK }} </option>
                     @endforeach
-                </select>
+                </select> -->
+                <select class="cari_buku form-control" style="" id="ID_BUKU" name="ID_BUKU" autocomplete="off" required></select>
                 @if($errors->has('ID_BUKU'))
                                 <div class="text-danger">
                                    <input type="hidden" value="{{ $errors->first('ID_BUKU')}}">Nama Buku wajib diisi</input>
@@ -58,12 +60,25 @@
 		</div>
 		<div class="form-group">
 			<label for="tahun_terbit">Tanggal Pinjam</label>
-			<input class="date form-control" type="text" name="TANGGAL_PINJAM" id="TANGGAL_PINJAM" placeholder="" autocomplete="off">
+			<!-- <input class="date form-control" type="text" name="TANGGAL_PINJAM" id="TANGGAL_PINJAM" placeholder="" autocomplete="off"> -->
+            <div class="start_date input-group mb-4">
+            <input class="form-control date" type="text" placeholder="Tanggal Pinjam" id="TANGGAL_PINJAM" autocomplete="off">
+                <div class="input-group-append">
+                <span class="fa fa-calendar input-group-text start_date_calendar" aria-hidden="true "></span>
+                </div>
+            </div>
 		</div>
 		<div class="form-group">
 			<label for="stok">Tanggal Kembali</label>
-			<input class="date form-control" type="text" name="TANGGAL_KEMBALI" id="TANGGAL_KEMBALI" placeholder="" autocomplete="off">
+			<!-- <input class="date form-control" type="text" name="TANGGAL_KEMBALI" id="TANGGAL_KEMBALI" placeholder="" autocomplete="off"> -->
+            <div class="start_date input-group mb-4">
+            <input class="form-control date" type="text" placeholder="Tanggal Kembali" id="TANGGAL_KEMBALI" autocomplete="off">
+                <div class="input-group-append">
+                <span class="fa fa-calendar input-group-text start_date_calendar" aria-hidden="true "></span>
+                </div>
+            </div>
 		</div>
+
 		<div class="form-group float-right">
 		<!-- fontawesome  -->
 			<button class="btn btn-lg btn-danger" type="reset"><i class="fas fa-times"></i> Hapus</button>
@@ -84,7 +99,48 @@
         autoclose: true
 
      });  
+</script>
+<script type="text/javascript">
+  $('.cari_anggota').select2({
+    placeholder: 'Cari...',
+    ajax: {
+      url: "{{url('/cari_anggota')}}",
+      dataType: 'json',
+      delay: 250,
+      processResults: function (data) {
+        return {
+          results:  $.map(data, function (item) {
+            return {
+              text: item.NAMA_ANGGOTA,
+              id: item.ID_ANGGOTA
+            }
+          })
+        };
+      },
+      cache: false
+    }
+  });
 
-</script>  
+  $('.cari_buku').select2({
+    placeholder: 'Cari...',
+    ajax: {
+      url: "{{url('/cari_buku')}}",
+      dataType: 'json',
+      delay: 250,
+      processResults: function (data) {
+        return {
+          results:  $.map(data, function (item) {
+            return {
+              text: item.JUDUL_BUKU,
+              id: item.ID_BUKU
+            }
+          })
+        };
+      },
+      cache: false
+    }
+  });
+
+</script>
 <!-- /.Main Section -->
 @endsection
