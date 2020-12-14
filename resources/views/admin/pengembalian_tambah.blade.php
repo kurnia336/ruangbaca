@@ -3,18 +3,18 @@
 @section('container') {{-- Mengisi di bagian content --}}
 <!-- Main Section -->
 <div class="container">
-	<div class="row">
+    <div class="row">
 <!-- Content -->
-		<div class="col-md-12 mt-3">
-		<!-- fontawesome  -->
-			<h3><i class="fas fa-undo-alt"></i> Form Tambah Pengembalian</h3>
-	<form action="{{url('/pengembalian/pengembalian/simpan')}}" method="post">
-		{{ csrf_field() }}
-		<div class="form-group">
-			<!-- <label for="id_buku">ID Buku</label> -->
-			<input class="form-control" type="hidden" name="ID_PENGEMBALIAN" id="ID_PENGEMBALIAN" placeholder="Masukkan ID Buku" required="true">
-		</div>
-		<div class="form-group">
+        <div class="col-md-12 mt-3">
+        <!-- fontawesome  -->
+            <h3><i class="fas fa-undo-alt"></i> Form Tambah Pengembalian</h3>
+    <form action="{{url('/pengembalian/pengembalian/simpan')}}" method="post">
+        {{ csrf_field() }}
+        <div class="form-group">
+            <!-- <label for="id_buku">ID Buku</label> -->
+            <input class="form-control" type="hidden" name="ID_PENGEMBALIAN" id="ID_PENGEMBALIAN" placeholder="Masukkan ID Buku" required="true">
+        </div>
+        <div class="form-group">
             <label for="ID_ANGGOTA">Pilih Anggota</label>
                 <select name="ID_ANGGOTA" id="ID_ANGGOTA" class="form-control" style="">
                     <option value="">--- Nama Anggota ---</option>
@@ -27,7 +27,7 @@
                                     <input type="hidden" value="{{ $errors->first('ID_ANGGOTA')}}">Nama Anggota wajib diisi</input>
                                 </div>
                             @endif
-		</div>
+        </div>
         <div class="form-group">
             <label for="ID_PETUGAS">Pilih Petugas</label>
                 <select name="ID_PETUGAS" id="ID_PETUGAS" class="form-control" style="">
@@ -55,20 +55,32 @@
                                    <input type="hidden" value="{{ $errors->first('ID_BUKU')}}">Nama Buku wajib diisi</input>
                                 </div>
                             @endif
-		</div>
-		<div class="form-group">
-			<label for="stok">Tanggal Pengembalian</label>
-			<input class="form-control" type="date" name="TANGGAL_PENGEMBALIAN" id="TANGGAL_PENGEMBALIAN" placeholder="">
-		</div>
-		<div class="form-group float-right">
-		<!-- fontawesome  -->
-			<button class="btn btn-lg btn-danger" type="reset"><i class="fas fa-times"></i> Hapus</button>
-			<button class="btn btn-lg btn-primary" type="submit"><i class="fas fa-check"></i> Simpan</button>
-		</div>
-	</form>
-		</div>
+        </div>
+        <div class="form-group">
+            <label for="stok">Tanggal Pengembalian</label>
+            <input class="date form-control" type="text" name="TANGGAL_PENGEMBALIAN" id="TANGGAL_PENGEMBALIAN" placeholder="" autocomplete="off">
+        </div>
+        <div class="form-group float-right">
+        <!-- fontawesome  -->
+            <button class="btn btn-lg btn-danger" type="reset"><i class="fas fa-times"></i> Hapus</button>
+            <button class="btn btn-lg btn-primary" type="submit"><i class="fas fa-check"></i> Simpan</button>
+        </div>
+    </form>
+        </div>
 <!-- /.content -->
-	</div>
+    </div>
 </div>
+<script type="text/javascript">
+
+    $('.date').datepicker({  
+
+        startDate: new Date(),
+        format: 'yyyy-mm-dd',
+        todayHighlight:'TRUE',
+        autoclose: true
+
+     });  
+
+</script>  
 <!-- /.Main Section -->
 @endsection

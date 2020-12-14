@@ -15,7 +15,7 @@ class Peminjaman extends Model
     protected $fillable = ['ID_ANGGOTA','ID_BUKU','ID_PETUGAS','TANGGAL_PINJAM','TANGGAL_KEMBALI'];
 
     public function buku(){
-    	return $this->belongsTo(Buku::class,'ID_BUKU');
+        return $this->belongsTo(Buku::class,'ID_BUKU');
     }
 
     public function anggota(){
@@ -24,7 +24,10 @@ class Peminjaman extends Model
     }
 
     public function petugas(){
-    	return $this->belongsTo(Petugas::class,'ID_PETUGAS');
+        return $this->belongsTo(Petugas::class,'ID_PETUGAS');
     }
     
+    public function pengembalian(){
+        return $this->hasOne(Pengembalian::class,'ID_PENGEMBALIAN');
+    }
 }

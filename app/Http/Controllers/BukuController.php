@@ -11,17 +11,17 @@ class BukuController extends Controller
     	// $buku = DB::table('buku')->paginate(5);// untuk membagi record menjadi beberapa halaman
 		$buku = DB::table('buku as b')
         ->select('b.*','r.NAMA_RAK','j.NAMA_JENISBUKU', 'p.NAMA_PENERBIT')
-        ->join('rak as r','b.ID_RAK', '=', 'r.ID_RAK')
-        ->join('jenis_buku as j','b.ID_JENISBUKU', '=', 'j.ID_JENISBUKU')
+		->join('rak as r','b.ID_RAK', '=', 'r.ID_RAK')
+		->join('jenis_buku as j','b.ID_JENISBUKU', '=', 'j.ID_JENISBUKU')
         ->join('penerbit as p','b.ID_PENERBIT', '=', 'p.ID_PENERBIT')
 		->paginate(5);
 
     	// mengirim data petugas ke view index
-    	return view('admin.buku',['buku' => $buku]);
+    	return view('admin.buku.buku',['buku' => $buku]);
     } 
 
     public function index(){
-    	return view('admin.buku');
+    	return view('admin.buku.buku');
     }
     // method untuk insert data ke table petugas
 	public function simpan(Request $request)
@@ -49,7 +49,7 @@ class BukuController extends Controller
 		$rak = DB::table('rak')->pluck("NAMA_RAK","ID_RAK");
 		$jenis_buku = DB::table('jenis_buku')->pluck("NAMA_JENISBUKU","ID_JENISBUKU");
 		$penerbit = DB::table('penerbit')->pluck("NAMA_PENERBIT","ID_PENERBIT");
-        return view('admin.tambah_buku',compact('rak','jenis_buku','penerbit'));
+        return view('admin.buku.tambah_buku',compact('rak','jenis_buku','penerbit'));
     	// return view('admin.buku.tambah_buku');
     }
 
@@ -62,7 +62,7 @@ class BukuController extends Controller
 		$jenis_buku = DB::table('jenis_buku')->pluck("NAMA_JENISBUKU","ID_JENISBUKU");
 		$penerbit = DB::table('penerbit')->pluck("NAMA_PENERBIT","ID_PENERBIT");
 		// passing data petugas yang didapat ke view 
-		return view('admin.edit_buku',['buku' => $buku],compact('rak','jenis_buku','penerbit'));
+		return view('admin.buku.edit_buku',['buku' => $buku],compact('rak','jenis_buku','penerbit'));
 		// passing data petugas yang didapat ke view 
 		// return view('admin.buku.edit_buku',['buku' => $buku]);
 	 
@@ -73,7 +73,7 @@ class BukuController extends Controller
 		// insert data ke table pegawai
 		DB::table('buku')->where('ID_BUKU',$request->ID_BUKU)->update([
 			'ID_RAK' => $request->ID_RAK,
-			'ID_JENIS_BUKU' => $request->ID_JENISBUKU,
+			'ID_JENISBUKU' => $request->ID_JENISBUKU,
 			'ID_PENERBIT' => $request->ID_PENERBIT,
 			'JUDUL_BUKU' => $request->JUDUL_BUKU,
 			'PENULIS_BUKU' => $request->PENULIS_BUKU,
@@ -102,20 +102,45 @@ class BukuController extends Controller
     		// mengambil data dari table pegawai sesuai pencarian data
 		$buku = DB::table('buku as b')
 		->select('b.*','r.NAMA_RAK','j.NAMA_JENISBUKU', 'p.NAMA_PENERBIT')
-        ->join('rak as r','b.ID_RAK', '=', 'r.ID_RAK')
-        ->join('jenis_buku as j','b.ID_JENISBUKU', '=', 'j.ID_JENISBUKU')
+		->join('rak as r','b.ID_RAK', '=', 'r.ID_RAK')
+		->join('jenis_buku as j','b.ID_JENISBUKU', '=', 'j.ID_JENISBUKU')
         ->join('penerbit as p','b.ID_PENERBIT', '=', 'p.ID_PENERBIT')
 		->where('r.NAMA_RAK','like',"%".$cari."%")
+		->orWhere('b.JUDUL_BUKU','like',"%".$cari."%")
 		->orWhere('j.NAMA_JENISBUKU','like',"%".$cari."%")
 		->orWhere('p.NAMA_PENERBIT','like',"%".$cari."%")
-		->orWhere('b.JUDUL_BUKU','like',"%".$cari."%")
 		->orWhere('b.PENULIS_BUKU','like',"%".$cari."%")
 		->orWhere('b.TAHUN_TERBIT','like',"%".$cari."%")
 		->orWhere('b.STOK','like',"%".$cari."%")
 		->paginate();
  
     		// mengirim data pegawai ke view index
-		return view('admin.buku',['buku' => $buku]);
+		return view('admin.buku.buku',['buku' => $buku]);
  
 	}
+
+	public function loadData_rak(Request $request)
+    {
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $data = DB::table('rak')->select('ID_RAK', 'NAMA_RAK')->where('NAMA_RAK', 'like',"%".$cari."%")->get();
+            return response()->json($data);
+        }
+	}
+	public function loadData_jenisBuku(Request $request)
+    {
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $data = DB::table('jenis_buku')->select('ID_JENISBUKU', 'NAMA_JENISBUKU')->where('NAMA_JENISBUKU', 'like',"%".$cari."%")->get();
+            return response()->json($data);
+        }
+	}
+	public function loadData_penerbit(Request $request)
+    {
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $data = DB::table('penerbit')->select('ID_PENERBIT', 'NAMA_PENERBIT')->where('NAMA_PENERBIT', 'like',"%".$cari."%")->get();
+            return response()->json($data);
+        }
+    }
 }

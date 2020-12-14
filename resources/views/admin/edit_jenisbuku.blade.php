@@ -12,12 +12,12 @@
 		{{ csrf_field() }}
 		<div class="form-group">
 			<!-- <label for="id_buku">ID Buku</label> -->
-			<input class="form-control" type="hidden" name="ID_JENISBUKU" id="ID_JENISBUKU" placeholder="Masukkan ID Jenis Buku" value="{{$j->ID_JENISBUKU}}">
+			<input class="form-control" type="hidden" name="ID_JENISBUKU" id="ID_JENISBUKU" placeholder="Masukkan ID Jenis Buku" value="{{$j->ID_JENISBUKU}}" autocomplete="off">
 		</div>
-        
+
 		<div class="form-group">
 			<label for="nama_rak">Jenis Buku</label>
-			<input class="form-control" type="text" name="NAMA_JENISBUKU" id="NAMA_JENISBUKU" placeholder="Masukkan Jenis Buku" value="{{$j->NAMA_JENISBUKU}}">
+			<input class="form-control" type="text" name="NAMA_JENISBUKU" id="NAMA_JENISBUKU" placeholder="Masukkan Jenis Buku" value="{{$j->NAMA_JENISBUKU}}" autocomplete="off">
 		</div>
 		<div class="form-group float-right">
 			<button class="btn btn-lg btn-danger" type="reset">Cancel</button>
@@ -30,4 +30,4 @@
 	</div>
 </div>
 <!-- /.Main Section -->
-@endsection 
+@endsection

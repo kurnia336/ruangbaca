@@ -9,7 +9,7 @@
 				<a class="btn btn-primary float-right mt-2" href="{{url('/jenisbuku_tambah')}}" role="button"><i class="fa fa-bookmark"></i> Tambah Jenis Buku</a>
 				<form class="float-right mt-2" style="margin: 5px;" action="{{url('/jenisbuku_cari')}}" method="GET">
 					{{ csrf_field() }}
-					<input type="text" name="cari" placeholder="Cari..." value="{{ old('cari') }}">
+					<input type="text" name="cari" placeholder="Cari..." value="{{ old('cari') }}" autocomplete="off">
 					<input type="submit" class="btn btn-success" value="CARI">
 				</form>
 		</div>
@@ -31,7 +31,7 @@
 		<td>
 		<!-- fontawesome  -->
 			<a href="{{url('/jenisbuku_edit/'.$j->ID_JENISBUKU)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit Jenis Buku</a>
-			<a href="{{url('/jenisbuku_hapus/'.$j->ID_JENISBUKU)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a>
+			<!-- <a href="{{url('/jenisbuku_hapus/'.$j->ID_JENISBUKU)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a> -->
 		</td>
 	</tr>
 	@endforeach
@@ -43,5 +43,4 @@
 		</div>
 	</div>
 </div>
-
-@endsection 
+@endsection

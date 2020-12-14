@@ -3,19 +3,19 @@
 @section('container') {{-- Mengisi di bagian content --}}
 <!-- Main Section -->
 <div class="container">
-	<div class="row">
+    <div class="row">
 <!-- Content -->
-		<div class="col-md-12 mt-3">
-		<!-- fontawesome  -->
-			<h3><i class="fas fa-undo-alt"></i> Form Edit Pengembalian</h3>
-	<form action="{{url('/pengembalian/pengembalian/update/'.$pengembalian->ID_PENGEMBALIAN)}}" method="post">
-		{{ csrf_field() }}
+        <div class="col-md-12 mt-3">
+        <!-- fontawesome  -->
+            <h3><i class="fas fa-undo-alt"></i> Form Edit Pengembalian</h3>
+    <form action="{{url('/pengembalian/pengembalian/update/'.$pengembalian->ID_PENGEMBALIAN)}}" method="post">
+        {{ csrf_field() }}
         {{ method_field('PUT') }}
-		<div class="form-group">
-			<!-- <label for="id_buku">ID Buku</label> -->
-			<input class="form-control" type="hidden" name="ID_PENGEMBALIAN" id="ID_PENGEMBALIAN" placeholder="Masukkan ID Buku" required="true" value="{{$pengembalian->ID_PENGEMBALIAN}}">
-		</div>
-		<div class="form-group">
+        <div class="form-group">
+            <!-- <label for="id_buku">ID Buku</label> -->
+            <input class="form-control" type="hidden" name="ID_PENGEMBALIAN" id="ID_PENGEMBALIAN" placeholder="Masukkan ID Buku" required="true" value="{{$pengembalian->ID_PENGEMBALIAN}}">
+        </div>
+        <div class="form-group">
         <?php $selectedvalue=$pengembalian->ID_ANGGOTA ?>
             <label for="ID_ANGGOTA">Pilih Anggota</label>
                 <select name="ID_ANGGOTA" id="ID_ANGGOTA" class="form-control" style="">
@@ -29,7 +29,7 @@
                                     <input type="hidden" value="{{ $errors->first('ID_ANGGOTA')}}">Nama Anggota wajib diisi</input>
                                 </div>
                             @endif
-		</div>
+        </div>
         <div class="form-group">
         <?php $selectedvalue=$pengembalian->ID_BUKU ?>
             <label for="ID_BUKU">Pilih Buku</label>
@@ -44,7 +44,7 @@
                                    <input type="hidden" value="{{ $errors->first('ID_BUKU')}}">Nama Buku wajib diisi</input>
                                 </div>
                             @endif
-		</div>
+        </div>
         <div class="form-group">
         <?php $selectedvalue=$pengembalian->ID_PETUGAS ?>
             <label for="ID_PETUGAS">Pilih Petugas</label>
@@ -59,20 +59,35 @@
                                     <input type="hidden" value="{{ $errors->first('ID_PETUGAS')}}">Nama Petugas wajib diisi</input>
                                 </div>
                             @endif
-		</div>
-		<div class="form-group">
-			<label for="stok">Tanggal Pengembalian</label>
-			<input class="form-control" type="date" name="TANGGAL_PENGEMBALIAN" id="TANGGAL_PENGEMBALIAN" value="{{$pengembalian->TANGGAL_PENGEMBALIAN}}" placeholder="">
-		</div>
-		<div class="form-group float-right">
-		<!-- fontawesome  -->
-			<button class="btn btn-lg btn-danger" type="reset"><i class="fas fa-times"></i> Hapus</button>
-			<button class="btn btn-lg btn-primary" type="submit"><i class="fas fa-check"></i> Simpan</button>
-		</div>
-	</form>
-		</div>
+        </div>
+        <div class="form-group">
+            <label for="stok">Tanggal Pengembalian</label>
+            <input class="form-control" type="text" name="TANGGAL_PENGEMBALIAN" id="TANGGAL_PENGEMBALIAN" value="{{$pengembalian->TANGGAL_PENGEMBALIAN}}" placeholder="" autocomplete="off">
+        </div>
+        <div class="form-group float-right">
+        <!-- fontawesome  -->
+            <button class="btn btn-lg btn-danger" type="reset"><i class="fas fa-times"></i> Batal</button>
+            <button class="btn btn-lg btn-primary" type="submit"><i class="fas fa-check"></i> Simpan</button>
+        </div>
+    </form>
+        </div>
 <!-- /.content -->
-	</div>
+    </div>
 </div>
+<script type="text/javascript">
+
+(function() {
+
+$("#TANGGAL_PENGEMBALIAN").datepicker({
+  format: 'yyyy-mm-dd',
+  startDate: new Date(),
+  endDate: ''
+}).on("show", function() {
+  $(this).val("{{$pengembalian->TANGGAL_PENGEMBALIAN}}").datepicker('update');
+});
+
+})();
+
+</script> 
 <!-- /.Main Section -->
 @endsection

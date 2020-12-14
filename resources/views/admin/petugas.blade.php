@@ -11,7 +11,7 @@
 				<br> -->
 				<form class="float-right mt-2" style="margin: 5px;" action="{{url('/petugas/cari')}}" method="GET">
 					{{ csrf_field() }}
-					<input type="text" name="cari" placeholder="Cari..." value="{{ old('cari') }}">
+					<input type="text" name="cari" placeholder="Cari..." value="{{ old('cari') }}" autocomplete="off">
 					<input type="submit" class="btn btn-success" value="CARI">
 				</form>
 		</div>
@@ -41,7 +41,7 @@
 		<td>
 		<!-- fontawesome  -->
 			<a href="{{url('/petugas/petugas/edit/'.$p->ID_PETUGAS)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit</a>
-			<a href="{{url('/petugas/hapus/'.$p->ID_PETUGAS)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a>
+			<!-- <a href="{{url('/petugas/hapus/'.$p->ID_PETUGAS)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a> -->
 		</td>
 	</tr>
 	<!-- script untuk menambahkan notifikasi -->

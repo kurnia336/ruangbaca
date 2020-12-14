@@ -3,45 +3,48 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Peminjaman;
+use Illuminate\Support\Facades\DB;//query builder
+use Illuminate\Support\Carbon;
+use App\Peminjaman;//eloquent
 use App\Buku;
 use App\Anggota;
 use App\Petugas;
+use App\Pengembalian;
 
 class PeminjamanController extends Controller
 {
     //
     public function index()
     {
-        $peminjaman = peminjaman::paginate(5);
+        $peminjaman = peminjaman::where('STATUS_PINJAM', '=', 0)->paginate(5);
         $anggota = anggota::all();
         $petugas = petugas::all();
         $buku = buku::all();
         // return view('admin.peminjaman.peminjaman', ['peminjaman' => $peminjaman]);
-        return view('admin.peminjaman', compact('anggota','petugas','buku','peminjaman'));
+        return view('admin.peminjaman.peminjaman',compact('anggota','petugas','buku','peminjaman'));
     }
 
     public function tambah(){
         $anggota = DB::table('anggota')->pluck("NAMA_ANGGOTA","ID_ANGGOTA");
-        $buku = DB::table('buku')->pluck("JUDUL_BUKU","ID_BUKU");
+        // $buku = DB::table('buku')->pluck("JUDUL_BUKU","ID_BUKU","STOK");
+        $buku = Buku::all();
         $petugas = DB::table('petugas')->pluck("NAMA_PETUGAS","ID_PETUGAS");
-        return view('admin.peminjaman_tambah',compact('anggota','buku','petugas'));
-    	// return view('admin.peminjaman.peminjaman_tambah');
+        return view('admin.peminjaman.peminjaman_tambah',compact('anggota','buku','petugas'));
+        // return view('admin.peminjaman.peminjaman_tambah');
     }
 
     public function simpan(Request $request){
-        $this->validate($request,[
-            // 'ID_PEMINJAMAN' => 'required',
-    		'ID_ANGGOTA' => 'required',
-            'ID_BUKU' => 'required',
-            'ID_PETUGAS' => 'required',
-            'TANGGAL_PINJAM' => 'required',
-            'TANGGAL_KEMBALI' => 'required'
-    	]);
+        // $this->validate($request,[
+        //     // 'ID_PEMINJAMAN' => 'required',
+        //  'ID_ANGGOTA' => 'required',
+        //     'ID_BUKU' => 'required',
+        //     'ID_PETUGAS' => 'required',
+        //     'TANGGAL_PINJAM' => 'required',
+        //     'TANGGAL_KEMBALI' => 'required'
+        // ]);
  
         Peminjaman::create([
-    		// 'ID_PEMINJAMAN' => $request->ID_PEMINJAMAN,
+            // 'ID_PEMINJAMAN' => $request->ID_PEMINJAMAN,
             'ID_ANGGOTA' => $request->ID_ANGGOTA,
             'ID_BUKU' => $request->ID_BUKU,
             'ID_PETUGAS' => $request->ID_PETUGAS,
@@ -49,54 +52,92 @@ class PeminjamanController extends Controller
             'TANGGAL_KEMBALI' => $request->TANGGAL_KEMBALI
         ]);
         
+        DB::table('buku')->where('ID_BUKU',$request->ID_BUKU)->decrement('STOK');
+
         return redirect('/peminjaman/peminjaman')->with(['success' => 'Tambah Berhasil']);//notifikasi
+    }
+
+    public function simpan_pengembalian(Request $request, $id_peminjaman){
+        // $this->validate($request,[
+        //     // 'ID_PEMINJAMAN' => 'required',
+        //  'ID_ANGGOTA' => 'required',
+        //     'ID_BUKU' => 'required',
+        //     'ID_PETUGAS' => 'required',
+        //     'TANGGAL_PINJAM' => 'required',
+        //     'TANGGAL_KEMBALI' => 'required'
+        // ]);
+        $now = now();
+        $peminjaman = peminjaman::find($id_peminjaman);
+        $peminjaman->STATUS_PINJAM = 1;
+        $peminjaman->save();
+        DB::table('buku')->where('ID_BUKU',$peminjaman->ID_BUKU)->increment('STOK');
+
+        Pengembalian::create([
+            'ID_PEMINJAMAN' => $id_peminjaman,
+            'TANGGAL_PENGEMBALIAN' => $now
+        ]);
+        
+        
+
+        return redirect('/pengembalian/pengembalian')->with(['success' => 'Tambah Berhasil']);//notifikasi
     }
 
     public function edit($id){
         $peminjaman = peminjaman::find($id);
         $anggota = DB::table('anggota')->pluck("NAMA_ANGGOTA","ID_ANGGOTA");
-        $buku = DB::table('buku')->pluck("JUDUL_BUKU","ID_BUKU");
+        // $buku = DB::table('buku')->pluck("JUDUL_BUKU","ID_BUKU");
+        $buku = Buku::all();
         $petugas = DB::table('petugas')->pluck("NAMA_PETUGAS","ID_PETUGAS");
-        return view('admin.edit_peminjaman',compact('anggota','buku','petugas','peminjaman'));
+        return view('admin.peminjaman.edit_peminjaman',compact('anggota','buku','petugas','peminjaman'));
     }
 
-    public function update($id, Request $request){
+    public function update(Request $request,$id){
         $this->validate($request,[
             // 'ID_PEMINJAMAN' => 'required',
-    		'ID_ANGGOTA' => 'required',
+            'ID_ANGGOTA' => 'required',
             'ID_BUKU' => 'required',
             'ID_PETUGAS' => 'required',
             'TANGGAL_PINJAM' => 'required',
             'TANGGAL_KEMBALI' => 'required'
         ]);
-    
         $peminjaman = peminjaman::find($id);
-        $peminjaman->ID_ANGGOTA = $request->ID_ANGGOTA;
-        $peminjaman->ID_BUKU = $request->ID_BUKU;
-        $peminjaman->ID_PETUGAS = $request->ID_PETUGAS;
-        $peminjaman->TANGGAL_PINJAM = $request->TANGGAL_PINJAM;
-        $peminjaman->TANGGAL_KEMBALI = $request->TANGGAL_KEMBALI;
-        $peminjaman->save();
+        // if($request->ID_BUKU == $id_buku){  
+        //     $peminjaman->ID_ANGGOTA = $request->ID_ANGGOTA;
+        //     $peminjaman->ID_BUKU = $request->ID_BUKU;
+        //     $peminjaman->ID_PETUGAS = $request->ID_PETUGAS;
+        //     $peminjaman->TANGGAL_PINJAM = $request->TANGGAL_PINJAM;
+        //     $peminjaman->TANGGAL_KEMBALI = $request->TANGGAL_KEMBALI;
+        //     $peminjaman->save();
+        // }else{
+            // $peminjaman = peminjaman::find($id);
+            $peminjaman->ID_ANGGOTA = $request->ID_ANGGOTA;
+            $peminjaman->ID_BUKU = $request->ID_BUKU;
+            $peminjaman->ID_PETUGAS = $request->ID_PETUGAS;
+            $peminjaman->TANGGAL_PINJAM = $request->TANGGAL_PINJAM;
+            $peminjaman->TANGGAL_KEMBALI = $request->TANGGAL_KEMBALI;
+            $peminjaman->save();
+            // DB::table('buku')->where('ID_BUKU',$id_buku)->increment('STOK');            
+        // }
         return redirect('/peminjaman/peminjaman')->with(['success' => 'Update Berhasil']);//notifikasi
     }
 
     public function cari(Request $request)
-	{
-		// menangkap data pencarian
-		$cari = $request->cari;
+    {
+        // menangkap data pencarian
+        $cari = $request->cari;
  
-    		// mengambil data dari table pegawai sesuai pencarian data
-		// $peminjaman = DB::table('peminjaman as p')
-		// ->select('p.*','b.JUDUL_BUKU','a.NAMA_ANGGOTA','pe.NAMA_PETUGAS')
+            // mengambil data dari table pegawai sesuai pencarian data
+        // $peminjaman = DB::table('peminjaman as p')
+        // ->select('p.*','b.JUDUL_BUKU','a.NAMA_ANGGOTA','pe.NAMA_PETUGAS')
         // ->join('buku as b','b.ID_BUKU', '=', 'p.ID_BUKU')
         // ->join('petugas as pe','pe.ID_PETUGAS', '=', 'p.ID_PETUGAS')
         // ->join('anggota as a','a.ID_ANGGOTA', '=', 'p.ID_ANGGOTA')
-		// ->where('b.JUDUL_BUKU','like',"%".$cari."%")
-		// ->orWhere('a.NAMA_ANGGOTA','like',"%".$cari."%")
-		// ->orWhere('pe.NAMA_PETUGAS','like',"%".$cari."%")
-		// ->orWhere('p.TANGGAL_PINJAM','like',"%".$cari."%")
-		// ->orWhere('p.TANGGAL_KEMBALI','like',"%".$cari."%")
-		// ->paginate();
+        // ->where('b.JUDUL_BUKU','like',"%".$cari."%")
+        // ->orWhere('a.NAMA_ANGGOTA','like',"%".$cari."%")
+        // ->orWhere('pe.NAMA_PETUGAS','like',"%".$cari."%")
+        // ->orWhere('p.TANGGAL_PINJAM','like',"%".$cari."%")
+        // ->orWhere('p.TANGGAL_KEMBALI','like',"%".$cari."%")
+        // ->paginate();
         $peminjaman = peminjaman::select('peminjaman.*')
         ->join('buku', 'peminjaman.ID_BUKU', '=', 'buku.ID_BUKU')
         ->join('petugas', 'peminjaman.ID_PETUGAS', '=', 'petugas.ID_PETUGAS')
@@ -105,54 +146,71 @@ class PeminjamanController extends Controller
         ->orWhere('TANGGAL_PINJAM','like',"%".$cari."%")
         ->orWhere('TANGGAL_KEMBALI','like',"%".$cari."%")
         ->orWhere('buku.JUDUL_BUKU','like',"%".$cari."%")
-		->orWhere('anggota.NAMA_ANGGOTA','like',"%".$cari."%")
-		->orWhere('petugas.NAMA_PETUGAS','like',"%".$cari."%") 
+        ->orWhere('anggota.NAMA_ANGGOTA','like',"%".$cari."%")
+        ->orWhere('petugas.NAMA_PETUGAS','like',"%".$cari."%") 
         ->paginate();
-    		// mengirim data pegawai ke view index
-		return view('admin.peminjaman',['peminjaman' => $peminjaman]);
+            // mengirim data pegawai ke view index
+        return view('admin.peminjaman.peminjaman',['peminjaman' => $peminjaman]);
  
-	}
+    }
+    
+    public function loadData_buku(Request $request)
+    {
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $data = DB::table('buku')->select('ID_BUKU', 'JUDUL_BUKU')->where('JUDUL_BUKU', 'like',"%".$cari."%")->get();
+            return response()->json($data);
+        }
+    }
+    public function loadData_anggota(Request $request)
+    {
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $data = DB::table('anggota')->select('ID_ANGGOTA', 'NAMA_ANGGOTA')->where('NAMA_ANGGOTA', 'like',"%".$cari."%")->get();
+            return response()->json($data);
+        }
+    }
 
     public function hapusSementara($id){
-    	$peminjaman = peminjaman::find($id);
-    	$peminjaman->delete();
+        $peminjaman = peminjaman::find($id);
+        $peminjaman->delete();
  
-    	return redirect('/peminjaman/peminjaman')->with(['success' => 'Hapus Sementara Berhasil']);//notifikasi
+        return redirect('/peminjaman/peminjaman')->with(['success' => 'Hapus Sementara Berhasil']);//notifikasi
     }
 
     // menampilkan data guru yang sudah dihapus
     public function tongSampah(){
-    	// mengampil data guru yang sudah dihapus
-    	$peminjaman = peminjaman::onlyTrashed()->paginate(5);
-    	return view('admin.peminjaman_tongSampah', ['peminjaman' => $peminjaman]);
+        // mengampil data guru yang sudah dihapus
+        $peminjaman = peminjaman::onlyTrashed()->paginate(5);
+        return view('admin.peminjaman.peminjaman_tongSampah', ['peminjaman' => $peminjaman]);
     }
 
     public function kembalikan($id){
-    	$peminjaman = peminjaman::onlyTrashed()->where('ID_PEMINJAMAN',$id);
-    	$peminjaman->restore();
-    	return redirect('/peminjaman/peminjaman')->with(['success' => 'Restore Berhasil']);//notifikasi
+        $peminjaman = peminjaman::onlyTrashed()->where('ID_PEMINJAMAN',$id);
+        $peminjaman->restore();
+        return redirect('/peminjaman/peminjaman')->with(['success' => 'Restore Berhasil']);//notifikasi
     }
 
     
-    public function kembalikan_semua(){	
-    	$peminjaman = peminjaman::onlyTrashed();
-    	$peminjaman->restore();
-    	return redirect('/peminjaman/peminjaman')->with(['success' => 'Restore Berhasil']);//notifikasi
+    public function kembalikan_semua(){ 
+        $peminjaman = peminjaman::onlyTrashed();
+        $peminjaman->restore();
+        return redirect('/peminjaman/peminjaman')->with(['success' => 'Restore Berhasil']);//notifikasi
     }
 
     // hapus permanen
     public function hapusPermanen($id){
-    	// hapus permanen data guru
-    	$peminjaman = peminjaman::onlyTrashed()->where('ID_PEMINJAMAN',$id);
-    	$peminjaman->forceDelete();
-    	return redirect('/peminjaman/peminjaman_tongSampah')->with(['success' => 'Hapus Permanen Berhasil']);//notifikasi
+        // hapus permanen data guru
+        $peminjaman = peminjaman::onlyTrashed()->where('ID_PEMINJAMAN',$id);
+        $peminjaman->forceDelete();
+        return redirect('/peminjaman/peminjaman_tongSampah')->with(['success' => 'Hapus Permanen Berhasil']);//notifikasi
     }
 
     public function hapusPermanen_semua(){
-    	// hapus permanen data guru
-    	$peminjaman = peminjaman::onlyTrashed();
-    	$peminjaman->forceDelete();
-    	return redirect('/peminjaman/peminjaman_tongSampah')->with(['success' => 'Hapus Permanen Berhasil']);//notifikasi
+        // hapus permanen data guru
+        $peminjaman = peminjaman::onlyTrashed();
+        $peminjaman->forceDelete();
+        return redirect('/peminjaman/peminjaman_tongSampah')->with(['success' => 'Hapus Permanen Berhasil']);//notifikasi
     }
 
     

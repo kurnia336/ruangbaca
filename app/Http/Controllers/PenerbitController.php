@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class PenerbitController extends Controller
 {
     //
-      public function tampil(){
+    public function tampil(){
         // mengambil data dari table petugas
         // $rak = DB::table('rak')->paginate(5);// untuk membagi record menjadi beberapa halaman
         // $rak = DB::table('rak as r')
@@ -17,11 +17,11 @@ class PenerbitController extends Controller
         // ->paginate(5);
         $penerbit = DB::table('penerbit')->paginate(5);
         // mengirim data petugas ke view index
-        return view('admin.penerbit',['penerbit' => $penerbit]);
+        return view('admin.penerbit.penerbit',['penerbit' => $penerbit]);
     } 
 
     public function index(){
-        return view('admin.penerbit');
+        return view('admin.penerbit.penerbit');
     }
 
     public function simpan(Request $request)
@@ -39,7 +39,7 @@ class PenerbitController extends Controller
         // }
         // $new_id = 'RK'.$zero_string.$numeric_id;
         // $new_id = 0;
-            
+
         // insert data ke table pegawai
         DB::table('penerbit')->insert([
             // 'id_rak' => $new_id==2 ? $new_id : $new_id++,
@@ -53,11 +53,11 @@ class PenerbitController extends Controller
         return redirect('/penerbit/penerbit_tampil')->with(['success' => 'Tambah Berhasil']);//notifikasi 
 
     }
-    
+
     public function tambah(){
         // $buku = DB::table('buku')->pluck("judul_buku","id_buku");
         // return view('admin.rak.tambah_rak',compact('buku'));
-        return view('admin.tambah_penerbit');
+        return view('admin.penerbit.tambah_penerbit');
     }
 
     public function edit($id)
@@ -67,9 +67,9 @@ class PenerbitController extends Controller
         // $buku = DB::table('buku')->pluck("judul_buku","id_buku");
         // passing data petugas yang didapat ke view 
         // return view('admin.rak.edit_rak',['rak' => $rak],compact('buku'));
-        return view('admin.edit_penerbit',['penerbit' => $penerbit]);
+        return view('admin.penerbit.edit_penerbit',['penerbit' => $penerbit]);
     }
-    
+
     public function update(Request $request)
     {
         // insert data ke table pegawai
@@ -83,7 +83,7 @@ class PenerbitController extends Controller
         return redirect('/penerbit/penerbit_tampil')->with(['success' => 'Update Berhasil']);//notifikasi 
 
     }
-    
+
     public function hapus($id)
     {
         // mengambil data petugas berdasarkan id yang dipilih
@@ -92,7 +92,7 @@ class PenerbitController extends Controller
         return redirect('/penerbit/penerbit_tampil')->with(['success' => 'Hapus Berhasil']);//notifikasi 
 
     }
-    
+
     //funtion cari/search untuk saat ini masih menggunakan where nama
     public function cari(Request $request)
     {
@@ -113,7 +113,7 @@ class PenerbitController extends Controller
         ->paginate();
 
             // mengirim data pegawai ke view index
-        return view('admin.penerbit',['penerbit' => $penerbit]);
+        return view('admin.penerbit.penerbit',['penerbit' => $penerbit]);
 
     }
 }
