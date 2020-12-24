@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -25,4 +26,8 @@ class Anggota extends Authenticatable
     public function pengembalianAnggota(){
     	return $this->hasMany(Pengembalian::class,'ID_ANGGOTA');
     }
+
+    protected $hidden = [
+      'NO_TELP_ANGGOTA'
+    ];
 }

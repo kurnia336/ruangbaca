@@ -127,3 +127,13 @@ Route::get('/pengembalian/hapusPermanen_semua', 'PengembalianController@hapusPer
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::namespace('Anggota')->name('anggota.')->prefix('anggota')->group(function () {
+   Route::get('login', 'AnggotaAuthController@getLogin')->name('login');
+   Route::post('login', 'AnggotaAuthController@postLogin');
+});
+
+Route::middleware('auth:anggota')->group(function(){
+   //here all your admin routes
+   // Route::get('/peminjaman/peminjaman', 'PeminjamanController@index');
+ });
