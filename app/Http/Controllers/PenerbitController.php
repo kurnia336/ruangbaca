@@ -15,7 +15,7 @@ class PenerbitController extends Controller
         // ->select('r.*','b.judul_buku')
         // ->join('buku as b','b.id_buku', '=', 'r.id_buku')
         // ->paginate(5);
-        $penerbit = DB::table('penerbit')->paginate(5);
+        $penerbit = DB::table('penerbit')->where('STATUS_PENERBIT', '=', 0)->paginate(5);
         // mengirim data petugas ke view index
         return view('admin.penerbit.penerbit',['penerbit' => $penerbit]);
     } 
@@ -82,6 +82,32 @@ class PenerbitController extends Controller
         // alihkan halaman ke halaman petugas
         return redirect('/penerbit/penerbit_tampil')->with(['success' => 'Update Berhasil']);//notifikasi 
 
+    }
+
+    public function nonaktif_penerbit($id_penerbit){
+		DB::table('penerbit')->where('ID_PENERBIT',$id_penerbit)->update([
+			'STATUS_PENERBIT' => 1
+		]);
+		// alihkan halaman ke halaman petugas
+		return redirect('/penerbit/penerbit_tampil')->with(['success' => 'Penonaktifan Berhasil']);//notifikasi
+	}
+
+	public function aktifkan_penerbit($id_penerbit){
+		DB::table('penerbit')->where('ID_PENERBIT',$id_penerbit)->update([
+			'STATUS_PENERBIT' => 0
+		]);
+		// alihkan halaman ke halaman petugas
+		return redirect('/penerbit/penerbit_tampil')->with(['success' => 'Pengaktifan Berhasil']);//notifikasi
+	}
+
+	public function penerbit_tongSampah()
+    {
+    	// mengambil data dari table petugas
+    	$penerbit = DB::table('penerbit')->where('STATUS_PENERBIT', '=', 1)->paginate(5);// untuk membagi record menjadi beberapa halaman
+ 
+    	// mengirim data petugas ke view index
+    	return view('admin.penerbit.penerbit_tongSampah',['penerbit' => $penerbit]);
+ 
     }
 
     public function hapus($id)

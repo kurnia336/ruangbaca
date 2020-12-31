@@ -15,7 +15,7 @@ class JenisBukuController extends Controller
         // ->select('r.*','b.judul_buku')
         // ->join('buku as b','b.id_buku', '=', 'r.id_buku')
         // ->paginate(5);
-        $jenis_buku = DB::table('jenis_buku')->paginate(5);
+        $jenis_buku = DB::table('jenis_buku')->where('STATUS_JENISBUKU', '=', 0)->paginate(5);
         // mengirim data petugas ke view index
         return view('admin.jenisbuku.jenisbuku',['jenis_buku' => $jenis_buku]);
     } 
@@ -82,6 +82,32 @@ class JenisBukuController extends Controller
         // alihkan halaman ke halaman petugas
         return redirect('/jenisbuku/jenisbuku_tampil')->with(['success' => 'Update Berhasil']);//notifikasi 
 
+    }
+
+    public function nonaktif_jenisbuku($id_jenisbuku){
+		DB::table('jenis_buku')->where('ID_JENISBUKU',$id_jenisbuku)->update([
+			'STATUS_JENISBUKU' => 1
+		]);
+		// alihkan halaman ke halaman petugas
+		return redirect('/jenisbuku/jenisbuku_tampil')->with(['success' => 'Penonaktifan Berhasil']);//notifikasi
+	}
+
+	public function aktifkan_jenisbuku($id_jenisbuku){
+		DB::table('jenis_buku')->where('ID_JENISBUKU',$id_jenisbuku)->update([
+			'STATUS_JENISBUKU' => 0
+		]);
+		// alihkan halaman ke halaman petugas
+		return redirect('/jenisbuku/jenisbuku_tampil')->with(['success' => 'Pengaktifan Berhasil']);//notifikasi
+	}
+
+	public function jenisbuku_tongSampah()
+    {
+    	// mengambil data dari table petugas
+    	$jenis_buku = DB::table('jenis_buku')->where('STATUS_JENISBUKU', '=', 1)->paginate(5);// untuk membagi record menjadi beberapa halaman
+ 
+    	// mengirim data petugas ke view index
+    	return view('admin.jenisbuku.jenisbuku_tongSampah',['jenis_buku' => $jenis_buku]);
+ 
     }
 
     public function hapus($id)

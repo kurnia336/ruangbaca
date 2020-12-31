@@ -27,15 +27,15 @@
 		</div>
 		<div class="form-group">
 			<label for="numb">No Telp Anggota</label>
-			<input class="form-control" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="NO_TELP_ANGGOTA" id="NO_TELP_ANGGOTA" placeholder="Masukkan No Telp Anggota" maxlength="13" autocomplete="off">
+			<input class="form-control" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="NO_TELP_ANGGOTA" id="NO_TELP_ANGGOTA" placeholder="Masukkan No Telp Anggota" maxlength="13" autocomplete="off" required>
 		</div>
 		<div class="form-group">
 			<label for="email">Email Anggota</label>
-			<input class="form-control" type="email" name="EMAIL_ANGGOTA" id="EMAIL_ANGGOTA" placeholder="Masukkan Email Anggota" autocomplete="off">
+			<input class="form-control" type="email" name="EMAIL_ANGGOTA" id="EMAIL_ANGGOTA" placeholder="Masukkan Email Anggota" autocomplete="off" required>
 		</div>
 		<div class="form-group">
 			<label for="adress">Alamat Anggota</label>
-			<textarea class="form-control" name="ALAMAT_ANGGOTA" id="ALAMAT_ANGGOTA" placeholder="Masukkan Alamat Anggota" row="5" autocomplete="off"></textarea>
+			<textarea class="form-control" name="ALAMAT_ANGGOTA" id="ALAMAT_ANGGOTA" placeholder="Masukkan Alamat Anggota" row="5" autocomplete="off" required></textarea>
 		</div>
 		<div class="form-group float-right">
 		<!-- fontawesome  -->

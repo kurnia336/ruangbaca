@@ -71,10 +71,10 @@
                         <a href="{{ url('/home') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('anggota.login') }}">Login Anggota</a>
+                        <!-- <a href="{{ route('anggota.login') }}">Login Anggota</a> -->
                         <!-- <a href="{{ url('/login_anggota') }}">Login Anggota</a> -->
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                            <!-- <a href="{{ route('register') }}">Register</a> -->
                         @endif
                     @endauth
                 </div>

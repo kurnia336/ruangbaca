@@ -169,6 +169,15 @@ class PeminjamanController extends Controller
             $data = DB::table('anggota')->select('ID_ANGGOTA', 'NAMA_ANGGOTA')->where('NAMA_ANGGOTA', 'like',"%".$cari."%")->get();
             return response()->json($data);
         }
+    }
+
+    public function loadData_petugas(Request $request)
+    {
+        if ($request->has('q')) {
+            $cari = $request->q;
+            $data = DB::table('petugas')->select('ID_PETUGAS', 'NAMA_PETUGAS')->where('NAMA_PETUGAS', 'like',"%".$cari."%")->get();
+            return response()->json($data);
+        }
 	}
 
     public function hapusSementara($id){

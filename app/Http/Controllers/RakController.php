@@ -15,7 +15,7 @@ class RakController extends Controller
         // ->select('r.*','b.judul_buku')
         // ->join('buku as b','b.id_buku', '=', 'r.id_buku')
 		// ->paginate(5);
-		$rak = DB::table('rak')->paginate(5);
+		$rak = DB::table('rak')->where('STATUS_RAK', '=', 0)->paginate(5);
     	// mengirim data petugas ke view index
     	return view('admin.rak.rak',['rak' => $rak]);
     } 
@@ -85,7 +85,33 @@ class RakController extends Controller
 		return redirect('/rak/rak_tampil')->with(['success' => 'Update Berhasil']);//notifikasi 
 
     }
-    
+	
+	public function nonaktif_rak($id_rak){
+		DB::table('rak')->where('ID_RAK',$id_rak)->update([
+			'STATUS_RAK' => 1
+		]);
+		// alihkan halaman ke halaman petugas
+		return redirect('/rak/rak_tampil')->with(['success' => 'Penonaktifan Berhasil']);//notifikasi
+	}
+
+	public function aktifkan_rak($id_rak){
+		DB::table('rak')->where('ID_RAK',$id_rak)->update([
+			'STATUS_RAK' => 0
+		]);
+		// alihkan halaman ke halaman petugas
+		return redirect('/rak/rak_tampil')->with(['success' => 'Pengaktifan Berhasil']);//notifikasi
+	}
+
+	public function rak_tongSampah()
+    {
+    	// mengambil data dari table petugas
+    	$rak = DB::table('rak')->where('STATUS_RAK', '=', 1)->paginate(5);// untuk membagi record menjadi beberapa halaman
+ 
+    	// mengirim data petugas ke view index
+    	return view('admin.rak.rak_tongSampah',['rak' => $rak]);
+ 
+    }
+
     public function hapus($id)
 	{
 		// mengambil data petugas berdasarkan id yang dipilih

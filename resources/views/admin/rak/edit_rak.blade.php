@@ -12,16 +12,16 @@
 		{{ csrf_field() }}
 		<div class="form-group">
 			<!-- <label for="id_buku">ID Buku</label> -->
-			<input class="form-control" type="hidden" name="ID_RAK" id="ID_RAK" placeholder="Masukkan ID Rak" value="{{$r->ID_RAK}}">
+			<input class="form-control" type="hidden" name="ID_RAK" id="ID_RAK" placeholder="Masukkan ID Rak" value="{{$r->ID_RAK}}" required>
 		</div>
         
 		<div class="form-group">
 			<label for="nama_rak">Nama Rak</label>
-			<input class="form-control" type="text" name="NAMA_RAK" id="NAMA_RAK" placeholder="Masukkan Nama Rak" value="{{$r->NAMA_RAK}}" autocomplete="off">
+			<input class="form-control" type="text" name="NAMA_RAK" id="NAMA_RAK" placeholder="Masukkan Nama Rak" value="{{$r->NAMA_RAK}}" autocomplete="off" required>
 		</div>
 		<div class="form-group">
 			<label for="lokasi_rak">Lokasi Rak</label>
-			<input class="form-control" type="text" name="LOKASI_RAK" id="LOKASI_RAK" placeholder="Masukkan Lokasi Rak" value="{{$r->LOKASI_RAK}}" autocomplete="off">
+			<input class="form-control" type="text" name="LOKASI_RAK" id="LOKASI_RAK" placeholder="Masukkan Lokasi Rak" value="{{$r->LOKASI_RAK}}" autocomplete="off" required>
 		</div>
 		<div class="form-group float-right">
 			<button class="btn btn-lg btn-danger" type="reset">Cancel</button>

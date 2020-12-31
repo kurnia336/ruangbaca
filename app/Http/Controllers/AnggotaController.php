@@ -20,7 +20,7 @@ class AnggotaController extends Controller
     {
     	// mengambil data dari table anggota
     	// $anggota = DB::table('anggota')->paginate(5);// untuk membagi record menjadi beberapa halaman
-		$anggota = anggota::paginate(5);
+		$anggota = anggota::where('STATUS_ANGGOTA', '=', 0)->paginate(5);
     	// mengirim data anggota ke view index
     	return view('admin.anggota.anggota',['anggota' => $anggota]);
  
@@ -37,9 +37,18 @@ class AnggotaController extends Controller
 	// method untuk insert data ke table anggota
 	public function simpan(Request $request)
 	{
+		$user = new \App\User;
+		$user->role = 'Anggota';
+		$user->name = $request->NAMA_ANGGOTA;
+		$user->email = $request->EMAIL_ANGGOTA;
+		$user->password = bcrypt('rahasiaku');
+		$user->remember_token = str_random(60);
+		$user->save();
+
 		// insert data ke table pegawai
 		DB::table('anggota')->insert([
 			'ID_ANGGOTA' => $request->ID_ANGGOTA,
+			'USER_ID' => $user->id,
 			'NAMA_ANGGOTA' => $request->NAMA_ANGGOTA,
 			'JENIS_KELAMIN' => $request->JENIS_KELAMIN,
 			'NO_TELP_ANGGOTA' => $request->NO_TELP_ANGGOTA,
@@ -75,6 +84,32 @@ class AnggotaController extends Controller
 		// alihkan halaman ke halaman anggota
 		return redirect('/anggota/anggota')->with(['success' => 'Update Berhasil']);//notifikasi
 	}
+
+	public function nonaktif_anggota($id_anggota){
+		DB::table('anggota')->where('ID_ANGGOTA',$id_anggota)->update([
+			'STATUS_ANGGOTA' => 1
+		]);
+		// alihkan halaman ke halaman petugas
+		return redirect('/anggota/anggota')->with(['success' => 'Penonaktifan Berhasil']);//notifikasi
+	}
+
+	public function aktifkan_anggota($id_anggota){
+		DB::table('anggota')->where('ID_ANGGOTA',$id_anggota)->update([
+			'STATUS_ANGGOTA' => 0
+		]);
+		// alihkan halaman ke halaman petugas
+		return redirect('/anggota/anggota')->with(['success' => 'Pengaktifan Berhasil']);//notifikasi
+	}
+
+	public function anggota_tongSampah()
+    {
+    	// mengambil data dari table petugas
+    	$anggota = DB::table('anggota')->where('STATUS_ANGGOTA', '=', 1)->paginate(5);// untuk membagi record menjadi beberapa halaman
+ 
+    	// mengirim data petugas ke view index
+    	return view('admin.anggota.anggota_tongSampah',['anggota' => $anggota]);
+ 
+    }
 
 	// method untuk hapus data anggota
 	public function hapus($id)

@@ -5,16 +5,15 @@
 	<div class="row">
 		<div class="my-4 col-12">
 		<!-- form cari -->
-			<h1 class="float-left"><i class="fas fa-user-tie"></i> Daftar Petugas</h1>
-				<a class="btn btn-secondary float-right mt-2" style="margin: 5px;" href="{{url('/petugas/petugas_tongSampah')}}" role="button"><i class="fas fa-trash"></i> Petugas Tidak Aktif</a>
-				<a class="btn btn-primary float-right mt-2" href="{{url('/petugas/petugas/tambah')}}" role="button"><i class="fas fa-user-tie"></i> Tambah Petugas</a>
+			<h1 class="float-left"><i class="fas fa-user-tie"></i> Daftar Petugas Tidak Aktif</h1>
+				<!-- <a class="btn btn-primary float-right mt-2" href="{{url('/petugas/petugas/tambah')}}" role="button"><i class="fas fa-user-tie"></i> Tambah Petugas</a> -->
 				<!-- <br>
 				<br> -->
-				<form class="float-right mt-2" style="margin: 5px;" action="{{url('/petugas/cari')}}" method="GET">
+				<!-- <form class="float-right mt-2" style="margin: 5px;" action="{{url('/petugas/cari')}}" method="GET">
 					{{ csrf_field() }}
 					<input type="text" name="cari" placeholder="Cari..." value="{{ old('cari') }}" autocomplete="off">
 					<input type="submit" class="btn btn-success" value="CARI">
-				</form>
+				</form> -->
 		</div>
 	<div class="col-12">
 <!-- style table -->
@@ -41,8 +40,8 @@
 		<td>{{ $p->ALAMAT_PETUGAS }}</td>
 		<td>
 		<!-- fontawesome  -->
-			<a href="{{url('/petugas/petugas/edit/'.$p->ID_PETUGAS)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit</a>
-			<a href="{{url('/petugas/nonaktif_petugas/'.$p->ID_PETUGAS)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> NonAktif</a>
+			<!-- <a href="{{url('/petugas/petugas/edit/'.$p->ID_PETUGAS)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit</a> -->
+			<a href="{{url('/petugas/aktifkan_petugas/'.$p->ID_PETUGAS)}}" onclick="return confirm('Are you sure?')" class="badge badge-success"><i class="fas fa-recycle"></i> Aktifkan</a>
 			<!-- <a href="{{url('/petugas/hapus/'.$p->ID_PETUGAS)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a> -->
 		</td>
 	</tr>

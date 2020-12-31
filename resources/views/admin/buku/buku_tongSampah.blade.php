@@ -5,16 +5,14 @@
 	<div class="row">
 		<div class="my-4 col-12">
 		<!-- form cari -->
-			<h1 class="float-left"><i class="fas fa-book"></i> Daftar Buku</h1>
-				<a class="btn btn-secondary float-right mt-2" style="margin: 5px;" href="{{url('/buku/buku_tongSampah')}}" role="button"><i class="fas fa-trash"></i> Buku Tidak Aktif</a>
-				@if(auth()->user()->role == 'Admin' || auth()->user()->role == 'Petugas')
+			<h1 class="float-left"><i class="fas fa-book"></i> Daftar Buku Tidak Aktif</h1>
+				<!-- <a class="btn btn-secondary float-right mt-2" style="margin: 5px;" href="{{url('/buku/buku_tongSampah')}}" role="button"><i class="fas fa-trash"></i> Rak Tidak Aktif</a>
 				<a class="btn btn-primary float-right mt-2" href="{{url('/buku/buku_tambah')}}" role="button"><i class="fas fa-book"></i> Tambah Buku</a>
-				@endif
 				<form class="float-right mt-2" style="margin: 5px;" action="{{url('/buku_cari')}}" method="GET">
 					{{ csrf_field() }}
 					<input type="text" name="cari" placeholder="Cari..." value="{{ old('cari') }}" autocomplete="off">
 					<input type="submit" class="btn btn-success" value="CARI" >
-				</form>
+				</form> -->
 		</div>
 	<div class="col-12">
 <!-- style table -->
@@ -29,9 +27,7 @@
 		<th>Penulis</th>
 		<th>Tahun Terbit</th>
 		<th>Stok</th>
-		@if(auth()->user()->role == 'Admin' || auth()->user()->role == 'Petugas')
 		<th>Action</th>
-		@endif
 	</tr>
 		</thead>
 <tbody>
@@ -45,14 +41,14 @@
 		<td>{{$b->PENULIS_BUKU}}</td>
 		<td>{{$b->TAHUN_TERBIT}}</td>
 		<td>{{$b->STOK}}</td>
-		@if(auth()->user()->role == 'Admin' || auth()->user()->role == 'Petugas')
 		<td>
 		<!-- fontawesome  -->
-			<a href="{{url('/buku/buku_edit/'.$b->ID_BUKU)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit Buku</a>
-			<a href="{{url('/buku/nonaktif_buku/'.$b->ID_BUKU)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> NonAktif</a>
+			<!-- <a href="{{url('/buku/buku_edit/'.$b->ID_BUKU)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit Buku</a> -->
+			@if(auth()->user()->role == 'Admin' || auth()->user()->role == 'Petugas')
+			<a href="{{url('/buku/aktifkan_buku/'.$b->ID_BUKU)}}" onclick="return confirm('Are you sure?')" class="badge badge-success"><i class="fas fa-recycle"></i> Aktifkan</a>
+			@endif
 			<!-- <a href="{{url('/buku_hapus/'.$b->ID_BUKU)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a> -->
 		</td>
-		@endif
 	</tr>
 	<!-- script untuk menambahkan notifikasi -->
 	<!-- <script>

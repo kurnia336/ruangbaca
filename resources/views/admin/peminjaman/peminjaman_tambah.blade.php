@@ -46,12 +46,13 @@
 		</div>
         <div class="form-group">
             <label for="ID_PETUGAS">Pilih Petugas</label>
-                <select name="ID_PETUGAS" id="ID_PETUGAS" class="form-control" style="">
+                <!-- <select name="ID_PETUGAS" id="ID_PETUGAS" class="form-control" style="" required>
                     <option value="">--- Nama Petugas ---</option>
                     @foreach ($petugas as $key => $value)
                     <option name="ID_PETUGAS" id="ID_PETUGAS" value="{{ $key }}">[{{ $key }}] {{ $value }}</option>
                     @endforeach
-                </select>
+                </select> -->
+                <select class="cari_petugas form-control" style="" id="ID_PETUGAS" name="ID_PETUGAS" autocomplete="off" required></select>
                 @if($errors->has('ID_PETUGAS'))
                                 <div class="text-danger">
                                     <input type="hidden" value="{{ $errors->first('ID_PETUGAS')}}">Nama Petugas wajib diisi</input>
@@ -62,7 +63,7 @@
 			<label for="tahun_terbit">Tanggal Pinjam</label>
 			<!-- <input class="date form-control" type="text" name="TANGGAL_PINJAM" id="TANGGAL_PINJAM" placeholder="" autocomplete="off"> -->
             <div class="start_date input-group mb-4">
-            <input class="form-control date" type="text" placeholder="Tanggal Pinjam" id="TANGGAL_PINJAM" autocomplete="off">
+            <input class="form-control date" type="text" placeholder="Tanggal Pinjam" name="TANGGAL_PINJAM" id="TANGGAL_PINJAM" autocomplete="off" required>
                 <div class="input-group-append">
                 <span class="fa fa-calendar input-group-text start_date_calendar" aria-hidden="true "></span>
                 </div>
@@ -72,7 +73,7 @@
 			<label for="stok">Tanggal Kembali</label>
 			<!-- <input class="date form-control" type="text" name="TANGGAL_KEMBALI" id="TANGGAL_KEMBALI" placeholder="" autocomplete="off"> -->
             <div class="start_date input-group mb-4">
-            <input class="form-control date" type="text" placeholder="Tanggal Kembali" id="TANGGAL_KEMBALI" autocomplete="off">
+            <input class="form-control date" type="text" placeholder="Tanggal Kembali" name="TANGGAL_KEMBALI" id="TANGGAL_KEMBALI" autocomplete="off" required>
                 <div class="input-group-append">
                 <span class="fa fa-calendar input-group-text start_date_calendar" aria-hidden="true "></span>
                 </div>
@@ -133,6 +134,26 @@
             return {
               text: item.JUDUL_BUKU,
               id: item.ID_BUKU
+            }
+          })
+        };
+      },
+      cache: false
+    }
+  });
+
+  $('.cari_petugas').select2({
+    placeholder: 'Cari...',
+    ajax: {
+      url: "{{url('/cari_petugas')}}",
+      dataType: 'json',
+      delay: 250,
+      processResults: function (data) {
+        return {
+          results:  $.map(data, function (item) {
+            return {
+              text: item.NAMA_PETUGAS,
+              id: item.ID_PETUGAS
             }
           })
         };

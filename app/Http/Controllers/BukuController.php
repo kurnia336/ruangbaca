@@ -14,6 +14,7 @@ class BukuController extends Controller
 		->join('rak as r','b.ID_RAK', '=', 'r.ID_RAK')
 		->join('jenis_buku as j','b.ID_JENISBUKU', '=', 'j.ID_JENISBUKU')
         ->join('penerbit as p','b.ID_PENERBIT', '=', 'p.ID_PENERBIT')
+		->where('STATUS_BUKU', '=', 0)
 		->paginate(5);
 
     	// mengirim data petugas ke view index
@@ -84,6 +85,38 @@ class BukuController extends Controller
 		return redirect('/buku/buku_tampil')->with(['success' => 'Update Berhasil']);//notifikasi 
 	 
 	}
+
+	public function nonaktif_buku($id_buku){
+		DB::table('buku')->where('ID_BUKU',$id_buku)->update([
+			'STATUS_BUKU' => 1
+		]);
+		// alihkan halaman ke halaman petugas
+		return redirect('/buku/buku_tampil')->with(['success' => 'Penonaktifan Berhasil']);//notifikasi
+	}
+
+	public function aktifkan_buku($id_buku){
+		DB::table('buku')->where('ID_BUKU',$id_buku)->update([
+			'STATUS_BUKU' => 0
+		]);
+		// alihkan halaman ke halaman petugas
+		return redirect('/buku/buku_tampil')->with(['success' => 'Pengaktifan Berhasil']);//notifikasi
+	}
+
+	public function buku_tongSampah()
+    {
+    	// mengambil data dari table petugas
+    	$buku = DB::table('buku as b')
+        ->select('b.*','r.NAMA_RAK','j.NAMA_JENISBUKU', 'p.NAMA_PENERBIT')
+		->join('rak as r','b.ID_RAK', '=', 'r.ID_RAK')
+		->join('jenis_buku as j','b.ID_JENISBUKU', '=', 'j.ID_JENISBUKU')
+        ->join('penerbit as p','b.ID_PENERBIT', '=', 'p.ID_PENERBIT')
+		->where('STATUS_BUKU', '=', 1)
+		->paginate(5);// untuk membagi record menjadi beberapa halaman
+ 
+    	// mengirim data petugas ke view index
+    	return view('admin.buku.buku_tongSampah',['buku' => $buku]);
+ 
+    }
 
 	public function hapus($id)
 	{

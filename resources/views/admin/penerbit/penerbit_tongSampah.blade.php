@@ -5,14 +5,14 @@
 	<div class="row">
 		<div class="my-4 col-12">
 		<!-- form cari -->
-			<h1 class="float-left"><i class="fa fa-building"></i> Daftar Penerbit</h1>
-				<a class="btn btn-secondary float-right mt-2" style="margin: 5px;" href="{{url('/penerbit/penerbit_tongSampah')}}" role="button"><i class="fas fa-trash"></i> Penerbit Tidak Aktif</a>
-				<a class="btn btn-primary float-right mt-2" href="{{url('/penerbit_tambah')}}" role="button"><i class="fa fa-building"></i> Tambah Penerbit</a>
-				<form class="float-right mt-2" style="margin: 5px;" action="{{url('/penerbit_cari')}}" method="GET">
+			<h1 class="float-left"><i class="fa fa-building"></i> Daftar Penerbit Tidak Aktif</h1>
+				<!-- <a class="btn btn-secondary float-right mt-2" style="margin: 5px;" href="{{url('/penerbit/penerbit_tongSampah')}}" role="button"><i class="fas fa-trash"></i> Penerbit Tidak Aktif</a>
+				<a class="btn btn-primary float-right mt-2" href="{{url('/penerbit_tambah')}}" role="button"><i class="fa fa-building"></i> Tambah Penerbit</a> -->
+				<!-- <form class="float-right mt-2" style="margin: 5px;" action="{{url('/penerbit_cari')}}" method="GET">
 					{{ csrf_field() }}
 					<input type="text" name="cari" placeholder="Cari..." value="{{ old('cari') }}" autocomplete="off">
 					<input type="submit" class="btn btn-success" value="CARI">
-				</form>
+				</form> -->
 		</div>
 	<div class="col-12">
 <!-- style table -->
@@ -31,8 +31,8 @@
 		<td>{{$p->NAMA_PENERBIT}}</td>
 		<td>
 		<!-- fontawesome  -->
-			<a href="{{url('/penerbit_edit/'.$p->ID_PENERBIT)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit Penerbit</a>
-			<a href="{{url('/penerbit/nonaktif_penerbit/'.$p->ID_PENERBIT)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> NonAktif</a>
+			<!-- <a href="{{url('/penerbit_edit/'.$p->ID_PENERBIT)}}" class="badge badge-success"><i class="fas fa-edit"></i> Edit Penerbit</a> -->
+			<a href="{{url('/penerbit/aktifkan_penerbit/'.$p->ID_PENERBIT)}}" onclick="return confirm('Are you sure?')" class="badge badge-success"><i class="fas fa-recycle"></i> Aktifkan</a>
 			<!-- <a href="{{url('/penerbit_hapus/'.$p->ID_PENERBIT)}}" onclick="return confirm('Are you sure?')" class="badge badge-danger"><i class="fas fa-times"></i> Hapus</a> -->
 		</td>
 	</tr>

@@ -12,12 +12,12 @@
 		{{ csrf_field() }}
 		<div class="form-group">
 			<!-- <label for="id_buku">ID Buku</label> -->
-			<input class="form-control" type="hidden" name="ID_PENERBIT" id="ID_PENERBIT" placeholder="Masukkan ID Penerbit" value="{{$p->ID_PENERBIT}}" autocomplete="off">
+			<input class="form-control" type="hidden" name="ID_PENERBIT" id="ID_PENERBIT" placeholder="Masukkan ID Penerbit" value="{{$p->ID_PENERBIT}}" autocomplete="off" required>
 		</div>
 
 		<div class="form-group">
 			<label for="nama_rak">Nama Penerbit</label>
-			<input class="form-control" type="text" name="NAMA_PENERBIT" id="NAMA_PENERBIT" placeholder="Masukkan Nama Penerbit" value="{{$p->NAMA_PENERBIT}}" autocomplete="off">
+			<input class="form-control" type="text" name="NAMA_PENERBIT" id="NAMA_PENERBIT" placeholder="Masukkan Nama Penerbit" value="{{$p->NAMA_PENERBIT}}" autocomplete="off" required>
 		</div>
 		<div class="form-group float-right">
 			<button class="btn btn-lg btn-danger" type="reset">Cancel</button>

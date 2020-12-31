@@ -12,11 +12,11 @@
 		{{ csrf_field() }}
 		<div class="form-group">
 			<!-- <label for="id_rak">ID Rak</label> -->
-			<input class="form-control" type="hidden" name="ID_PENERBIT" id="ID_PENERBIT" placeholder="Masukkan ID Penerbit" required="true" autocomplete="off">
+			<input class="form-control" type="hidden" name="ID_PENERBIT" id="ID_PENERBIT" placeholder="Masukkan ID Penerbit" required="true" autocomplete="off" >
 		</div>
 		<div class="form-group">
 			<label for="nama_rak">Nama Penerbit</label>
-			<input class="form-control" type="text" name="NAMA_PENERBIT" id="NAMA_PENERBIT" placeholder="Masukkan Nama Penerbit" autocomplete="off">
+			<input class="form-control" type="text" name="NAMA_PENERBIT" id="NAMA_PENERBIT" placeholder="Masukkan Nama Penerbit" autocomplete="off" required>
 		</div>
 		<div class="form-group float-right">
 		<!-- fontawesome  -->
