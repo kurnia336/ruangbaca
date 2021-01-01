@@ -15,6 +15,7 @@ class BukuController extends Controller
 		->join('jenis_buku as j','b.ID_JENISBUKU', '=', 'j.ID_JENISBUKU')
         ->join('penerbit as p','b.ID_PENERBIT', '=', 'p.ID_PENERBIT')
 		->where('STATUS_BUKU', '=', 0)
+		->orderBy('ID_BUKU', 'ASC')
 		->paginate(5);
 
     	// mengirim data petugas ke view index

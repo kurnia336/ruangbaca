@@ -20,7 +20,9 @@ class AnggotaController extends Controller
     {
     	// mengambil data dari table anggota
     	// $anggota = DB::table('anggota')->paginate(5);// untuk membagi record menjadi beberapa halaman
-		$anggota = anggota::where('STATUS_ANGGOTA', '=', 0)->paginate(5);
+		$anggota = anggota::where('STATUS_ANGGOTA', '=', 0)
+		->orderBy('ID_ANGGOTA', 'ASC')
+		->paginate(5);
     	// mengirim data anggota ke view index
     	return view('admin.anggota.anggota',['anggota' => $anggota]);
  

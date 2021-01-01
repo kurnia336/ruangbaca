@@ -12,7 +12,9 @@ class PetugasController extends Controller
     public function index()
     {
     	// mengambil data dari table petugas
-    	$petugas = DB::table('petugas')->where('STATUS_PETUGAS', '=', 0)->paginate(5);// untuk membagi record menjadi beberapa halaman
+    	$petugas = DB::table('petugas')->where('STATUS_PETUGAS', '=', 0)
+    	->orderBy('ID_PETUGAS', 'ASC')
+    	->paginate(5);// untuk membagi record menjadi beberapa halaman
  
     	// mengirim data petugas ke view index
     	return view('admin.petugas.petugas',['petugas' => $petugas]);

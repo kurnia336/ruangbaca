@@ -15,7 +15,9 @@ class JenisBukuController extends Controller
         // ->select('r.*','b.judul_buku')
         // ->join('buku as b','b.id_buku', '=', 'r.id_buku')
         // ->paginate(5);
-        $jenis_buku = DB::table('jenis_buku')->where('STATUS_JENISBUKU', '=', 0)->paginate(5);
+        $jenis_buku = DB::table('jenis_buku')->where('STATUS_JENISBUKU', '=', 0)
+        ->orderBy('ID_JENISBUKU', 'ASC')
+        ->paginate(5);
         // mengirim data petugas ke view index
         return view('admin.jenisbuku.jenisbuku',['jenis_buku' => $jenis_buku]);
     } 

@@ -1,5 +1,5 @@
 @extends('admin/index')
-@section('title','Books Database')
+@section('title','Peminjaman Database')
 @section('container')
 <div class="container">
 	<div class="row">

@@ -16,7 +16,9 @@ class PeminjamanController extends Controller
     //
     public function index()
     {
-        $peminjaman = peminjaman::where('STATUS_PINJAM', '=', 0)->paginate(5);
+        $peminjaman = peminjaman::where('STATUS_PINJAM', '=', 0)
+        ->orderBy('ID_PEMINJAMAN', 'ASC')
+        ->paginate(5);
         $anggota = anggota::all();
         $petugas = petugas::all();
         $buku = buku::all();

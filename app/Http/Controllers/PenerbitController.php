@@ -15,7 +15,9 @@ class PenerbitController extends Controller
         // ->select('r.*','b.judul_buku')
         // ->join('buku as b','b.id_buku', '=', 'r.id_buku')
         // ->paginate(5);
-        $penerbit = DB::table('penerbit')->where('STATUS_PENERBIT', '=', 0)->paginate(5);
+        $penerbit = DB::table('penerbit')->where('STATUS_PENERBIT', '=', 0)
+        ->orderBy('ID_PENERBIT', 'ASC')
+        ->paginate(5);
         // mengirim data petugas ke view index
         return view('admin.penerbit.penerbit',['penerbit' => $penerbit]);
     } 

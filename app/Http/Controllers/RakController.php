@@ -15,7 +15,9 @@ class RakController extends Controller
         // ->select('r.*','b.judul_buku')
         // ->join('buku as b','b.id_buku', '=', 'r.id_buku')
 		// ->paginate(5);
-		$rak = DB::table('rak')->where('STATUS_RAK', '=', 0)->paginate(5);
+		$rak = DB::table('rak')->where('STATUS_RAK', '=', 0)
+		->orderBy('ID_RAK', 'ASC')
+		->paginate(5);
     	// mengirim data petugas ke view index
     	return view('admin.rak.rak',['rak' => $rak]);
     } 
